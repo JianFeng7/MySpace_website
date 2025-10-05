@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>IIC通讯协议 - 空白Koobai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/suju/ios.json">
+  <link rel="icon" href="https://img.koobai.com/koobai.png">
+  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
+  <link rel="canonical" href="http://localhost:1313/iic%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" />
+
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+    
+    <meta property="og:title" content="IIC通讯协议"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://localhost:1313/iic%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+  
+</head>
+
+
+
+<body class='page page-blog-single'>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+        
+        
+            
+                <li >
+                    <a href="http://localhost:1313/">首页</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/posts/">博文</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://sport.koobai.com/">骑行</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/apps/">软件</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/movies/">观影</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://qiszy.taobao.com">好物</a>
+                </li>
+            
+        
+    </ul>
+</div>
+  <div id="wrapper" class="wrapper">
+    <div class="header">
+
+<div id="toggle-menu-main-mobile" class="hamburger-trigger">
+  <button class="hamburger">Menu</button>
+</div>
+<div class="new-heard-menu">
+
+
+
+
+<div class="header-menu">
+  <a href="/" >首页</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/posts/" >博文</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://sport.koobai.com/" >骑行</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/apps/" >软件</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/movies/" >观影</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
+</div>
+
+</div>
+  <div class="heard-right"> 
+    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
+    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+    </svg></a>    
+    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
+</div>
+
+</div>
+
+<script src="/js/moment.min.js?v=2.29.4"></script>
+<script src="/js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+     
+<div class="single-nrong">
+<div class="single-zw">
+    <div class="article_details">
+      <div class="article_details_title">IIC通讯协议</div>
+      
+    </div>
+    <div class="content_zhengwen">
+    <div class="content">
+      <p>I2C( <strong>IIC</strong> )属于两线式串行总线，由飞利浦公司开发用于微控制器(MCU)和外围设备(从设备)进行通信的一种总线，属于 <strong>一主多从(一个主设备(Master)，多个从设备(Slave))的总线结构</strong> ， <strong>总线上的每个设备都有一个特定的设备地址，以区分同一I2C总线上的其他设备</strong> 。</p>
+<p>物理I2C接口有两根双向线， <strong>串行时钟线（SCL）</strong> 和 <strong>串行数据线（SDA）</strong> 组成，可用于发送和接收数据，但是通信都是由主设备发起，从设备被动响应，实现数据的传输。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-31a872ddf9f33586cff30e3042580641_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<h2 id="i2c主设备与从设备的一般通信过程">I2C主设备与从设备的一般通信过程</h2>
+<p><strong>一. 主设备给从设备发送/写入数据：</strong></p>
+<blockquote>
+<ol>
+<li>主设备发送起始（START）信号</li>
+<li>主设备发送设备地址到从设备</li>
+<li>等待从设备响应(ACK)</li>
+<li>主设备发送数据到从设备，一般发送的每个字节数据后会跟着等待接收来自从设备的响应(ACK)</li>
+<li>数据发送完毕，主设备发送停止(STOP)信号终止传输</li>
+</ol></blockquote>
+<p><img src="https://pic2.zhimg.com/80/v2-2720df29fa1bf7f2b10214cf2263b6e5_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<p><strong>二. 主设备从从设备接收/读取数据</strong></p>
+<blockquote>
+<ol>
+<li>设备发送起始（START）信号</li>
+<li>主设备发送设备地址到从设备</li>
+<li>等待从设备响应(ACK)</li>
+<li>主设备接收来自从设备的数据，一般接收的每个字节数据后会跟着向从设备发送一个响应(ACK)</li>
+<li>一般接收到最后一个数据后会发送一个无效响应(NACK)，然后主设备发送停止(STOP)信号终止传输</li>
+</ol></blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-bba60469636bb6e6c6795b2a3ae7e7d0_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<p>注：具体通信过程需视具体时序图而定</p>
+<h2 id="i2c通信的实现">I2C通信的实现</h2>
+<p><strong>一. 使用I2C控制器实现</strong></p>
+<blockquote>
+<p>就是使用芯片上的I2C外设，也就是硬件I2C，它有相应的I2C驱动电路，有专用的IIC引脚，效率更高，写代码会相对简单， <strong>只要调用I2C的控制函数即可</strong> ， <strong>不需要用代码去控制SCL、SDA的各种高低电平变化来实现I2C协议</strong> ，只需要将I2C协议中的可变部分（如：从设备地址、传输数据等等）通过函数传参给控制器，控制器自动按照I2C协议实现传输，但是如果出现问题，就只能通过示波器看波形找问题。</p></blockquote>
+<p>二. 使用GPIO通过软件模拟实现</p>
+<blockquote>
+<p><strong>软件模拟I2C比较重要</strong> ， <strong>因为软件模拟的整个流程比较清晰</strong> ， <strong>哪里出来bug</strong> ， <strong>很快能找到问题</strong> ， <strong>模拟一遍会对I2C通信协议更加熟悉</strong> 。</p>
+<p>如果芯片上没有IIC控制器，或者控制接口不够用了，通过使用 <strong>任意IO口去模拟实现IIC通信协议</strong> ，手动写代码去控制IO口的电平变化，模拟IIC协议的时序，实现IIC的信号和数据传输， <strong>下面会讲到根据通信协议如何用软件去模拟</strong> 。</p></blockquote>
+<h2 id="i2c通信协议">I2C通信协议</h2>
+<p>IIC总线协议无非就是几样东西： <strong>起始信号</strong> 、 <strong>停止信号</strong> 、 <strong>应答信号</strong> 、以及 <strong>数据有效性</strong> 。</p>
+<p><strong>一. 空闲状态</strong></p>
+<p><strong>时钟线（SCL）和数据线（SDA）接上拉电阻</strong> ， <strong>默认高电平</strong> ， <strong>表示总线是空闲状态</strong> 。</p>
+<p><strong>二. 从设备地址</strong></p>
+<p>从设备地址用来区分总线上不同的从设备，一般发送从设备地址的时候会在最低位加上读/写信号，比如设备地址为0x50，0表示读，1表示写，则读数据就会发送0x50，写数据就会发送0x51。</p>
+<p><strong>三. 起始(START)信号</strong></p>
+<p>I2C通信的起始信号由主设备发起，SCL保持高电平，SDA由高电平跳变到低电平。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-b9dde1db9d0e3712651a335acddf85cf_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 起始信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">IIC_start</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1.首先把数据线设置为输出模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 总线空闲, SCL和SDA输出高
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SDA</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c1">// SDA由高变低
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拉低SCL开始传输数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>四. 停止(STOP)信号</strong></p>
+<p>I2C通信的停止信号由主设备终止，SCL保持高电平，SDA由低电平跳变到高电平。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-dad29b703b6c3dcde5e49ffd95d8b608_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 停止信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">IIC_stop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1.首先把数据线设置为输出模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拉高时钟线
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c1">// SDA由低变高
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDA</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>五. 数据有效性</strong></p>
+<p>I2C总线进行数据传送时，在SCL的每个时钟脉冲期间传输一个数据位， <strong>时钟信号SCL为高电平期间，数据线SDA上的数据必须保持稳定</strong> ，只有在时钟线SCL上的信号为低电平期间，数据线SDA上的高电平或低电平状态才允许变化，因为当SCL是高电平时，数据线SDA的变化被规定为 <strong>控制命令</strong> （<strong>START</strong>或 <strong>STOP</strong> ，也就是前面的<strong>起始信号</strong>和 <strong>停止信号</strong> ）。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-204bc680b249fde6d697541e59f2ce26_1440w.webp" alt="" class="img-hide" loading="lazy" decoding="async" /></p>
+<p><strong>六. 应答信号(ACK：有效应答，NACK：无效应答)</strong></p>
+<p><strong>接收端收到有效数据后向对方响应的信号，发送端每发送一个字节(8位)数据，在第9个时钟周期释放数据线去接收对方的应答。</strong></p>
+<blockquote>
+<p>当SDA是低电平为有效应答(ACK)，表示对方 <strong>接收成功</strong> ；
+当SDA是高电平为无效应答(NACK)，表示对方 <strong>没有接收成功</strong> 。</p></blockquote>
+<p>发送数据需要等待接收方的应答：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 等待ACK   1-无效    0-有效
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">u8</span> <span class="nf">IIC_wait_ack</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u8</span> <span class="n">ack</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c1">// 数据线设置为输入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拉高时钟线
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取数据线的电平
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">SDA</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>   <span class="c1">// 无效应答
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ack</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">IIC_stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>   <span class="c1">// 有效应答
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ack</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 拉低SCL开始传输数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SCL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ack</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>接收数据需要向发送方发送应答：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">IIC_ack</span><span class="p">(</span><span class="n">u8</span> <span class="n">ack</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 数据线设置为输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ack</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDA</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 无效应答
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 有效应答    
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 保持数据稳定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">delay_us</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拉低SCL开始传输数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SCL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>原文链接：https://zhuanlan.zhihu.com/p/503219395</p>
+
+    </div>
+    <div class="single-biaoq">
+ <div class="page-time">更新于 
+  <script>
+    document.write(formatDate( 1759488825 )); 
+  </script>
+ </div>
+ <div class="single-tag">
+     
+          
+     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
+          
+          
+ </div>
+  </div> 
+ </div>
+ 
+ <div class="archives_nrong" >
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/nano%E5%BC%80%E5%8F%91%E6%9D%BF/">Nano开发板</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488825 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/nano%E5%BC%80%E5%8F%91%E6%9D%BF/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/docker%E5%92%8Cdockercompose/">docker和dockercompose</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488825 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/docker%E5%92%8Cdockercompose/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+</div>
+      
+      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
+      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
+<script src="https://img.koobai.com/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+  Artalk.init({
+    el:        '#Comments',
+    pageKey:   'http:\/\/localhost:1313\/iic%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE\/',
+    pageTitle: 'IIC通讯协议',
+    server:    'https:\/\/c.koobai.com',
+    site:      'Koobai 空白生活',
+    
+  })
+</script></div> 
+</div>
+
+<div>
+    <div class="paragraph-dh">
+     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i2c主设备与从设备的一般通信过程">I2C主设备与从设备的一般通信过程</a></li>
+    <li><a href="#i2c通信的实现">I2C通信的实现</a></li>
+    <li><a href="#i2c通信协议">I2C通信协议</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+</div>
+<script src="/js/single.js"></script>    
+
+  </div>
+  <div class="footer-background">
+<div class="footer">
+        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
+        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
+        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
+      </div>
+      <div class="footer-rss">
+      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
+      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
+      </div>
+    </div>
+  </div>
+ 
+ <script src="/js/view-image.min.js"></script>
+  
+<div class="gotop_hide">
+  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
+</div>
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/bundle.js"></script>
+  
+
+  
+   
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Day2_Array_Pointer - 空白Koobai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/suju/ios.json">
+  <link rel="icon" href="https://img.koobai.com/koobai.png">
+  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
+  <link rel="canonical" href="http://localhost:1313/day2_array_pointer/" />
+
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+    
+    <meta property="og:title" content="Day2_Array_Pointer"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://localhost:1313/day2_array_pointer/"/>
+    
+    
+  
+</head>
+
+
+
+<body class='page page-blog-single'>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+        
+        
+            
+                <li >
+                    <a href="http://localhost:1313/">首页</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/posts/">博文</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://sport.koobai.com/">骑行</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/apps/">软件</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/movies/">观影</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://qiszy.taobao.com">好物</a>
+                </li>
+            
+        
+    </ul>
+</div>
+  <div id="wrapper" class="wrapper">
+    <div class="header">
+
+<div id="toggle-menu-main-mobile" class="hamburger-trigger">
+  <button class="hamburger">Menu</button>
+</div>
+<div class="new-heard-menu">
+
+
+
+
+<div class="header-menu">
+  <a href="/" >首页</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/posts/" >博文</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://sport.koobai.com/" >骑行</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/apps/" >软件</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/movies/" >观影</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
+</div>
+
+</div>
+  <div class="heard-right"> 
+    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
+    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+    </svg></a>    
+    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
+</div>
+
+</div>
+
+<script src="/js/moment.min.js?v=2.29.4"></script>
+<script src="/js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+     
+<div class="single-nrong">
+<div class="single-zw">
+    <div class="article_details">
+      <div class="article_details_title">Day2_Array_Pointer</div>
+      
+    </div>
+    <div class="content_zhengwen">
+    <div class="content">
+      <p>[TOC]</p>
+<h1 id="day2">DAY2</h1>
+<blockquote>
+<p>主题：数组与指针</p></blockquote>
+<h2 id="数组">数组</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">练习一：
+</span></span><span class="line"><span class="cl">	求一个一维数组的第二大元素，要求仅遍历一次数组。
+</span></span><span class="line"><span class="cl">	数组元素默认不重复。
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">练习1：
+</span></span></span><span class="line"><span class="cl"><span class="cm">求一个一维数组的第二大元素，要求仅遍历一次数组。
+</span></span></span><span class="line"><span class="cl"><span class="cm">**********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">102</span><span class="p">,</span><span class="mi">233</span><span class="p">,</span><span class="mi">435</span><span class="p">,</span><span class="mi">253</span><span class="p">,</span><span class="mi">12399</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="mi">45</span><span class="p">,</span><span class="mi">2353</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">434</span><span class="p">,</span><span class="mi">8877</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">max2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">max2</span> <span class="o">=</span> <span class="n">max</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">max</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max2</span><span class="p">)</span><span class="n">max2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;max:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;    max2:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">max2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//printf(&#34;%d dierda&#34;,max2);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></div><p>数组是一组相同数据类型的有序的元素。</p>
+<p>数组的定义</p>
+<p>​	数组元素的类型 数组名[元素的个数]｛=初始化｝;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int a[0];//定义了一个数组 里面有0个元素。空数组 
+</span></span><span class="line"><span class="cl">struct Node
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char Data[0];
+</span></span><span class="line"><span class="cl">	struct Node* prev;
+</span></span><span class="line"><span class="cl">	struct Node* next;
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int a[10];
+</span></span><span class="line"><span class="cl">typeof(a) = ? 
+</span></span><span class="line"><span class="cl">	a是一个数组，是一个有10个int类型元素的数组
+</span></span><span class="line"><span class="cl">	typeof(a) ==&gt; int[10]    //构造类型：由用户定义的类型
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">定义一个变量:类型 变量名;
+</span></span><span class="line"><span class="cl">定义一个像a的类型的变量b;
+</span></span><span class="line"><span class="cl">	typeof(a) b;
+</span></span><span class="line"><span class="cl">	int [10] b; ===&gt;int b[10];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">数组元素全部都是一维数组
+</span></span><span class="line"><span class="cl">typeof(a) c[5];//定义了一个数组，有5个类型为一维数组（有10个int类型的一维数字）的一维数组。
+</span></span><span class="line"><span class="cl">int[10] c[5];===&gt;int c[5][10];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">c这个数组有5个元素，分别为c[0] c[1] c[2] c[3] c[4]
+</span></span><span class="line"><span class="cl">c[0]是一个数组，数组名，所以我们访问c[0]里面的第一个元素，c[0][0]
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">数组与函数 
+</span></span><span class="line"><span class="cl">	数组怎么传入函数？数组作为函数的参数
+</span></span><span class="line"><span class="cl">	数组元素的类型 [],数组元素的个数
+</span></span><span class="line"><span class="cl">	int a[10] 
+</span></span><span class="line"><span class="cl">	sum(int b[],int n)
+</span></span><span class="line"><span class="cl">	{
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	调用：sum(a,10);
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	typeof(a) =&gt;int[10]
+</span></span><span class="line"><span class="cl">	sum(int[10] b) ==&gt;sum(int b[10])
+</span></span><span class="line"><span class="cl">	{
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">	}
+</span></span></code></pre></div><h3 id="练习">练习</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">封装一个函数，对任意长度的整型(int)一维数组进行输入
+</span></span><span class="line"><span class="cl">	array_input()
+</span></span><span class="line"><span class="cl">封装一个函数，对任意长度的整型(int)一维数组进行输出
+</span></span><span class="line"><span class="cl">	array_output()	
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">练习2：
+</span></span></span><span class="line"><span class="cl"><span class="cm">封装一个函数，对任意长度的整型(int)一维数组进行输入
+</span></span></span><span class="line"><span class="cl"><span class="cm">	array_input()
+</span></span></span><span class="line"><span class="cl"><span class="cm">封装一个函数，对任意长度的整型(int)一维数组进行输出
+</span></span></span><span class="line"><span class="cl"><span class="cm">	array_output()
+</span></span></span><span class="line"><span class="cl"><span class="cm">**********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt; </span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">array_intput</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">array_output</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">array_intput</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">array_output</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">array_output</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></div><h2 id="指针">指针</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">请封装一个函数来交换两个数(正整数)的值，要求不要百
+</span></span><span class="line"><span class="cl">度。
+</span></span><span class="line"><span class="cl">time:20分钟 14.45分讲解
+</span></span><span class="line"><span class="cl">main
+</span></span><span class="line"><span class="cl">a = 3,b = 4;
+</span></span><span class="line"><span class="cl">swap();//形参自己定义
+</span></span><span class="line"><span class="cl">printf(&#34;%d %d&#34;,a,b);//4 3
+</span></span><span class="line"><span class="cl">进阶：请使用三种方法可以不完成
+</span></span></code></pre></div><h3 id="1指针的概念">1.指针的概念</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">存储单元的地址：
+</span></span><span class="line"><span class="cl">	分配给每个变量的内存单元都有一各编号，这个编号
+</span></span><span class="line"><span class="cl">就是我们所说的存储单元的地址。
+</span></span><span class="line"><span class="cl">	在C语言中，指针和地址的概念差不多，你可以认为
+</span></span><span class="line"><span class="cl">指针就是一个地址。
+</span></span><span class="line"><span class="cl">地址：
+</span></span><span class="line"><span class="cl">一个变量的地址。也称之为变量的“指针&#34;
+</span></span><span class="line"><span class="cl">    &amp; 取地址符
+</span></span><span class="line"><span class="cl">    eg: &amp;a
+</span></span><span class="line"><span class="cl">    int a;
+</span></span><span class="line"><span class="cl">    scanf(&#34;%d&#34;,&amp;a);
+</span></span><span class="line"><span class="cl">    通过对象的指针去访问它，首先我们要解决对象的地
+</span></span><span class="line"><span class="cl">址的保存问题。
+</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220523152604258.png" alt="image-20220523152604258" class="img-hide" loading="lazy" decoding="async" /></p>
+<h3 id="2指针变量">2.指针变量</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">是一个变量，能读能写。指针变量保存地址的。
+</span></span><span class="line"><span class="cl">变量的定义：
+</span></span><span class="line"><span class="cl">	变量的类型 变量名; eg:int a
+</span></span><span class="line"><span class="cl">指针变量不是一般的变量，所以我们一般在变量的前面加
+</span></span><span class="line"><span class="cl">一个&#34;*&#34;，表示它是一个指针变量。
+</span></span><span class="line"><span class="cl">指针变量的定义:	
+</span></span><span class="line"><span class="cl">    指向对象的类型 *指针变量名;
+</span></span><span class="line"><span class="cl">    指向对象的类型而不是指针的类型。
+</span></span><span class="line"><span class="cl">    指向
+</span></span><span class="line"><span class="cl">    你的名字是你的，你的名字指向你。你的名字有没有
+</span></span><span class="line"><span class="cl">    包含你的&#34;地址&#34;
+</span></span><span class="line"><span class="cl">    你的名片是你的，名片是不是想你。那么我可以不可
+</span></span><span class="line"><span class="cl">    以根据你的名片上门打你一顿。
+</span></span><span class="line"><span class="cl">    间接的方式，间接访问。
+</span></span><span class="line"><span class="cl">    指针变量保存了谁的地址，指向谁。
+</span></span><span class="line"><span class="cl">    名片上保存了谁的地址，那就指向谁。
+</span></span><span class="line"><span class="cl">eg:
+</span></span><span class="line"><span class="cl">    int a;
+</span></span><span class="line"><span class="cl">    int *p;//p指向的对象类型是int
+</span></span><span class="line"><span class="cl">    p=&amp;a;//p保存的是a的地址 所以p指向a
+</span></span></code></pre></div><h3 id="3指针相关的运算符">3.指针相关的运算符</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">*：指向运算符
+</span></span><span class="line"><span class="cl">	动词，根据地址找上门
+</span></span><span class="line"><span class="cl">int a;
+</span></span><span class="line"><span class="cl">int *p=&amp;a;//p指向a
+</span></span><span class="line"><span class="cl">*p ==&gt;根据p的值(是a的地址) 根据a的地址去找a
+</span></span><span class="line"><span class="cl">    所以*p &lt;===&gt; a
+</span></span><span class="line"><span class="cl">    *p = 1024 &lt;==&gt; a = 1024
+</span></span><span class="line"><span class="cl">    *(&amp;a) = 1024 &lt;==&gt; a=1024
+</span></span><span class="line"><span class="cl">    *&amp;可以约掉 抵消
+</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220523152923537.png" alt="image-20220523152923537" class="img-hide" loading="lazy" decoding="async" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">段错误：内存异常，访问内存错误。默认中止程序。致命
+</span></span><span class="line"><span class="cl">错误。segment default
+</span></span><span class="line"><span class="cl">	eg:修改了只读的。比如：5 = 10;
+</span></span><span class="line"><span class="cl">int swap4(int *a,int *b)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    int *temp = NULL;
+</span></span><span class="line"><span class="cl">    *temp = *a;
+</span></span><span class="line"><span class="cl">    *a = *b;
+</span></span><span class="line"><span class="cl">    *b = *temp;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">int *temp;//temp指向谁？ 野指针
+</span></span><span class="line"><span class="cl">访问野指针一定会段错误吗？不一定，可能指向的那个内
+</span></span><span class="line"><span class="cl">存单元可以访问的。
+</span></span><span class="line"><span class="cl">一般让它指向为空
+</span></span><span class="line"><span class="cl">int *temp=NULL;//NULL 的ASCII是0 &#39;\0&#39; temp指
+</span></span><span class="line"><span class="cl">向内存编号为0的地方
+</span></span><span class="line"><span class="cl">//但是内存编号为0的储存空间是不存在的 能访问吗？不
+</span></span><span class="line"><span class="cl">能
+</span></span><span class="line"><span class="cl">所以访问这个为0编号的内存 一定会段错误
+</span></span><span class="line"><span class="cl">*temp 就一定段错误。
+</span></span><span class="line"><span class="cl">int a = 4;
+</span></span><span class="line"><span class="cl">4.指针做加减法
+</span></span><span class="line"><span class="cl">int *p = &amp;a;//p-&gt;a
+</span></span><span class="line"><span class="cl">typeof(p)的类型？类型 变量名;
+</span></span><span class="line"><span class="cl">	int * typeof(&amp;a) ==&gt; typeof(a) *==&gt;int *
+</span></span><span class="line"><span class="cl">数组作为函数的参数
+</span></span><span class="line"><span class="cl">数组名？int a[10];
+</span></span><span class="line"><span class="cl">	1.代表整个数组
+</span></span><span class="line"><span class="cl">		sizeof(a) ==&gt;整个数组的大小
+</span></span><span class="line"><span class="cl">		typeof(a) ==&gt;数组的类型 int[10]
+</span></span><span class="line"><span class="cl">	2.数组的首地址 等价于 &amp;a[0] 当作指针
+</span></span><span class="line"><span class="cl">		typeof(&amp;a[0]) =&gt;int *
+</span></span><span class="line"><span class="cl">int a[],int n &lt;==&gt; int *a,int n
+</span></span><span class="line"><span class="cl">int a[10]
+</span></span></code></pre></div><h3 id="4指针做加减法">4.指针做加减法</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">数火车，一节一节车厢 单位是车厢
+</span></span><span class="line"><span class="cl">数人头 单位是人
+</span></span><span class="line"><span class="cl">int *p = 0x300400;//p指向的对象是一节车厢 车厢
+</span></span><span class="line"><span class="cl">占4个字节
+</span></span><span class="line"><span class="cl">p+1 下一节车厢 所以p+1的值为多少 0x300404
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char *p1 = 0x300400;
+</span></span><span class="line"><span class="cl">p1+1 0x300401;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int a[10];
+</span></span><span class="line"><span class="cl">|————|----|----|....
+</span></span><span class="line"><span class="cl">&amp;a[0] = 0x300400
+</span></span><span class="line"><span class="cl">a当指针来用
+</span></span><span class="line"><span class="cl">5.字符串
+</span></span><span class="line"><span class="cl">&amp;a[0] = a + 0 a[0] &lt;==&gt;*(a+0)
+</span></span><span class="line"><span class="cl">&amp;a[1] = a + 1 a[1] &lt;==&gt;*(a+1)
+</span></span><span class="line"><span class="cl">....
+</span></span><span class="line"><span class="cl">请问 a[10] 存在吗？a[-1] &lt;==&gt;*(a-1)
+</span></span></code></pre></div><h3 id="5字符串">5.字符串</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">C语言是没有字符串这种类型的
+</span></span><span class="line"><span class="cl">把字符一个挨着一个存储，读的话从头读到尾。
+</span></span><span class="line"><span class="cl">|___|___|....|___| &#39;\0&#39; 结束的标志
+</span></span><span class="line"><span class="cl">知道头 知道尾
+</span></span><span class="line"><span class="cl">首地址 char*
+</span></span><span class="line"><span class="cl">+1 +1 +1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char *str = &#34;hello world&#34;;//str是指针 &#34;&#34;字符
+</span></span><span class="line"><span class="cl">串 &#39;&#39;字符 str保存是h的首地址
+</span></span><span class="line"><span class="cl">str指向一段内存 “hello world&#34; 这个字符串储存
+</span></span><span class="line"><span class="cl">在.rodata 只读数据段
+</span></span><span class="line"><span class="cl">&#34;hello world&#34;长度为？12
+</span></span><span class="line"><span class="cl">*(str+3)=&#39;W&#39;;//这个代码会段错误
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char str[]={&#34;hello world&#34;};//str 字符数组 数
+</span></span><span class="line"><span class="cl">组元素可读 可写的
+</span></span><span class="line"><span class="cl">char str[]={&#39;h&#39;,&#39;e&#39;,&#39;l&#39;,&#39;l&#39;....};
+</span></span><span class="line"><span class="cl">请问该数组的长度
+</span></span><span class="line"><span class="cl">str[4]=&#39;W&#39;;//可以
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char s[64]={0},c;//&lt;==&gt;char *s;char c
+</span></span><span class="line"><span class="cl">int i=0;
+</span></span><span class="line"><span class="cl">for(;i&lt;5;i++)
+</span></span><span class="line"><span class="cl">练习
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    scanf(&#34;%c&#34;,&amp;c);
+</span></span><span class="line"><span class="cl">    *(s+i)=c;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">//段错误 为什么
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char s[64] ={0};里面的元素都是0
+</span></span><span class="line"><span class="cl">printf(&#34;%c&#34;,s[1]);//&#39;\0&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char整型 存储的是整数 ascii码
+</span></span><span class="line"><span class="cl">s[1] -&gt;char 字符串ascii为0 为0 &#39;\0&#39;
+</span></span><span class="line"><span class="cl">s[1] = &#39;0&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">动态内存分配 ---&gt; 申请一段可用的内存（权限 可读可
+</span></span><span class="line"><span class="cl">写 归你所有）
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">*   练习3：
+</span></span></span><span class="line"><span class="cl"><span class="cm">封装交换两个数的函数:swap（）；
+</span></span></span><span class="line"><span class="cl"><span class="cm">**********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">//法1：
+</span></span></span><span class="line"><span class="cl"><span class="c">//普通的变量代替不会改变变量正真的值；
+</span></span></span><span class="line"><span class="cl"><span class="c">//在执行该函数时，存储空间生成形参，形参接收的只是实参的值的拷贝。
+</span></span></span><span class="line"><span class="cl"><span class="c">//即a=c只是数值上的相等，a并不是c
+</span></span></span><span class="line"><span class="cl"><span class="c">void swap1(int a, int b) {
+</span></span></span><span class="line"><span class="cl"><span class="c">    int mid = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    mid = a;
+</span></span></span><span class="line"><span class="cl"><span class="c">    a = b;
+</span></span></span><span class="line"><span class="cl"><span class="c">    b = mid;
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, a, b);
+</span></span></span><span class="line"><span class="cl"><span class="c">    //printf(&#34;a= %d,b= %d\n&#34;, &amp;a, &amp;b);//运行后可以看出来显然与c，d的地址不一样，因为输出的是形参的地址。
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">//法2：
+</span></span></span><span class="line"><span class="cl"><span class="c">//该法交换了实参c和d的地址，所以在main（）函数中仍然交换
+</span></span></span><span class="line"><span class="cl"><span class="c">void swap2(int *a, int *b) {
+</span></span></span><span class="line"><span class="cl"><span class="c">    int mid;
+</span></span></span><span class="line"><span class="cl"><span class="c">    mid = *a;
+</span></span></span><span class="line"><span class="cl"><span class="c">    *a = *b;
+</span></span></span><span class="line"><span class="cl"><span class="c">    *b = mid;
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, *a, *b);
+</span></span></span><span class="line"><span class="cl"><span class="c">    //printf(&#34;a= %d,b= %d\n&#34;, a, b);//输出的是实参的地址
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">//法3
+</span></span></span><span class="line"><span class="cl"><span class="c">//该法交换了实参的指针，所以在main（）函数中仍交换
+</span></span></span><span class="line"><span class="cl"><span class="c">void swap3(int *a, int *b) {
+</span></span></span><span class="line"><span class="cl"><span class="c">    int* c;
+</span></span></span><span class="line"><span class="cl"><span class="c">    c = a;
+</span></span></span><span class="line"><span class="cl"><span class="c">    a = b;
+</span></span></span><span class="line"><span class="cl"><span class="c">    b = c;
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, *a, *b);
+</span></span></span><span class="line"><span class="cl"><span class="c">    //printf(&#34;a= %d,b= %d\n&#34;, a, b);//输出的是实参的地址
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int c = 3, d = 4;
+</span></span></span><span class="line"><span class="cl"><span class="c">    swap1(c, d);
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, c, d);
+</span></span></span><span class="line"><span class="cl"><span class="c">    swap2(&amp;c, &amp;d);
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, c, d);
+</span></span></span><span class="line"><span class="cl"><span class="c">    swap3(&amp;c, &amp;d);
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;a= %d,b= %d\n&#34;, c, d);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">*   练习4：
+</span></span></span><span class="line"><span class="cl"><span class="cm">1.有一个一维数组int a[10]
+</span></span></span><span class="line"><span class="cl"><span class="cm">请封装以下函数：
+</span></span></span><span class="line"><span class="cl"><span class="cm">    （1）求最大值；Max_array()
+</span></span></span><span class="line"><span class="cl"><span class="cm">    （2）求和Sum_array()
+</span></span></span><span class="line"><span class="cl"><span class="cm">2.封装一个函数，实现如下功能：
+</span></span></span><span class="line"><span class="cl"><span class="cm">    判断一个三位数是否满足：各个位的数字的阶乘的和等于它的本身
+</span></span></span><span class="line"><span class="cl"><span class="cm">**********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">void Max_array(int array[], int n)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int max = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for (int i = 0; i &lt; n; i++)max = array[i] &gt; max ? array[i] : max;
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;这个数组的最大值是%d\n&#34;, max);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void Sum_array(int array[], int n)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int sum = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for (int i=0; i &lt; n; i++)sum += array[i];
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;这个数组的和是%d\n&#34;, sum);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void PDJiec(int num)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int sum = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int chengji = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int single = num % 10;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int ten = (num / 10) % 10;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int hundred = num / 100;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">    if (num / 100 == 0 || num / 1000 != 0)
+</span></span></span><span class="line"><span class="cl"><span class="c">        printf(&#34;输入错误，&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">    else
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        for (int i = 0; i &lt; single; i++)chengji *= (i + 1);
+</span></span></span><span class="line"><span class="cl"><span class="c">        //printf(&#34;%d\n&#34;, chengji);
+</span></span></span><span class="line"><span class="cl"><span class="c">        sum += chengji;
+</span></span></span><span class="line"><span class="cl"><span class="c">        chengji = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">        for (int i = 0; i &lt; ten; i++)chengji *= (i + 1);
+</span></span></span><span class="line"><span class="cl"><span class="c">        sum += chengji;
+</span></span></span><span class="line"><span class="cl"><span class="c">        //printf(&#34;%d\n&#34;, chengji);
+</span></span></span><span class="line"><span class="cl"><span class="c">        chengji = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">        for (int i = 0; i &lt; hundred; i++)chengji *= (i + 1);
+</span></span></span><span class="line"><span class="cl"><span class="c">        sum += chengji;
+</span></span></span><span class="line"><span class="cl"><span class="c">        //printf(&#34;%d\n&#34;, chengji);
+</span></span></span><span class="line"><span class="cl"><span class="c">        chengji = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    if (num == sum)printf(&#34;%d这个数符合要求\n&#34;,num);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if (num != sum)printf(&#34;%d这个数不符合要求\n&#34;,num);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">int main() {
+</span></span></span><span class="line"><span class="cl"><span class="c">    int a[10] = { 123,321,32,44,543,2,55,888,554,357 };
+</span></span></span><span class="line"><span class="cl"><span class="c">    Max_array(a, 10);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Sum_array(a, 10);
+</span></span></span><span class="line"><span class="cl"><span class="c">    PDJiec(145);
+</span></span></span><span class="line"><span class="cl"><span class="c">    PDJiec(135);
+</span></span></span><span class="line"><span class="cl"><span class="c">    PDJiec(45);
+</span></span></span><span class="line"><span class="cl"><span class="c">    return 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><h1 id="homework">homework</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">1.《算经》中提出一个著名的“百钱买百鸡”
+</span></span></span><span class="line"><span class="cl"><span class="cm">鸡翁一，值钱五，鸡母一，值钱三，鸡雏三，值钱一;
+</span></span></span><span class="line"><span class="cl"><span class="cm">百钱买百鸡，问翁，母，雏各几？
+</span></span></span><span class="line"><span class="cl"><span class="cm">提示：请不要太残忍，不要把小鸡切开。
+</span></span></span><span class="line"><span class="cl"><span class="cm">******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">分析：公=5元，母=三元，雏=1/3元 ---&gt;5x+3y+(1/3)z=100&lt;=&gt;15x+9y+z=300
+</span></span></span><span class="line"><span class="cl"><span class="cm">且x+Y+z=100,
+</span></span></span><span class="line"><span class="cl"><span class="cm">******************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	for (int i = 0; i &lt; 20; i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">	{
+</span></span></span><span class="line"><span class="cl"><span class="c">		for (int j = 0; j &lt; 34; j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">		{
+</span></span></span><span class="line"><span class="cl"><span class="c">			for (int k = 0; k &lt; 300; k++)
+</span></span></span><span class="line"><span class="cl"><span class="c">			{
+</span></span></span><span class="line"><span class="cl"><span class="c">				if (i * 15 + j * 9 + k == 300 &amp;&amp; i + j + k == 100)printf(&#34;%d,%d,%d\n&#34;, i,j,k);
+</span></span></span><span class="line"><span class="cl"><span class="c">			}
+</span></span></span><span class="line"><span class="cl"><span class="c">		}
+</span></span></span><span class="line"><span class="cl"><span class="c">	}
+</span></span></span><span class="line"><span class="cl"><span class="c">	return 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">2.春哥给你发喜糖，每个同学的糖果数目成等差数列，前4各同学得到的糖果数目之和是26，积是880。
+</span></span></span><span class="line"><span class="cl"><span class="cm">编程求前20名学生每人得到的糖果数目。
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">分析：设第一个是a，第二个就是a+d，第三个就是a+2d,第四个就是a+3d;和为4a+6d.
+</span></span></span><span class="line"><span class="cl"><span class="cm">---&gt; a最大6.5&lt;7;d最大8.7&lt;9
+</span></span></span><span class="line"><span class="cl"><span class="cm">******************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	int product;//前四个数的乘积
+</span></span></span><span class="line"><span class="cl"><span class="c">	for (int a = 0; a &lt; 7; a++)
+</span></span></span><span class="line"><span class="cl"><span class="c">	{
+</span></span></span><span class="line"><span class="cl"><span class="c">		for (int d = 0; d &lt; 9; d++)
+</span></span></span><span class="line"><span class="cl"><span class="c">		{
+</span></span></span><span class="line"><span class="cl"><span class="c">			if (4 * a + 6 * d == 26)
+</span></span></span><span class="line"><span class="cl"><span class="c">			{
+</span></span></span><span class="line"><span class="cl"><span class="c">				product = a * (a + d) * (a + d + d) * (a + d + d + d);
+</span></span></span><span class="line"><span class="cl"><span class="c">				if(880==product)printf(&#34;%d,%d\n&#34;, a, d);
+</span></span></span><span class="line"><span class="cl"><span class="c">			}
+</span></span></span><span class="line"><span class="cl"><span class="c">		}
+</span></span></span><span class="line"><span class="cl"><span class="c">	}
+</span></span></span><span class="line"><span class="cl"><span class="c">	return 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">3.哥德巴赫猜想
+</span></span></span><span class="line"><span class="cl"><span class="cm">	验证100以内的正偶数都可以分解为两个素数（质数）之和。
+</span></span></span><span class="line"><span class="cl"><span class="cm">	即验证哥德巴赫猜想对100以内(大于2)的正偶数成立的。
+</span></span></span><span class="line"><span class="cl"><span class="cm">	请使用函数封装的思想。
+</span></span></span><span class="line"><span class="cl"><span class="cm">******************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">//判断是否为素数
+</span></span></span><span class="line"><span class="cl"><span class="c">int Whether_prime(int n)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	int flag = 1;//假设是素数
+</span></span></span><span class="line"><span class="cl"><span class="c">	for (int i = 2; i &lt; n; i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">		if (n % i == 0)
+</span></span></span><span class="line"><span class="cl"><span class="c">		{
+</span></span></span><span class="line"><span class="cl"><span class="c">			flag = 0;//如果存在余数为0的就不是素数
+</span></span></span><span class="line"><span class="cl"><span class="c">			
+</span></span></span><span class="line"><span class="cl"><span class="c">		}
+</span></span></span><span class="line"><span class="cl"><span class="c">	return flag;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">//哥德巴赫猜想的拆分/证明
+</span></span></span><span class="line"><span class="cl"><span class="c">void Goldbach_conjecture(int n)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	for (int i = 2; i &lt; (n/2)+1; i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">	{
+</span></span></span><span class="line"><span class="cl"><span class="c">		if (Whether_prime(i))
+</span></span></span><span class="line"><span class="cl"><span class="c">		{
+</span></span></span><span class="line"><span class="cl"><span class="c">			for (int j = 2; j &lt; n; j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">			{
+</span></span></span><span class="line"><span class="cl"><span class="c">				if (Whether_prime(j))
+</span></span></span><span class="line"><span class="cl"><span class="c">				{
+</span></span></span><span class="line"><span class="cl"><span class="c">					if(i+j==n)
+</span></span></span><span class="line"><span class="cl"><span class="c">						printf(&#34;%d是满足条件:可以分解为:%d+%d\n&#34;, n, i, j);
+</span></span></span><span class="line"><span class="cl"><span class="c">				}
+</span></span></span><span class="line"><span class="cl"><span class="c">			}
+</span></span></span><span class="line"><span class="cl"><span class="c">		}
+</span></span></span><span class="line"><span class="cl"><span class="c">	}
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	int n;
+</span></span></span><span class="line"><span class="cl"><span class="c">	//scanf_s(&#34;%d&#34;, &amp;n);
+</span></span></span><span class="line"><span class="cl"><span class="c">	for(n=0;n&lt;100;n+=2)
+</span></span></span><span class="line"><span class="cl"><span class="c">		Goldbach_conjecture(n);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">4.在你爷爷小时候的时候，如果要将挣钱换成零钱，那么一元可以兑换成一角，两角或五角。
+</span></span></span><span class="line"><span class="cl"><span class="cm">	请问有多少种兑换方式？
+</span></span></span><span class="line"><span class="cl"><span class="cm">******************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	int counter = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">	for (int i = 0; i &lt;= 10; i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">		for (int j = 0; j &lt;=5; j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">			for (int k = 0; k &lt;= 2; k++)
+</span></span></span><span class="line"><span class="cl"><span class="c">				if (10 == i + 2 * j + 5 * k)
+</span></span></span><span class="line"><span class="cl"><span class="c">				{
+</span></span></span><span class="line"><span class="cl"><span class="c">					printf(&#34;可以有:%d+%d+%d\n&#34;, i, j, k);
+</span></span></span><span class="line"><span class="cl"><span class="c">					counter++;
+</span></span></span><span class="line"><span class="cl"><span class="c">				}
+</span></span></span><span class="line"><span class="cl"><span class="c">	printf(&#34;共有%d种兑换方式&#34;, counter);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div>
+    </div>
+    <div class="single-biaoq">
+ <div class="page-time">更新于 
+  <script>
+    document.write(formatDate( 1759488826 )); 
+  </script>
+ </div>
+ <div class="single-tag">
+     
+          
+     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
+          
+          
+ </div>
+  </div> 
+ </div>
+ 
+ <div class="archives_nrong" >
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day3_6818board/">Day3_6818board</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day3_6818board/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day13_%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/">Day13_双向链表</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day13_%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+</div>
+      
+      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
+      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
+<script src="https://img.koobai.com/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+  Artalk.init({
+    el:        '#Comments',
+    pageKey:   'http:\/\/localhost:1313\/day2_array_pointer\/',
+    pageTitle: 'Day2_Array_Pointer',
+    server:    'https:\/\/c.koobai.com',
+    site:      'Koobai 空白生活',
+    
+  })
+</script></div> 
+</div>
+
+<div>
+    <div class="paragraph-dh">
+     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数组">数组</a>
+      <ul>
+        <li><a href="#练习">练习</a></li>
+      </ul>
+    </li>
+    <li><a href="#指针">指针</a>
+      <ul>
+        <li><a href="#1指针的概念">1.指针的概念</a></li>
+        <li><a href="#2指针变量">2.指针变量</a></li>
+        <li><a href="#3指针相关的运算符">3.指针相关的运算符</a></li>
+        <li><a href="#4指针做加减法">4.指针做加减法</a></li>
+        <li><a href="#5字符串">5.字符串</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+</div>
+<script src="/js/single.js"></script>    
+
+  </div>
+  <div class="footer-background">
+<div class="footer">
+        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
+        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
+        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
+      </div>
+      <div class="footer-rss">
+      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
+      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
+      </div>
+    </div>
+  </div>
+ 
+ <script src="/js/view-image.min.js"></script>
+  
+<div class="gotop_hide">
+  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
+</div>
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/bundle.js"></script>
+  
+
+  
+   
+</body>
+</html>

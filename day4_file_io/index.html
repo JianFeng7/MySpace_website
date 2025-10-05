@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Day4_File_IO - 空白Koobai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/suju/ios.json">
+  <link rel="icon" href="https://img.koobai.com/koobai.png">
+  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
+  <link rel="canonical" href="http://localhost:1313/day4_file_io/" />
+
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+    
+    <meta property="og:title" content="Day4_File_IO"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://localhost:1313/day4_file_io/"/>
+    
+    
+  
+</head>
+
+
+
+<body class='page page-blog-single'>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+        
+        
+            
+                <li >
+                    <a href="http://localhost:1313/">首页</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/posts/">博文</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://sport.koobai.com/">骑行</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/apps/">软件</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/movies/">观影</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://qiszy.taobao.com">好物</a>
+                </li>
+            
+        
+    </ul>
+</div>
+  <div id="wrapper" class="wrapper">
+    <div class="header">
+
+<div id="toggle-menu-main-mobile" class="hamburger-trigger">
+  <button class="hamburger">Menu</button>
+</div>
+<div class="new-heard-menu">
+
+
+
+
+<div class="header-menu">
+  <a href="/" >首页</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/posts/" >博文</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://sport.koobai.com/" >骑行</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/apps/" >软件</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/movies/" >观影</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
+</div>
+
+</div>
+  <div class="heard-right"> 
+    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
+    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+    </svg></a>    
+    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
+</div>
+
+</div>
+
+<script src="/js/moment.min.js?v=2.29.4"></script>
+<script src="/js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+     
+<div class="single-nrong">
+<div class="single-zw">
+    <div class="article_details">
+      <div class="article_details_title">Day4_File_IO</div>
+      
+    </div>
+    <div class="content_zhengwen">
+    <div class="content">
+      <p>[TOC]</p>
+<h1 id="1内存映射">1.内存映射</h1>
+<p>通过write去操作屏幕，有明显的缺陷</p>
+<ul>
+<li>屏幕很慢(write的效率不高)</li>
+<li>连续调用write还需要配合使用<code>lseek</code></li>
+<li>只是想操作屏幕一小部分，对整个<code>fram buffer</code>赋值</li>
+</ul>
+<p>即有人提出<code>fram buffer</code>本身就是一块内存，在C语言中，我们知道一个内存的地址(指针)就可以通过指针来操作这块内存。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">假设：
+</span></span><span class="line"><span class="cl">    int *plcd;//指向linux你和帧缓冲的首地址
+</span></span><span class="line"><span class="cl">    屏幕上第一个像素点在帧缓冲中的地址为plcd
+</span></span><span class="line"><span class="cl">    *plcd = 0xff00;//屏幕上的第一个像素点会显示成绿的
+</span></span><span class="line"><span class="cl">    第一行的第二个像素点在帧缓冲中的地址:
+</span></span><span class="line"><span class="cl">    plcd+1
+</span></span><span class="line"><span class="cl">    *(plcd+1) = 0xff00;
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    屏幕上坐标为x,y的像素点在帧缓冲中的地址
+</span></span><span class="line"><span class="cl">    plcd+800*y+x
+</span></span><span class="line"><span class="cl">    *(plcd+800*y+x) = 0xff00;
+</span></span><span class="line"><span class="cl">    ===&gt;封装成函数 任意的在屏幕上显示一个像素点
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;error:plcd == NULL</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">800</span><span class="o">&amp;&amp;</span><span class="n">y</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">y</span><span class="o">&lt;</span><span class="mi">480</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="o">*</span><span class="p">(</span><span class="n">plcd</span><span class="o">+</span><span class="mi">800</span><span class="o">*</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220519164113344.png" alt="image-20220519164113344" class="img-hide" loading="lazy" decoding="async" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nl">LINUX操作系统提供了一个API函数</span><span class="p">:</span><span class="n">mmap</span>
+</span></span><span class="line"><span class="cl"><span class="n">memory</span> <span class="n">map</span> <span class="err">内存映射</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">       <span class="n">mmap</span><span class="p">,</span> <span class="n">munmap</span> <span class="o">-</span> <span class="n">map</span> <span class="n">or</span> <span class="n">unmap</span> <span class="n">files</span> <span class="n">or</span> <span class="n">devices</span> <span class="n">into</span> <span class="n">memory</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">映射或解映射文件或设备到内存</span>
+</span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">       <span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">       <span class="kt">void</span> <span class="o">*</span><span class="nf">mmap</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prot</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">off_t</span> <span class="n">offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="nl">addr</span><span class="p">:</span><span class="err">映射到应用程序的哪个地址上去，不知道。填</span><span class="nb">NULL</span><span class="err">，表示让系统自行分配。</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="nl">length</span><span class="p">:</span><span class="err">要映射区域长度。</span><span class="mi">800</span><span class="o">*</span><span class="mi">480</span><span class="o">*</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="nl">prot</span><span class="p">:</span><span class="err">指定映射区域的权限</span>
+</span></span><span class="line"><span class="cl">       <span class="n">PROT_EXEC</span>  <span class="n">Pages</span> <span class="n">may</span> <span class="n">be</span> <span class="n">executed</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="n">PROT_READ</span>  <span class="n">Pages</span> <span class="n">may</span> <span class="n">be</span> <span class="n">read</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="n">PROT_WRITE</span> <span class="n">Pages</span> <span class="n">may</span> <span class="n">be</span> <span class="n">written</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="n">PROT_NONE</span>  <span class="n">Pages</span> <span class="n">may</span> <span class="n">not</span> <span class="n">be</span> <span class="n">accessed</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">       <span class="err">位定义</span><span class="mo">0000</span>  <span class="n">PROT_EXEC</span> <span class="n">PROT_READ</span> <span class="n">PROT_WRITE</span> <span class="n">PROT_NONE</span>
+</span></span><span class="line"><span class="cl">                  <span class="mi">1000</span>      <span class="mo">0100</span>     <span class="mo">0010</span>  <span class="mo">0001</span>
+</span></span><span class="line"><span class="cl">                   <span class="mo">0110</span>  <span class="mo">0100</span> <span class="o">|</span> <span class="mo">0010</span>
+</span></span><span class="line"><span class="cl">       <span class="n">PROT_READ</span> <span class="o">|</span>  <span class="n">PROT_WRITE</span>  
+</span></span><span class="line"><span class="cl">         <span class="err">@</span><span class="nl">flags</span><span class="p">:</span><span class="err">映射标志</span> <span class="err">映射方式</span> <span class="err">有如下两种情况</span>
+</span></span><span class="line"><span class="cl">             <span class="nl">MAP_SHARED</span><span class="p">:</span><span class="err">共享映射</span> <span class="err">你对映射区域的操作会立即反馈到文件或内核</span>
+</span></span><span class="line"><span class="cl">             <span class="nl">MAP_PRIVATE</span><span class="p">:</span><span class="err">私有映射</span> <span class="err">你对映射区域的操作只对你可见</span>
+</span></span><span class="line"><span class="cl">         <span class="err">@</span><span class="nl">fd</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">         <span class="err">@</span><span class="nl">offset</span><span class="p">:</span><span class="err">偏移量</span> <span class="err">表示你想从文件的哪个位置开始映射</span>
+</span></span><span class="line"><span class="cl">          <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">             <span class="err">成功：返回映射区域的首地址</span>
+</span></span><span class="line"><span class="cl">             <span class="err">失败：返回</span><span class="n">MAP_FAILED</span> <span class="err">同时</span><span class="n">errno被设置</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="kt">int</span> <span class="nf">munmap</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">length</span><span class="p">);</span>
+</span></span></code></pre></div><h1 id="2文件io">2.文件io</h1>
+<blockquote>
+<p>系统IO:由操作系统提供的，LINUX/UNIX、 WIN &lt;&mdash;- - 标准IO:为了更好的能够方便移植，同一标准。printf scanf&hellip; 它调用的系统IO屏幕</p></blockquote>
+<h2 id="1文件描述符">1.文件描述符</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">file discriptor 唯一性 整数
+</span></span><span class="line"><span class="cl">所有已经打开的文件都是通过文件描述符来引用。
+</span></span><span class="line"><span class="cl">文件描述符是在LINUX下面，唯一标识一个已经打开的文
+</span></span><span class="line"><span class="cl">件。后续对这个文件的所有的操作都通过文件描述符。
+</span></span></code></pre></div><h2 id="2文件的操作">2.文件的操作</h2>
+<blockquote>
+<p>man:manual 手册</p>
+<p>LINUX会为每个库函数/命令提供一个帮助文档，而 man则是用来查询该帮助文档的。</p>
+<p>man ls 查询ls这条指令的帮助文件(默认是第一页)</p>
+<p>选项-f 帮助文档的目录，因为你要查询的命令可能在 不同的环境下是不同的东西。函数名或者命令。</p>
+<p>man -f ls  f</p>
+<p>man 数字 要查询的东西 ：查看指定的页数</p></blockquote>
+<p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220523154208362.png" alt="image-20220523154208362" class="img-hide" loading="lazy" decoding="async" /></p>
+<h2 id="aopenclose">a.open/close</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="n">open</span> <span class="o">-</span> <span class="n">open</span> <span class="n">a</span> <span class="n">file</span>
+</span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;sys/types.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;sys/stat.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;fcntl.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="n">open</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="ne">int</span>
+</span></span><span class="line"><span class="cl"><span class="n">flags</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">pathname</span><span class="p">:</span><span class="err">路径名</span> <span class="err">可以是相对路径也可以是</span>
+</span></span><span class="line"><span class="cl">    <span class="err">绝对路径</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">flags</span><span class="p">:</span><span class="err">打开标志，文件打开以后的权限，读和写</span>
+</span></span><span class="line"><span class="cl">    <span class="n">O_RDONLY</span><span class="p">:</span><span class="n">open_read_only</span>
+</span></span><span class="line"><span class="cl">    <span class="n">O_WRONLY</span>
+</span></span><span class="line"><span class="cl">    <span class="n">O_RDWR</span>
+</span></span><span class="line"><span class="cl">    <span class="err">三个标志任选其一</span>
+</span></span><span class="line"><span class="cl">    <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">        <span class="err">成功返回文件描述符</span><span class="p">(</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span> <span class="err">代表了该文件</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="err">标准输入</span> <span class="err">标准输出</span> <span class="err">标准出错</span>
+</span></span><span class="line"><span class="cl">        <span class="err">失败返回</span><span class="o">-</span><span class="mi">1</span><span class="err">，并且</span><span class="n">errno</span><span class="err">（错误码）被设置</span>
+</span></span><span class="line"><span class="cl">            <span class="err">我</span>     <span class="err">槟榔</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">1</span>      <span class="err">买到了</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">0</span>      <span class="err">有内鬼</span> <span class="err">终止交易</span>
+</span></span><span class="line"><span class="cl">           <span class="o">-</span><span class="mi">1</span>    <span class="err">被他吃完了</span>
+</span></span><span class="line"><span class="cl">           <span class="o">-</span><span class="mi">2</span>    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">errno</span> <span class="o">---&gt;</span> <span class="n">perror</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">        <span class="n">perror</span> <span class="o">-</span> <span class="nb">print</span> <span class="n">a</span> <span class="n">system</span> <span class="n">error</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#include &lt;stdio.h&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">void</span> <span class="n">perror</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">s</span><span class="err">：所指向的内容由用户进行输入</span>
+</span></span><span class="line"><span class="cl">            <span class="err">比如</span><span class="p">:</span><span class="n">perror</span><span class="p">(</span><span class="s2">&#34;open fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">open</span> <span class="n">fail</span><span class="p">:</span><span class="n">success</span>\<span class="n">n</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="n">close</span> <span class="o">-</span> <span class="n">close</span> <span class="n">a</span> <span class="n">file</span> <span class="n">descriptor</span>
+</span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;unistd.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="n">close</span><span class="p">(</span><span class="ne">int</span> <span class="n">fd</span><span class="p">);</span>
+</span></span></code></pre></div><p>参考代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/LJ/1.txt&#34;</span><span class="p">,</span><span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">fd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="breadwrite">b.read/write</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="n">read</span> <span class="o">-</span> <span class="n">read</span> <span class="n">from</span> <span class="n">a</span> <span class="n">file</span> <span class="n">descriptor</span>
+</span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;unistd.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ssize_t</span> <span class="n">read</span><span class="p">(</span><span class="ne">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="n">size_t</span> <span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">从文件中读取</span><span class="n">count个字节放到buf所指向的地方中去</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">fd</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">buf</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">count</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;</span><span class="mi">0</span> <span class="err">成功读取到的字节数，文件偏移量（光标）随之增加</span>
+</span></span><span class="line"><span class="cl">        <span class="o">=</span><span class="mi">0</span> <span class="err">什么都没有读到</span> <span class="err">到达文件的末尾</span> <span class="err">文件结束了</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="mi">0</span> <span class="err">出错</span> <span class="err">同时</span><span class="n">errno被设置</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span> <span class="o">-</span> <span class="n">write</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">descriptorSYNOPSIS</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;unistd.h&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ssize_t</span> <span class="n">write</span><span class="p">(</span><span class="ne">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="n">void</span><span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">把</span><span class="n">buf所指向的空间中最多count个字节写到fd所代表的文件中去</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">    <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;</span><span class="mi">0</span> <span class="err">成功写入的字节数，文件偏移量（光标）随之增加</span>
+</span></span><span class="line"><span class="cl">        <span class="o">=</span><span class="mi">0</span> <span class="err">什么都没有写入</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="mi">0</span> <span class="err">出错</span> <span class="err">同时</span><span class="n">errno被设置</span>
+</span></span><span class="line"><span class="cl"><span class="n">ps</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ssize_t</span> <span class="n">size_t</span> <span class="err">???</span>
+</span></span><span class="line"><span class="cl">    <span class="err">使用</span><span class="n">typedef来定义的新类型</span>
+</span></span><span class="line"><span class="cl">    <span class="n">typedef</span> <span class="n">unsigned</span> <span class="ne">int</span> <span class="n">Uint_32</span> <span class="o">//</span><span class="err">定义了一个新类型，名为</span><span class="n">Uint_32</span> <span class="err">实际上就是</span><span class="o">//</span><span class="n">unsigned</span> <span class="ne">int</span>
+</span></span></code></pre></div><h3 id="clseek">c.lseek</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lseek</span> <span class="o">-</span> <span class="n">reposition</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span> <span class="n">file</span>
+</span></span><span class="line"><span class="cl"><span class="n">offset</span>
+</span></span><span class="line"><span class="cl">    <span class="err">重定位光标</span>
+</span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="kt">off_t</span> <span class="nf">lseek</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">off_t</span> <span class="n">offset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">whence</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">fd</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="nl">offset</span><span class="p">:</span><span class="err">要设置的偏移量</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="nl">whence</span><span class="p">:</span><span class="err">定位方式</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SEEK_SET</span> <span class="err">基于文件的开头</span>
+</span></span><span class="line"><span class="cl">        <span class="n">The</span> <span class="n">file</span> <span class="n">offset</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">offset</span> <span class="n">bytes</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="err">新的光标位置</span><span class="o">=</span><span class="err">文件开头</span><span class="o">+</span><span class="nf">offset</span><span class="p">(</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SEEK_CUR</span> <span class="err">基于光标当前的位置</span>
+</span></span><span class="line"><span class="cl">        <span class="n">The</span> <span class="n">file</span> <span class="n">offset</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">its</span> <span class="n">current</span> <span class="n">location</span> <span class="n">plus</span> <span class="n">offset</span> <span class="n">bytes</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="err">新的光标位置</span><span class="o">=</span><span class="err">光标当前的位置</span><span class="o">+</span><span class="nf">offset</span><span class="p">(</span><span class="err">可正可负</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SEEK_END</span> <span class="err">基于文件的末尾</span>
+</span></span><span class="line"><span class="cl">        <span class="n">The</span> <span class="n">file</span> <span class="n">offset</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">file</span> <span class="n">plus</span> <span class="n">offset</span> <span class="n">bytes</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="err">新的光标位置</span><span class="o">=</span><span class="err">文件的末尾</span><span class="o">+</span><span class="nf">offset</span><span class="p">(</span><span class="err">可正可负</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">    <span class="err">成功返回新的光标位置相对于文件开头的偏移量</span> <span class="err">单位：字节</span>
+</span></span><span class="line"><span class="cl">    <span class="err">失败返回</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="err">并且</span><span class="n">errno被设置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">重定位光标在文件的开头</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SEEK_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">使用</span><span class="n">lseek求文件的大小</span>
+</span></span></code></pre></div><h1 id="3lcd屏幕">3.LCD屏幕</h1>
+<h2 id="一屏幕属性">一、屏幕属性</h2>
+<blockquote>
+<p>液晶显示屏</p></blockquote>
+<p><strong>分辨率</strong>：有多少行 多少列像素点。
+1080p:1080* 1920
+2K：1440* 2545
+4K：&hellip;
+6818开发板:480p 480*800=384000个像素点</p>
+<p><strong>像素点</strong>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">piexl:显示某种颜色的点。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在屏幕上显示图像，就是给每个像素点一个颜色。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">颜色：红色 蓝色 黑色... DC2(DREAM COLOR梦幻) 十 亿色
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 三基色：红绿蓝 RGB red green blue 红的程度不一样，怎么来形容这种程度呢？量化：数量化 RGB设备 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">红0~255      绿      蓝 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">255             0         0         耀世红 0XFF0000 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0                 255     0         原谅绿 0xFF00 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0                 0         255     天空蓝 0XFF 
+</span></span></code></pre></div><p><strong>透明度：</strong> 一个像素点看起来透明的问题。A（占一个字节 0~255）</p>
+<p>ARGB</p>
+<p>6818开发板屏幕就是ARGB（四个字节）</p>
+<h2 id="二linux帧缓冲">二、LINUX帧缓冲</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">中间层OS的作用:对上层应用层提供操作硬件的接口函数， 屏蔽硬件具体实现细节。让用户不必去关系硬件的实现。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在内存中开辟一块缓冲区，用来保存屏幕上每个像素点的 颜色值，然后应用成序直接把要显示的图像的颜色值写入 到内存即可。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">这块缓冲区buffer至少多大:800* 480* 4 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">帧缓冲设备是对图像硬件的一种抽象，它让上层应用不必 去关心具体的硬件实现细节，上层图形应用，只需要在帧 缓冲中填上合适的颜色值，然后帧缓冲的驱动按一定的刷 新频率去把颜色值在屏幕上正确的显示。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">以上就是帧缓冲的原理。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LINUX中设计哲学：LINUX一切皆文件。 
+</span></span><span class="line"><span class="cl">屏幕:/dev/fb0 
+</span></span></code></pre></div><h2 id="三练习">三、练习</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*****************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">    字符串A123aBCd&amp;$$eNd
+</span></span></span><span class="line"><span class="cl"><span class="cm">    把大写字母-&gt;小写
+</span></span></span><span class="line"><span class="cl"><span class="cm">        小写-&gt;大写
+</span></span></span><span class="line"><span class="cl"><span class="cm">        其他字符不变
+</span></span></span><span class="line"><span class="cl"><span class="cm">    要求：需要封装成函数
+</span></span></span><span class="line"><span class="cl"><span class="cm">*****************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">char  *String_change(char str[]); 
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">int main()
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    char str[] = {&#34;A123aBCd&amp;$$eNd&#34;};
+</span></span></span><span class="line"><span class="cl"><span class="c">    printf(&#34;%s\n&#34;,String_change(str));
+</span></span></span><span class="line"><span class="cl"><span class="c">    return 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">char  *String_change(char str[])
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i = 0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(;str[i]!=&#39;\0&#39;;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        if(str[i] &gt;= 97&amp;&amp;str[i] &lt;= 122)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            str[i] -= 32;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">        else if(str[i] &gt;= 65&amp;&amp;str[i] &lt;=90)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            str[i] += 32;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    return str;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*****************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">在开发板的屏幕显示德国国旗
+</span></span></span><span class="line"><span class="cl"><span class="cm">*****************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">/*头文件*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/types.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/stat.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;fcntl.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;unistd.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">/*宏定义*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#define FILE_PATH &#34;/dev/fb0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c">int main(int argc,char **argv)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //1.打开帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c">    int fd = open(&#34;/dev/fb0&#34;,O_RDWR);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(-1 == fd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;open fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        //print a system error message
+</span></span></span><span class="line"><span class="cl"><span class="c">        return -1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    /*
+</span></span></span><span class="line"><span class="cl"><span class="c">    int open(const char *pathname, int
+</span></span></span><span class="line"><span class="cl"><span class="c">    flags);
+</span></span></span><span class="line"><span class="cl"><span class="c">    @pathname:路径名 可以是相对路径也可以是
+</span></span></span><span class="line"><span class="cl"><span class="c">    绝对路径
+</span></span></span><span class="line"><span class="cl"><span class="c">    @flags:打开标志，文件打开以后的权限，读和
+</span></span></span><span class="line"><span class="cl"><span class="c">    写
+</span></span></span><span class="line"><span class="cl"><span class="c">    O_RDONLY : open_read_only
+</span></span></span><span class="line"><span class="cl"><span class="c">    O_WRONLY
+</span></span></span><span class="line"><span class="cl"><span class="c">    O_RDWR
+</span></span></span><span class="line"><span class="cl"><span class="c">    三个标志任选其一
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值：
+</span></span></span><span class="line"><span class="cl"><span class="c">    成功返回文件描述符(&gt;2) 代表了该文件
+</span></span></span><span class="line"><span class="cl"><span class="c">    0 1 2 标准输入 标准输出 标准出错
+</span></span></span><span class="line"><span class="cl"><span class="c">    失败返回-1，并且errno（错误码）被设
+</span></span></span><span class="line"><span class="cl"><span class="c">    置
+</span></span></span><span class="line"><span class="cl"><span class="c">    */
+</span></span></span><span class="line"><span class="cl"><span class="c">    //2.写入颜色值
+</span></span></span><span class="line"><span class="cl"><span class="c">    int color[480][800];
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        for(i=0;i&lt;800;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            id(j&lt;=160)
+</span></span></span><span class="line"><span class="cl"><span class="c">                color[j][i]=0x000000;
+</span></span></span><span class="line"><span class="cl"><span class="c">            else if(j&lt;=320)
+</span></span></span><span class="line"><span class="cl"><span class="c">                color[j][i]=0xff0000;
+</span></span></span><span class="line"><span class="cl"><span class="c">            else 
+</span></span></span><span class="line"><span class="cl"><span class="c">                color[j][i]=0xffff00;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    int ret = write(fd,color,800*480*4);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(ret &lt; 0)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;write fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return -1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    /*
+</span></span></span><span class="line"><span class="cl"><span class="c">    ssize_t read(int fd, void *buf,
+</span></span></span><span class="line"><span class="cl"><span class="c">    size_t count);
+</span></span></span><span class="line"><span class="cl"><span class="c">    从文件中读取count个字节放到buf所指向的地方中
+</span></span></span><span class="line"><span class="cl"><span class="c">    去。
+</span></span></span><span class="line"><span class="cl"><span class="c">    @fd: 
+</span></span></span><span class="line"><span class="cl"><span class="c">    @buf: 
+</span></span></span><span class="line"><span class="cl"><span class="c">    @count: 
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值：
+</span></span></span><span class="line"><span class="cl"><span class="c">    &gt;0 成功读取到的字节数，文件偏移量（光标）
+</span></span></span><span class="line"><span class="cl"><span class="c">    随之增加
+</span></span></span><span class="line"><span class="cl"><span class="c">    =0 什么都没有读到 到达文件的末尾 文件结束
+</span></span></span><span class="line"><span class="cl"><span class="c">    了
+</span></span></span><span class="line"><span class="cl"><span class="c">    &lt;0 出错 同时errno被设置
+</span></span></span><span class="line"><span class="cl"><span class="c">    */
+</span></span></span><span class="line"><span class="cl"><span class="c">    //3.关闭文件
+</span></span></span><span class="line"><span class="cl"><span class="c">    close(fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*****************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">使用lseek求文件的大小(单位字节)
+</span></span></span><span class="line"><span class="cl"><span class="cm">    NAME   lseek - reposition read/write file offset
+</span></span></span><span class="line"><span class="cl"><span class="cm">       即重定位光标
+</span></span></span><span class="line"><span class="cl"><span class="cm">    off_t lseek(int fd, off_t offset,int whence);
+</span></span></span><span class="line"><span class="cl"><span class="cm">    @fd
+</span></span></span><span class="line"><span class="cl"><span class="cm">    @offset:要设置的偏移量
+</span></span></span><span class="line"><span class="cl"><span class="cm">    @whence:定位方式
+</span></span></span><span class="line"><span class="cl"><span class="cm">    SEEK_SET 基于文件的开头
+</span></span></span><span class="line"><span class="cl"><span class="cm">        The file offset is set to offset bytes.
+</span></span></span><span class="line"><span class="cl"><span class="cm">        新的光标位置=文件开头+offset(&gt;0)
+</span></span></span><span class="line"><span class="cl"><span class="cm">    SEEK_CUR 基于光标当前的位置
+</span></span></span><span class="line"><span class="cl"><span class="cm">        The file offset is set to its current location plus offset bytes.
+</span></span></span><span class="line"><span class="cl"><span class="cm">        新的光标位置=光标当前的位置+offset(可正可负)
+</span></span></span><span class="line"><span class="cl"><span class="cm">    SEEK_END 基于文件的末尾
+</span></span></span><span class="line"><span class="cl"><span class="cm">        The file offset is set to the size of the file plus offset bytes.
+</span></span></span><span class="line"><span class="cl"><span class="cm">        新的光标位置=文件的末尾+offset(可正可负)
+</span></span></span><span class="line"><span class="cl"><span class="cm">    返回值：
+</span></span></span><span class="line"><span class="cl"><span class="cm">        成功返回新的光标位置相对于文件开头的偏移量
+</span></span></span><span class="line"><span class="cl"><span class="cm">        单位：字节
+</span></span></span><span class="line"><span class="cl"><span class="cm">        失败返回-1,并且errno被设置
+</span></span></span><span class="line"><span class="cl"><span class="cm">        重定位光标在文件的开头
+</span></span></span><span class="line"><span class="cl"><span class="cm">    lseek(fd,0,SEEK_SET);
+</span></span></span><span class="line"><span class="cl"><span class="cm">*****************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 1
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span> <span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*头文件*/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*宏定义*/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define FILE_PATH &#34;../ceshi.txt&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span><span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;今天真好看!！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    打开文件：open（文件路径 O_RDONLY/O_WRONLY/O_RDWR）
+</span></span></span><span class="line"><span class="cl"><span class="cm">    返回值：文件描述符（代表该文件）/-1.
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">FILE_PATH</span><span class="p">,</span><span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">fd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//print a system error message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    写入:write(文件描述符&lt;-待放数据 ，内存大小)
+</span></span></span><span class="line"><span class="cl"><span class="cm">     返回值：    &gt;0 成功读取到的字节数，文件偏移量（光标）随之增加
+</span></span></span><span class="line"><span class="cl"><span class="cm">                =0 什么都没有读到 到达文件的末尾 文件结束
+</span></span></span><span class="line"><span class="cl"><span class="cm">                &lt;0 出错 同时errno被设置
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">length</span><span class="o">=</span><span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="n">SEEK_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">str</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;write fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*将光标移回开头*/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">length</span><span class="o">=</span><span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SEEK_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*从最后开始，0偏移，返回偏移量*/</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">red</span><span class="o">=</span><span class="nf">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">str</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">red</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;read fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%c&#34;</span><span class="p">,</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">length</span><span class="o">=</span><span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SEEK_END</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/RGB%E9%A2%9C%E8%89%B2%E6%9F%A5%E8%AF%A2%E5%AF%B9%E7%85%A7%E8%A1%A8.png" alt="RGB颜色查询对照表" class="img-hide" loading="lazy" decoding="async" /></p>
+<h1 id="4homework">4.homework</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">作业
+</span></span></span><span class="line"><span class="cl"><span class="cm">1.在屏幕的x y(矩形的左上角)处显示一个颜色为color
+</span></span></span><span class="line"><span class="cl"><span class="cm">高h宽为w的矩形
+</span></span></span><span class="line"><span class="cl"><span class="cm">封装成函数
+</span></span></span><span class="line"><span class="cl"><span class="cm">2.在屏幕上显示一个圆
+</span></span></span><span class="line"><span class="cl"><span class="cm">封装成函数
+</span></span></span><span class="line"><span class="cl"><span class="cm">拓展：显示一个太极图案
+</span></span></span><span class="line"><span class="cl"><span class="cm">********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*头文件*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/types.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/stat.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;fcntl.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;unistd.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/mman.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*宏定义*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#define FILE_PATH &#34;/dev/fb0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*函数声明*/
+</span></span></span><span class="line"><span class="cl"><span class="c">int *Init_LCD(int *fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Uninit_LCD(int fd,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_point(int x,int y,int color,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_circle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_leftcircle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_rightcircle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_taiji(int x,int y,int r,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">int main(int argc,char **argv)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int fd=-1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int* plcd = Init_LCD(&amp;fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_matrx(0,0,880,480,0xff0000,plcd);//清屏
+</span></span></span><span class="line"><span class="cl"><span class="c">    //Lcd_draw_circle(440,240,200,0xff0000,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_taiji(440,240,200,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Uninit_LCD(fd,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">    Init_LCD:初始化显示屏
+</span></span></span><span class="line"><span class="cl"><span class="c">    参数为空
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值 int*
+</span></span></span><span class="line"><span class="cl"><span class="c">        成功 返回映射区域的首地址
+</span></span></span><span class="line"><span class="cl"><span class="c">        失败 返回NULL
+</span></span></span><span class="line"><span class="cl"><span class="c">*/
+</span></span></span><span class="line"><span class="cl"><span class="c">int *Init_LCD(int *fd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //1.打开帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c">    *fd = open(&#34;/dev/fb0&#34;,O_RDWR);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(-1 == *fd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;open fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return NULL;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    //2.映射
+</span></span></span><span class="line"><span class="cl"><span class="c">    int *plcd = mmap(NULL,800*480*4
+</span></span></span><span class="line"><span class="cl"><span class="c">            ,PROT_READ |  PROT_WRITE,
+</span></span></span><span class="line"><span class="cl"><span class="c">            MAP_SHARED,*fd,0);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(MAP_FAILED == plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;mmap fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return NULL;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    return plcd;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">    Uninit_LCD:解初始化屏幕
+</span></span></span><span class="line"><span class="cl"><span class="c">    @fd:帧缓冲的文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c">    @plcd:
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值:无
+</span></span></span><span class="line"><span class="cl"><span class="c">*/
+</span></span></span><span class="line"><span class="cl"><span class="c">void Uninit_LCD(int fd,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //1.解映射
+</span></span></span><span class="line"><span class="cl"><span class="c">    munmap(plcd,800*480*4);
+</span></span></span><span class="line"><span class="cl"><span class="c">    //2.关闭帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c">    close(fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_point(int x,int y,int color,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(NULL == plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        printf(&#34;error:plcd == NULL\n&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return ;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(x&gt;=0&amp;&amp;x&lt;800&amp;&amp;y&gt;=0&amp;&amp;y&lt;480)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">           *(plcd+800*y+x) = color;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    if((x+w)&gt;=0||(x+w)&lt;=880||(y+h)&gt;=0||(y+h)&lt;=880)
+</span></span></span><span class="line"><span class="cl"><span class="c">        for(j=x;j&lt;x+w;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=y;i&lt;y+h;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_circle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_leftcircle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r&amp;&amp;i&lt;x)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_rightcircle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r&amp;&amp;i&gt;=x)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_taiji(int x,int y,int r,int* plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_leftcircle(x,y,r,0x000000,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_rightcircle(x,y,r,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_circle(x,y-(r/2),r/2,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_circle(x,y+(r/2),r/2,0x000000,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_circle(x,y-(r/2),r/4,0x000000,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_circle(x,y+(r/2),r/4,0xffffff,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*******************************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm">碰壁转弯直线代码
+</span></span></span><span class="line"><span class="cl"><span class="cm">*******************************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*头文件*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/types.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/stat.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;fcntl.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;unistd.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">#include &lt;sys/mman.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*宏定义*/
+</span></span></span><span class="line"><span class="cl"><span class="c">#define FILE_PATH &#34;/dev/fb0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*函数声明*/
+</span></span></span><span class="line"><span class="cl"><span class="c">int *Init_LCD(int *fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Uninit_LCD(int fd,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_point(int x,int y,int color,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_circle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_leftcircle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_rightcircle(int x,int y,int r,int color,int *plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_taiji(int x,int y,int r,int *plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">int main(int argc,char **argv)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int fd=-1;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int* plcd = Init_LCD(&amp;fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_matrx(0,0,880,480,0xff0000,plcd);//清屏
+</span></span></span><span class="line"><span class="cl"><span class="c">    //Lcd_draw_circle(440,240,200,0xff0000,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Lcd_draw_taiji(440,240,5,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">    Uninit_LCD(fd,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">    Init_LCD:初始化显示屏
+</span></span></span><span class="line"><span class="cl"><span class="c">    参数为空
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值 int*
+</span></span></span><span class="line"><span class="cl"><span class="c">        成功 返回映射区域的首地址
+</span></span></span><span class="line"><span class="cl"><span class="c">        失败 返回NULL
+</span></span></span><span class="line"><span class="cl"><span class="c">*/
+</span></span></span><span class="line"><span class="cl"><span class="c">int *Init_LCD(int *fd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //1.打开帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c">    *fd = open(&#34;/dev/fb0&#34;,O_RDWR);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(-1 == *fd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;open fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return NULL;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    //2.映射
+</span></span></span><span class="line"><span class="cl"><span class="c">    int *plcd = mmap(NULL,800*480*4
+</span></span></span><span class="line"><span class="cl"><span class="c">            ,PROT_READ |  PROT_WRITE,
+</span></span></span><span class="line"><span class="cl"><span class="c">            MAP_SHARED,*fd,0);
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(MAP_FAILED == plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        perror(&#34;mmap fail&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return NULL;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    return plcd;
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">    Uninit_LCD:解初始化屏幕
+</span></span></span><span class="line"><span class="cl"><span class="c">    @fd:帧缓冲的文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c">    @plcd:
+</span></span></span><span class="line"><span class="cl"><span class="c">    返回值:无
+</span></span></span><span class="line"><span class="cl"><span class="c">*/
+</span></span></span><span class="line"><span class="cl"><span class="c">void Uninit_LCD(int fd,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //1.解映射
+</span></span></span><span class="line"><span class="cl"><span class="c">    munmap(plcd,800*480*4);
+</span></span></span><span class="line"><span class="cl"><span class="c">    //2.关闭帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c">    close(fd);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_point(int x,int y,int color,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(NULL == plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        printf(&#34;error:plcd == NULL\n&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c">        return ;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">    if(x&gt;=0&amp;&amp;x&lt;800&amp;&amp;y&gt;=0&amp;&amp;y&lt;480)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">           *(plcd+800*y+x) = color;
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    if((x+w)&gt;=0||(x+w)&lt;=880||(y+h)&gt;=0||(y+h)&lt;=880)
+</span></span></span><span class="line"><span class="cl"><span class="c">        for(j=x;j&lt;x+w;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=y;i&lt;y+h;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_circle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_leftcircle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r&amp;&amp;i&lt;x)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_rightcircle(int x,int y,int r,int color,int *plcd )
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i,j;
+</span></span></span><span class="line"><span class="cl"><span class="c">    for(j=0;j&lt;480;j++)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            for(i=0;i&lt;880;i++)
+</span></span></span><span class="line"><span class="cl"><span class="c">            {
+</span></span></span><span class="line"><span class="cl"><span class="c">                if((x-i)*(x-i)+(y-j)*(y-j)&lt;r*r&amp;&amp;i&gt;=x)
+</span></span></span><span class="line"><span class="cl"><span class="c">                    Lcd_draw_point(i,j,color,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            }
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">void Lcd_draw_taiji(int x,int y,int r,int* plcd)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">    //上圆心
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i0=x;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int j0=y-r/2;
+</span></span></span><span class="line"><span class="cl"><span class="c">    //下圆心
+</span></span></span><span class="line"><span class="cl"><span class="c">    int i2=x;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int j2=y+r/2;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int flog=0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    int flog1=0;
+</span></span></span><span class="line"><span class="cl"><span class="c">    while(1)
+</span></span></span><span class="line"><span class="cl"><span class="c">    {
+</span></span></span><span class="line"><span class="cl"><span class="c">        if(0==flog)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            j0--;
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/2,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/4,0x000000,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">            //sleep(0.5);
+</span></span></span><span class="line"><span class="cl"><span class="c">            if(j0==1)flog=1;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">        if(1==flog)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            j0++;
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/2,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/4,0x000000,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">            //sleep(0.5);
+</span></span></span><span class="line"><span class="cl"><span class="c">            if(j0==480)flog=0;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">        if(0==flog1)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            i0++;
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/2,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/4,0x000000,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">            //sleep(0.5);
+</span></span></span><span class="line"><span class="cl"><span class="c">            if(i0==800)flog1=1;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">        if(1==flog1)
+</span></span></span><span class="line"><span class="cl"><span class="c">        {
+</span></span></span><span class="line"><span class="cl"><span class="c">            i0--;
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/2,0xffffff,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c">            Lcd_draw_circle(i0,j0,r/4,0x000000,plcd );
+</span></span></span><span class="line"><span class="cl"><span class="c">            //sleep(0.5);
+</span></span></span><span class="line"><span class="cl"><span class="c">            if(i0==1)flog1=0;
+</span></span></span><span class="line"><span class="cl"><span class="c">        }
+</span></span></span><span class="line"><span class="cl"><span class="c">    }
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/********************************************************************
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 转动太极图案代码
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 
+</span></span></span><span class="line"><span class="cl"><span class="cm">********************************************************************/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 1
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*头文件*/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*宏定义*/</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define FILE_PATH &#34;/dev/fb0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*函数声明*/</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="nf">Init_LCD</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Uninit_LCD</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_matrx</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">h</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_leftcircle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_rightcircle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_taiji</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span><span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">plcd</span> <span class="o">=</span> <span class="nf">Init_LCD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Lcd_draw_matrx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">880</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mh">0xff0000</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span><span class="c1">//清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//Lcd_draw_circle(440,240,200,0xff0000,plcd);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">Lcd_draw_taiji</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Uninit_LCD</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Init_LCD:初始化显示屏
+</span></span></span><span class="line"><span class="cl"><span class="cm">    参数为空
+</span></span></span><span class="line"><span class="cl"><span class="cm">    返回值 int*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        成功 返回映射区域的首地址
+</span></span></span><span class="line"><span class="cl"><span class="cm">        失败 返回NULL
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="nf">Init_LCD</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">fd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//1.打开帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/fb0&#34;</span><span class="p">,</span><span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="o">*</span><span class="n">fd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//2.映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="mi">800</span><span class="o">*</span><span class="mi">480</span><span class="o">*</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl">            <span class="p">,</span><span class="n">PROT_READ</span> <span class="o">|</span>  <span class="n">PROT_WRITE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">MAP_SHARED</span><span class="p">,</span><span class="o">*</span><span class="n">fd</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">MAP_FAILED</span> <span class="o">==</span> <span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;mmap fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">plcd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Uninit_LCD:解初始化屏幕
+</span></span></span><span class="line"><span class="cl"><span class="cm">    @fd:帧缓冲的文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="cm">    @plcd:
+</span></span></span><span class="line"><span class="cl"><span class="cm">    返回值:无
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Uninit_LCD</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//1.解映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">munmap</span><span class="p">(</span><span class="n">plcd</span><span class="p">,</span><span class="mi">800</span><span class="o">*</span><span class="mi">480</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//2.关闭帧缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;error:plcd == NULL</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">800</span><span class="o">&amp;&amp;</span><span class="n">y</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">y</span><span class="o">&lt;</span><span class="mi">480</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="o">*</span><span class="p">(</span><span class="n">plcd</span><span class="o">+</span><span class="mi">800</span><span class="o">*</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_matrx</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">h</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">w</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">||</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">w</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">880</span><span class="o">||</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">||</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">880</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">x</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">x</span><span class="o">+</span><span class="n">w</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">y</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">y</span><span class="o">+</span><span class="n">h</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">480</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">880</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">&lt;</span><span class="n">r</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_leftcircle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">480</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">880</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">&lt;</span><span class="n">r</span><span class="o">*</span><span class="n">r</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_rightcircle</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">480</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">880</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">&lt;</span><span class="n">r</span><span class="o">*</span><span class="n">r</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Lcd_draw_point</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Lcd_draw_taiji</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span><span class="o">*</span> <span class="n">plcd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">time</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//上圆心
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">i0</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">j0</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//下圆心
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">i2</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">j2</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">addx</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">400</span><span class="p">,</span><span class="mi">372</span><span class="p">,</span><span class="mi">340</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">304</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">304</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">340</span><span class="p">,</span><span class="mi">373</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">428</span><span class="p">,</span><span class="mi">460</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mi">496</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">496</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mi">460</span><span class="p">,</span><span class="mi">428</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">addy</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">140</span><span class="p">,</span><span class="mi">144</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">268</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">336</span><span class="p">,</span><span class="mi">340</span><span class="p">,</span><span class="mi">336</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">268</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">144</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//画两个半圆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">Lcd_draw_leftcircle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="mh">0x000000</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span><span class="c1">//黑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">Lcd_draw_rightcircle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="mh">0xffffff</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span><span class="c1">//白
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//画两个大圆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">j0</span><span class="p">,</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mh">0xffffff</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">i2</span><span class="p">,</span><span class="n">j2</span><span class="p">,</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mh">0x000000</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//画两个小圆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">j0</span><span class="p">,</span><span class="n">r</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mh">0x000000</span><span class="p">,</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">i2</span><span class="p">,</span><span class="n">j2</span><span class="p">,</span><span class="n">r</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mh">0xffffff</span><span class="p">,</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//画两个大圆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">addx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">addy</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mh">0xffffff</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">addx</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="n">addy</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">r</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mh">0x000000</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//sleep(0.25);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//画两个小圆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">addx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">addy</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">r</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mh">0x000000</span><span class="p">,</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">Lcd_draw_circle</span><span class="p">(</span><span class="n">addx</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="n">addy</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">r</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mh">0xffffff</span><span class="p">,</span><span class="n">plcd</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="mi">20</span><span class="o">==</span><span class="n">i</span><span class="p">)</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="mi">20</span><span class="o">==</span><span class="n">j</span><span class="p">)</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="mi">20</span><span class="o">==</span><span class="n">m</span><span class="p">)</span><span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="mi">20</span><span class="o">==</span><span class="n">n</span><span class="p">)</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">//用这个程序求出解的数组：
+</span></span></span><span class="line"><span class="cl"><span class="cm">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">int main()
+</span></span></span><span class="line"><span class="cl"><span class="cm">{
+</span></span></span><span class="line"><span class="cl"><span class="cm">    int i, j;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    //int str[10000][10000];
+</span></span></span><span class="line"><span class="cl"><span class="cm">    for (j = 140; j &lt;= 340;j++)
+</span></span></span><span class="line"><span class="cl"><span class="cm">    {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        for (i = 300; i &lt;= 500; i++)
+</span></span></span><span class="line"><span class="cl"><span class="cm">        {
+</span></span></span><span class="line"><span class="cl"><span class="cm">            if (207600 + i * i + j * j == 800 * i + 480 * j)
+</span></span></span><span class="line"><span class="cl"><span class="cm">            {
+</span></span></span><span class="line"><span class="cl"><span class="cm">                printf(&#34;有解:%d,%d&#34;,i,j);
+</span></span></span><span class="line"><span class="cl"><span class="cm">                printf(&#34;\n&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">            }
+</span></span></span><span class="line"><span class="cl"><span class="cm">        }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    return 0;
+</span></span></span><span class="line"><span class="cl"><span class="cm">}
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:400,140
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:372,144
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:428,144
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:340,160
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:460,160
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:320,180
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:480,180
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:304,212
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:496,212
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:300,240
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:500,240
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:304,268
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:496,268
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:320,300
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:480,300
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:340,320
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:460,320
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:372,336
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:428,336
+</span></span></span><span class="line"><span class="cl"><span class="cm">有解:400,340
+</span></span></span><span class="line"><span class="cl"><span class="cm">即：
+</span></span></span><span class="line"><span class="cl"><span class="cm">//上圆逆时针转到下圆：0-9
+</span></span></span><span class="line"><span class="cl"><span class="cm">400,140
+</span></span></span><span class="line"><span class="cl"><span class="cm">372,144
+</span></span></span><span class="line"><span class="cl"><span class="cm">340,160
+</span></span></span><span class="line"><span class="cl"><span class="cm">320,180
+</span></span></span><span class="line"><span class="cl"><span class="cm">304,212
+</span></span></span><span class="line"><span class="cl"><span class="cm">300,240
+</span></span></span><span class="line"><span class="cl"><span class="cm">304,268
+</span></span></span><span class="line"><span class="cl"><span class="cm">320,300
+</span></span></span><span class="line"><span class="cl"><span class="cm">340,320
+</span></span></span><span class="line"><span class="cl"><span class="cm">372,336
+</span></span></span><span class="line"><span class="cl"><span class="cm">//下圆逆时针转到上圆：10-19
+</span></span></span><span class="line"><span class="cl"><span class="cm">400,340
+</span></span></span><span class="line"><span class="cl"><span class="cm">428,336
+</span></span></span><span class="line"><span class="cl"><span class="cm">460,320
+</span></span></span><span class="line"><span class="cl"><span class="cm">480,300
+</span></span></span><span class="line"><span class="cl"><span class="cm">496,268
+</span></span></span><span class="line"><span class="cl"><span class="cm">500,240
+</span></span></span><span class="line"><span class="cl"><span class="cm">496,212
+</span></span></span><span class="line"><span class="cl"><span class="cm">480,180
+</span></span></span><span class="line"><span class="cl"><span class="cm">460,160
+</span></span></span><span class="line"><span class="cl"><span class="cm">428,144
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div>
+    </div>
+    <div class="single-biaoq">
+ <div class="page-time">更新于 
+  <script>
+    document.write(formatDate( 1759488826 )); 
+  </script>
+ </div>
+ <div class="single-tag">
+     
+          
+     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
+          
+          
+ </div>
+  </div> 
+ </div>
+ 
+ <div class="archives_nrong" >
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day5_bmp/">Day5_BMP</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day5_bmp/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day3_6818board/">Day3_6818board</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day3_6818board/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+</div>
+      
+      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
+      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
+<script src="https://img.koobai.com/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+  Artalk.init({
+    el:        '#Comments',
+    pageKey:   'http:\/\/localhost:1313\/day4_file_io\/',
+    pageTitle: 'Day4_File_IO',
+    server:    'https:\/\/c.koobai.com',
+    site:      'Koobai 空白生活',
+    
+  })
+</script></div> 
+</div>
+
+<div>
+    <div class="paragraph-dh">
+     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1文件描述符">1.文件描述符</a></li>
+    <li><a href="#2文件的操作">2.文件的操作</a></li>
+    <li><a href="#aopenclose">a.open/close</a>
+      <ul>
+        <li><a href="#breadwrite">b.read/write</a></li>
+        <li><a href="#clseek">c.lseek</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#一屏幕属性">一、屏幕属性</a></li>
+    <li><a href="#二linux帧缓冲">二、LINUX帧缓冲</a></li>
+    <li><a href="#三练习">三、练习</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+</div>
+<script src="/js/single.js"></script>    
+
+  </div>
+  <div class="footer-background">
+<div class="footer">
+        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
+        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
+        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
+      </div>
+      <div class="footer-rss">
+      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
+      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
+      </div>
+    </div>
+  </div>
+ 
+ <script src="/js/view-image.min.js"></script>
+  
+<div class="gotop_hide">
+  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
+</div>
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/bundle.js"></script>
+  
+
+  
+   
+</body>
+</html>

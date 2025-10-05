@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on 空白Koobai</title>
+    <link>http://localhost:1313/tags/hugo/</link>
+    <description>Recent content in Hugo on 空白Koobai</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 24 Feb 2024 16:49:41 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HUGO 折腾随记之热力图 / 段落导航</title>
+      <link>http://localhost:1313/hugo_suiji/</link>
+      <pubDate>Sat, 24 Feb 2024 16:49:41 +0800</pubDate>
+      <guid>http://localhost:1313/hugo_suiji/</guid>
+      <description>&lt;p&gt;在闲逛各博客的时候，发现有些功能蛮有意思的，于是趁现在还没忙碌起来，跟着抄了下作业，同时通过 AI 的帮忙，优化了下以适应自己页面的风格。&lt;/p&gt;&#xA;&lt;h2 id=&#34;博文热力图&#34;&gt;博文热力图&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://img.koobai.com/article/20240224_relitu.webp&#34; alt=&#34;热力图&#34; class=&#34;img-hide&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; /&gt;&lt;/p&gt;&#xA;&lt;p&gt;最开始看到好像是因为&#xA;&lt;a &#xA;    &#xA;        href=&#34;http://localhost:1313/tiaozhuan?target=aHR0cHM6Ly9pbW1tbW0uY29tLw%3d%3d&#34;&#xA;    &#xA;     target=&#34;_blank&#34;&#xA;&gt;&#xA;木木老师&lt;/a&gt;发了个memos，当时想着自己平常也不怎么更新博文，所以意义不大。这两天又在&#xA;&lt;a &#xA;    &#xA;        href=&#34;http://localhost:1313/tiaozhuan?target=aHR0cHM6Ly9ibG9nLmRvdWNoaS5zcGFjZS9odWdvLWJsb2ctaGVhdG1hcC8jZ3NjLnRhYj0w&#34;&#xA;    &#xA;     target=&#34;_blank&#34;&#xA;&gt;&#xA;椒盐豆豉&lt;/a&gt;中看到完整的教程，心想这次页面布局改成很窄的单栏之后，似乎很契合小而美的特性。一顿操作，跟原版的区别在于：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用 unicode-range 属性, 提高自定义字体加载速度</title>
+      <link>http://localhost:1313/unicode_range/</link>
+      <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/unicode_range/</guid>
+      <description>&lt;p&gt;每天折腾一点，新鲜满足感就增强点。为了各个终端显示效果能保持一致性及自己的审美爱好，网站自定义了三种字体：标题(得意黑)、正文(鸿蒙)、代码(JetBrainsMono)。效果很满意，但带来的问题就是加载速度怎么保证，特别是中文字体。虽然使用.woff2 格式可以一定程度的降低容量，但动不动就 1M 以上的大小，对加载速度还是有一定的影响，包括 CDN 的流量损耗。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Github 自动构建 Hugo, 并通过 Webhook 同步到宝塔指定目录</title>
+      <link>http://localhost:1313/hugo_action_webhooks/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hugo_action_webhooks/</guid>
+      <description>&lt;p&gt;(2024.01.19晚更新) 折腾博客的乐趣就是不停的折腾，一个评论插件就搞来搞去的，为此还特意买了轻量服务器，索性也把 Hugo 搬过去。只是原先自动同步到腾讯 COS 就不可用，而且域名还指定了境外访问路径，导致更新博客的流程变得非常复杂。最终通过 Google，总算解决：本地提交 hugo 源码到 Github，自动触发构建并同步到宝塔指定的网站目录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Github自动构建Hugo, 并同步到腾讯COS, 同时刷新CDN缓存</title>
+      <link>http://localhost:1313/hugo_action_tencentcos/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hugo_action_tencentcos/</guid>
+      <description>&lt;p&gt;博客逐步搭建完善，更新了日常使用的&#xA;&lt;a &#xA;    &#xA;        href=&#34;https://koobai.com/apps/&#34;&#xA;    &#xA;     target=&#34;_blank&#34;&#xA;&gt;&#xA;App&lt;/a&gt;、&#xA;&lt;a &#xA;    &#xA;        href=&#34;https://koobai.com/hardware/&#34;&#xA;    &#xA;     target=&#34;_blank&#34;&#xA;&gt;&#xA;硬件&lt;/a&gt;页面。博客样式标题采用了&amp;quot;&#xA;&lt;a &#xA;    &#xA;        href=&#34;http://localhost:1313/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2F0ZWxpZXItYW5jaG9yL3NtaWxleS1zYW5z&#34;&#xA;    &#xA;     target=&#34;_blank&#34;&#xA;&gt;&#xA;得意黑&lt;/a&gt;&amp;ldquo;开源字体。把二级域名改成一级，过程中发现 Cloudflare Pages 如果要绑定一级，须把域名的 DNS 服务器解析过去。解析之后，自己的 nas 访问变得不稳定，时不时的打不开，来来回回折腾了好几次，无解，只好改回去。 vercel 可以绑定一级，尝试之后，访问速度太慢，放弃。开始了解国内的云服务，学习到了对象储存、CDN，经过一番对比尝试，最终选择腾讯云的 COS 对象存储配合内容分发网络 CDN 搭建(主要它的 cosbrowser 界面是经过设计的 ᵔ◡ᵔ；客服也很负责，咨询问题会电话打过来详细教你如何操作)。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Day6_TouchEvent - 空白Koobai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/suju/ios.json">
+  <link rel="icon" href="https://img.koobai.com/koobai.png">
+  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
+  <link rel="canonical" href="http://localhost:1313/day6_touchevent/" />
+
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+    
+    <meta property="og:title" content="Day6_TouchEvent"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://localhost:1313/day6_touchevent/"/>
+    
+    
+  
+</head>
+
+
+
+<body class='page page-blog-single'>
+  <div id="menu-main-mobile" class="menu-main-mobile">
+    <ul class="menu">
+        
+        
+            
+                <li >
+                    <a href="http://localhost:1313/">首页</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/posts/">博文</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://sport.koobai.com/">骑行</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/apps/">软件</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="http://localhost:1313/movies/">观影</a>
+                </li>
+            
+        
+            
+                <li >
+                    <a href="https://qiszy.taobao.com">好物</a>
+                </li>
+            
+        
+    </ul>
+</div>
+  <div id="wrapper" class="wrapper">
+    <div class="header">
+
+<div id="toggle-menu-main-mobile" class="hamburger-trigger">
+  <button class="hamburger">Menu</button>
+</div>
+<div class="new-heard-menu">
+
+
+
+
+<div class="header-menu">
+  <a href="/" >首页</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/posts/" >博文</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://sport.koobai.com/" >骑行</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/apps/" >软件</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="/movies/" >观影</a>
+</div>
+
+
+
+<div class="header-menu">
+  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
+</div>
+
+</div>
+  <div class="heard-right"> 
+    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
+    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+    </svg></a>    
+    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
+</div>
+
+</div>
+
+<script src="/js/moment.min.js?v=2.29.4"></script>
+<script src="/js/moment.twitter.min.js"></script>
+<script>
+function formatDate(param) {
+if(typeof param === 'number') {
+     param = new Date(param * 1000).toISOString();
+  }
+return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
+}
+</script>
+     
+<div class="single-nrong">
+<div class="single-zw">
+    <div class="article_details">
+      <div class="article_details_title">Day6_TouchEvent</div>
+      
+    </div>
+    <div class="content_zhengwen">
+    <div class="content">
+      <p>[TOC]</p>
+<h1 id="1输入事件">1.输入事件</h1>
+<blockquote>
+<p>输入设备（键盘，鼠标，触摸屏，游戏手柄&hellip;..），都属于输入的子系统 特点 ： 你不知道他什么时候输入，当我们输入的时候，我们称之为输入事件 触摸屏对GEC6818的一个文件 ： /dev/input/event0</p></blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">input_event</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">timeval</span> <span class="n">time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_u16</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_u16</span> <span class="n">code</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_s32</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">type</span> <span class="err">：表示事件的类型</span> <span class="err">区分是什么事件</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define EV_KEY 0x01    按键事件
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define EV_REL 0x02 （relative）   相对事件： 鼠标
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define EV_ABS 0x03 （absolute）    绝对事件： 触摸屏
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_KEY</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">code键值</span><span class="err">，</span> <span class="err">区分按下的是哪个键</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define KEY_ESC    1
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define KEY_1      2
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define KEY_2      3
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define KEY_3      4
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define KEY_4      5
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="err">。。。。。</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define BTN_TOUCH  0x14a </span><span class="c1">//触摸屏的按键
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_REL</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">code就是相对的坐标轴</span> <span class="err">区分是哪个轴</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define REL_X 0x00
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define REL_Y 0x01
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define REL_Z 0x02
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="err">。。。。。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">code就是绝对坐标轴</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define ABS_X 0x00
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp">#define ABS_Y 0x01
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="err">。。。。。。</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define ABS_PRESSURE 0x18</span><span class="c1">//触摸屏的压力值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">value</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_KEY</span> 	<span class="n">code</span> <span class="o">==</span> <span class="n">KEY_ESC</span> 	<span class="n">value按键的状态值</span>
+</span></span><span class="line"><span class="cl">    <span class="err">按键的状态</span>
+</span></span><span class="line"><span class="cl">    <span class="err">按下</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="err">松开</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> 	<span class="n">code</span> <span class="o">==</span> <span class="n">ABS_X</span> 	<span class="n">value是x轴的坐标</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> 	<span class="n">code</span> <span class="o">==</span> <span class="n">ABS_Y</span> 	<span class="n">value是y轴的坐标</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> 	<span class="n">code</span> <span class="o">==</span> <span class="n">ABS_PRESSURE</span> 	<span class="n">value是压力值</span>
+</span></span></code></pre></div><h2 id="简化表格">简化表格:</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">type</th>
+          <th style="text-align: center">ture number</th>
+          <th>code</th>
+          <th style="text-align: center">ture number</th>
+          <th style="text-align: center">value meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">EV_KEY</td>
+          <td style="text-align: center">0x01</td>
+          <td>KEY_ESC</td>
+          <td style="text-align: center">0x01</td>
+          <td style="text-align: center">按键的状态:1按0松</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>KEY_X</td>
+          <td style="text-align: center">0x0X</td>
+          <td style="text-align: center">按键的状态:1按0松</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">按键的状态:1按0松</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>BTN_TOUCH</td>
+          <td style="text-align: center">0x14a</td>
+          <td style="text-align: center">按键的状态:1按0松</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">EV_REL</td>
+          <td style="text-align: center">0x02</td>
+          <td>REL_X</td>
+          <td style="text-align: center">0x00</td>
+          <td style="text-align: center">x轴</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>REL_Y</td>
+          <td style="text-align: center">0x01</td>
+          <td style="text-align: center">y轴</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>REL_Z..</td>
+          <td style="text-align: center">0x02</td>
+          <td style="text-align: center">z轴</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">EV_ABS</td>
+          <td style="text-align: center">0x03</td>
+          <td>ABS_X</td>
+          <td style="text-align: center">0x00</td>
+          <td style="text-align: center">x轴的坐标</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>ABS_Y</td>
+          <td style="text-align: center">0x01</td>
+          <td style="text-align: center">y轴的坐标</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: center"></td>
+          <td>ABS_PRESSURE</td>
+          <td style="text-align: center">0x18</td>
+          <td style="text-align: center">压力值</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="2实例程序">2.实例程序</h1>
+<h2 id="touchh文件">touch.h文件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef __TOUCH_H__
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __TOUCH_H__
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/input.h&gt;//输入子系统</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define UP    1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define DOWN  2
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define LEFT  3
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define RIGHT 4
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">getTouch</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></div><h2 id="touchc文件">touch.c文件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//获取坐标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">getTouch</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//1.打开触摸屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/input/event0&#34;</span><span class="p">,</span><span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">fd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open ScreenTouch failed</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//2.操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">input_event</span> <span class="n">ev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="o">&amp;</span><span class="n">ev</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ev</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;type =%d,code=%d,value=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">ev</span><span class="p">.</span><span class="n">type</span><span class="p">,</span><span class="n">ev</span><span class="p">.</span><span class="n">code</span><span class="p">,</span><span class="n">ev</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> <span class="o">&amp;&amp;</span> <span class="n">ev</span><span class="p">.</span><span class="n">code</span> <span class="o">==</span> <span class="n">ABS_X</span> <span class="p">)</span><span class="c1">//触摸屏的x轴
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span> <span class="o">=</span> <span class="n">ev</span><span class="p">.</span><span class="n">value</span> <span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="mi">800</span><span class="o">/</span><span class="mi">1040</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">EV_ABS</span> <span class="o">&amp;&amp;</span> <span class="n">ev</span><span class="p">.</span><span class="n">code</span> <span class="o">==</span> <span class="n">ABS_Y</span> <span class="p">)</span><span class="c1">//触摸屏的y轴
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span> <span class="o">=</span> <span class="n">ev</span><span class="p">.</span><span class="n">value</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="mi">480</span><span class="o">/</span><span class="mi">600</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;( %d , %d )</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ev</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">EV_KEY</span> <span class="o">&amp;&amp;</span> <span class="n">ev</span><span class="p">.</span><span class="n">code</span> <span class="o">==</span> <span class="n">BTN_TOUCH</span> <span class="o">&amp;&amp;</span> <span class="n">ev</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="c1">//手指松开
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span><span class="c1">//一次获取
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>      
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//3.关闭
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="mainc文件">main.c文件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&#34;touch.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">getTouch</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220521205433085-16532877785093.png" alt="image-20220521205433085" class="img-hide" loading="lazy" decoding="async" /></p>
+<h2 id="分析">分析:</h2>
+<p>type=3，code=0，value=307：屏幕事件	|	x轴坐标	|	x=307</p>
+<p>type=3，code=1，value=338：屏幕事件	|	y轴坐标	|	y=338</p>
+<p>type=1，code=330，value=1：按键事件	|	屏幕按键	|	已经摁下</p>
+<p>type=0，code=0，value=0：<em><strong>应该是系统事件，不太清楚</strong></em></p>
+<p>type=1，code=330，value=0：按键事件	|	屏幕按键	|	已经松开</p>
+
+    </div>
+    <div class="single-biaoq">
+ <div class="page-time">更新于 
+  <script>
+    document.write(formatDate( 1759488826 )); 
+  </script>
+ </div>
+ <div class="single-tag">
+     
+          
+     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
+          
+          
+ </div>
+  </div> 
+ </div>
+ 
+ <div class="archives_nrong" >
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day7_sliptouch/">Day7_SlipTouch</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day7_sliptouch/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+  
+    <div class="archives_one">
+      <div>
+        <div class="archive-title"><a href="/day5_bmp/">Day5_BMP</a></div>
+        <div class="archive-time">
+          <script>
+            document.write(formatDate( 1759488826 )); 
+          </script>
+        </div>
+        </div>
+        <div class="archive-img">
+        <a href="/day5_bmp/"><img loading="lazy" decoding="async" src="/" /></a>          
+        </div>
+    </div>
+  
+</div>
+      
+      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
+      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
+<script src="https://img.koobai.com/Artalk.js"></script>
+
+
+<div id="Comments"></div>
+
+<script>
+  Artalk.init({
+    el:        '#Comments',
+    pageKey:   'http:\/\/localhost:1313\/day6_touchevent\/',
+    pageTitle: 'Day6_TouchEvent',
+    server:    'https:\/\/c.koobai.com',
+    site:      'Koobai 空白生活',
+    
+  })
+</script></div> 
+</div>
+
+<div>
+    <div class="paragraph-dh">
+     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简化表格">简化表格:</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#touchh文件">touch.h文件</a></li>
+    <li><a href="#touchc文件">touch.c文件</a></li>
+    <li><a href="#mainc文件">main.c文件</a></li>
+    <li><a href="#分析">分析:</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+</div>
+<script src="/js/single.js"></script>    
+
+  </div>
+  <div class="footer-background">
+<div class="footer">
+        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
+        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
+        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
+      </div>
+      <div class="footer-rss">
+      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
+      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
+      </div>
+    </div>
+  </div>
+ 
+ <script src="/js/view-image.min.js"></script>
+  
+<div class="gotop_hide">
+  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
+</div>
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/bundle.js"></script>
+  
+
+  
+   
+</body>
+</html>

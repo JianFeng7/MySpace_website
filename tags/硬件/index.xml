@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>硬件 on 空白Koobai</title>
+    <link>http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6/</link>
+    <description>Recent content in 硬件 on 空白Koobai</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 19 Sep 2024 21:15:36 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从 iOS 更换到 Android 会有不适吗？</title>
+      <link>http://localhost:1313/iosandroid/</link>
+      <pubDate>Thu, 19 Sep 2024 21:15:36 +0000</pubDate>
+      <guid>http://localhost:1313/iosandroid/</guid>
+      <description>&lt;p&gt;Linux的命令行和Windows的命令行有什么区别&lt;/p&gt;&#xA;&lt;p&gt;ChatGPT&lt;/p&gt;&#xA;&lt;p&gt;Linux 的命令行和 Windows 的命令行在操作和语法上有很多区别。以下是一些主要的差异：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;命令和工具：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 使用一些基本的核心工具，例如 &lt;code&gt;ls&lt;/code&gt;、&lt;code&gt;cp&lt;/code&gt;、&lt;code&gt;rm&lt;/code&gt; 等，这些工具通常是通过终端（Terminal）使用的。&lt;/li&gt;&#xA;&lt;li&gt;Windows 使用一些不同的命令，例如 &lt;code&gt;dir&lt;/code&gt;、&lt;code&gt;copy&lt;/code&gt;、&lt;code&gt;del&lt;/code&gt; 等。在 PowerShell 中，还有更强大的命令集。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;路径表示：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 使用正斜杠（&lt;code&gt;/&lt;/code&gt;）来表示文件路径，例如 &lt;code&gt;/home/user/Documents&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;Windows 使用反斜杠（&lt;code&gt;\&lt;/code&gt;）来表示文件路径，例如 &lt;code&gt;C:\Users\user\Documents&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;命令行解释器：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 使用 Bash（Bourne Again SHell）等命令行解释器。&lt;/li&gt;&#xA;&lt;li&gt;Windows 使用命令提示符（Command Prompt）或者 PowerShell。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;文件系统：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 使用类Unix的文件系统，例如 ext4。&lt;/li&gt;&#xA;&lt;li&gt;Windows 使用NTFS（New Technology File System）。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;命令行参数：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 命令通常支持长参数（例如 &lt;code&gt;--help&lt;/code&gt;）和短参数（例如 &lt;code&gt;-h&lt;/code&gt;）。&lt;/li&gt;&#xA;&lt;li&gt;Windows 命令通常使用前斜杠（&lt;code&gt;/&lt;/code&gt;）或短划线（&lt;code&gt;-&lt;/code&gt;）作为参数标志，例如 &lt;code&gt;/h&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;命令的可用性：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 的命令通常是功能丰富的，支持各种选项和参数。&lt;/li&gt;&#xA;&lt;li&gt;Windows 的命令集在某些方面可能较为简化，但PowerShell提供了更强大的脚本和管理功能。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;权限系统：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 使用基于权限的安全模型，每个文件和目录都有所有者、组和其他用户的权限设置。&lt;/li&gt;&#xA;&lt;li&gt;Windows 使用基于ACL（访问控制列表）的权限模型。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;管道和重定向：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Linux 具有强大的管道和重定向功能，可以将一个命令的输出传递给另一个命令或保存到文件中。&lt;/li&gt;&#xA;&lt;li&gt;Windows 的命令行也支持一些管道和重定向，但相对来说较为有限。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Linux 的命令行工具和 Shell 脚本主要使用 Bash（Bourne Again SHell）或其他类Unix系统支持的 Shell 解释器。Bash 是一种命令处理器，提供了与用户交互的终端界面和执行脚本的功能。此外，还有其他的 Shell，如 sh、zsh、ksh 等。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
