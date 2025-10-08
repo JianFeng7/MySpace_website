@@ -1,156 +1,234 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="[toc]\n电子相册 1. 功能设计 上一张 下一张 随机一张 循环播放 退出循环播放 滑动实现相片的切换 2.代码实现 1. 上一张 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt; 160 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,0,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/shang.bmp&#34;,0,430,plcd); //printf(&#34;return\\n&#34;); if(0 == k) { k = 31; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 2. 下一张 else if(touch_x1 &gt;= 160 &amp;&amp; touch_x1 &lt;320 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,160,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xia.bmp&#34;,160,430,plcd); //printf(&#34;next\\n&#34;); if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 3. 随机一张 else if(touch_x1 &gt;= 320 &amp;&amp; touch_x1 &lt;480 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,320,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/sui.bmp&#34;,320,430,plcd); //printf(&#34;suiji\\n&#34;); k = random()%30; sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 4. 循环播放 else if(touch_x1 &gt;= 480 &amp;&amp; touch_x1 &lt;640 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,480,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xun.bmp&#34;,480,430,plcd); //printf(&#34;xun\\n&#34;); xunflag=1; while(1) { if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); sleep(1); if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 )break; touch_x1=touch_y1=touch_x2=touch_y2=-1; } } 5. 退出循环播放 else if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 ) { usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/ting2.bmp&#34;,640,430,plcd); printf(&#34;停止循环播放&#34;); touch_x1=touch_y1=touch_x2=touch_y2=-1; //break; } 6. 滑动实现相片的切换 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt;= 600 &amp;&amp; touch_y1 &gt;= 200 &amp;&amp; touch_y1&lt;= 430) { //测试滑动\tif(-1 == getInput(touch_fd)) { continue; } int direction; switch (direction = Get_slip_direction()) { case RIGHT: printf(&#34;RIGHT\\n&#34;); if(1 ==k) { k = 30; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; case LEFT: if(31 == k) { k = 0; } printf(&#34;%d\\n&#34;,k); sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; default: touch_x1=touch_y1=touch_x2=touch_y2=-1; break; } } 3. 功能实现以及缺陷 现在已经将基本功能全部做好了，但是我觉得代码还可以进一步优化，但是实习事件已经快结束了，并没有进一步优化代码。单说以下那个触摸就有点不太灵敏，不知道是代码的问题还是板子的问题。\r而且我们做相册时，对图片的处理都是统一为屏幕的大小，然后将其裁剪为同样的大小实现的看上去时“相册”，而且bmp文件也是统一了命名才方便图片路径的使用，这样对于图片的添加是不太友好的。\r对于音乐的添加，在做完音乐播放器以后是很简单的操作，而且事件有限我就没添加了。\r环境检测 1.功能设计 进入初始界面，显示一定信息 打印广告和倒计时，倒计时结束后进入主界面 主界面里面打印光照强度，温湿度，海拔和气压 2.代码实现 1.初始界面 /*打印开始界面*/ void displayStart(int* plcd) { Bmp_display(&#34;/mnt/udisk/Logos/startface.bmp&#34;, 0, 0, plcd); //Lcd_draw_matrx(0,0,800,480,0x71c671,plcd); for(int i=0;i&lt;14;i++) { Draw_word(20+phrase_w*i, 50, phrase_w, phrase_h, 0x000000, phrase[i], plcd); usleep(100000); } for(int i=0;i&lt;6;i++) { Draw_word(20+words_w*i, 100, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } for(int i=6;i&lt;13;i++) { Draw_word(200+words_w*i, 400, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } sleep(3); } 这部分代码通过计算和循环实现了打印字的自动移动，而不像部分同学的用冗长的重复代码打印，算是自己的一点小创新吧。\n">
+<title>Project_电子相册&amp;音乐播放器&amp;环境检测系统</title>
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Project_电子相册&amp;音乐播放器&amp;环境检测系统 - 空白Koobai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/suju/ios.json">
-  <link rel="icon" href="https://img.koobai.com/koobai.png">
-  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
-  <link rel="canonical" href="http://localhost:1313/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/" />
+<link rel='canonical' href='http://localhost:1313/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/'>
 
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Project_电子相册&音乐播放器&环境检测系统">
+<meta property='og:description' content="[toc]\n电子相册 1. 功能设计 上一张 下一张 随机一张 循环播放 退出循环播放 滑动实现相片的切换 2.代码实现 1. 上一张 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt; 160 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,0,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/shang.bmp&#34;,0,430,plcd); //printf(&#34;return\\n&#34;); if(0 == k) { k = 31; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 2. 下一张 else if(touch_x1 &gt;= 160 &amp;&amp; touch_x1 &lt;320 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,160,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xia.bmp&#34;,160,430,plcd); //printf(&#34;next\\n&#34;); if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 3. 随机一张 else if(touch_x1 &gt;= 320 &amp;&amp; touch_x1 &lt;480 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,320,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/sui.bmp&#34;,320,430,plcd); //printf(&#34;suiji\\n&#34;); k = random()%30; sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 4. 循环播放 else if(touch_x1 &gt;= 480 &amp;&amp; touch_x1 &lt;640 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,480,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xun.bmp&#34;,480,430,plcd); //printf(&#34;xun\\n&#34;); xunflag=1; while(1) { if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); sleep(1); if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 )break; touch_x1=touch_y1=touch_x2=touch_y2=-1; } } 5. 退出循环播放 else if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 ) { usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/ting2.bmp&#34;,640,430,plcd); printf(&#34;停止循环播放&#34;); touch_x1=touch_y1=touch_x2=touch_y2=-1; //break; } 6. 滑动实现相片的切换 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt;= 600 &amp;&amp; touch_y1 &gt;= 200 &amp;&amp; touch_y1&lt;= 430) { //测试滑动\tif(-1 == getInput(touch_fd)) { continue; } int direction; switch (direction = Get_slip_direction()) { case RIGHT: printf(&#34;RIGHT\\n&#34;); if(1 ==k) { k = 30; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; case LEFT: if(31 == k) { k = 0; } printf(&#34;%d\\n&#34;,k); sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; default: touch_x1=touch_y1=touch_x2=touch_y2=-1; break; } } 3. 功能实现以及缺陷 现在已经将基本功能全部做好了，但是我觉得代码还可以进一步优化，但是实习事件已经快结束了，并没有进一步优化代码。单说以下那个触摸就有点不太灵敏，不知道是代码的问题还是板子的问题。\r而且我们做相册时，对图片的处理都是统一为屏幕的大小，然后将其裁剪为同样的大小实现的看上去时“相册”，而且bmp文件也是统一了命名才方便图片路径的使用，这样对于图片的添加是不太友好的。\r对于音乐的添加，在做完音乐播放器以后是很简单的操作，而且事件有限我就没添加了。\r环境检测 1.功能设计 进入初始界面，显示一定信息 打印广告和倒计时，倒计时结束后进入主界面 主界面里面打印光照强度，温湿度，海拔和气压 2.代码实现 1.初始界面 /*打印开始界面*/ void displayStart(int* plcd) { Bmp_display(&#34;/mnt/udisk/Logos/startface.bmp&#34;, 0, 0, plcd); //Lcd_draw_matrx(0,0,800,480,0x71c671,plcd); for(int i=0;i&lt;14;i++) { Draw_word(20+phrase_w*i, 50, phrase_w, phrase_h, 0x000000, phrase[i], plcd); usleep(100000); } for(int i=0;i&lt;6;i++) { Draw_word(20+words_w*i, 100, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } for(int i=6;i&lt;13;i++) { Draw_word(200+words_w*i, 400, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } sleep(3); } 这部分代码通过计算和循环实现了打印字的自动移动，而不像部分同学的用冗长的重复代码打印，算是自己的一点小创新吧。\n">
+<meta property='og:url' content='http://localhost:1313/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/'>
+<meta property='og:site_name' content='MySpace'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='default_tag' /><meta property='article:published_time' content='2025-10-03T18:53:46&#43;08:00'/><meta property='article:modified_time' content='2025-10-03T18:53:46&#43;08:00'/>
+<meta name="twitter:title" content="Project_电子相册&音乐播放器&环境检测系统">
+<meta name="twitter:description" content="[toc]\n电子相册 1. 功能设计 上一张 下一张 随机一张 循环播放 退出循环播放 滑动实现相片的切换 2.代码实现 1. 上一张 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt; 160 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,0,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/shang.bmp&#34;,0,430,plcd); //printf(&#34;return\\n&#34;); if(0 == k) { k = 31; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 2. 下一张 else if(touch_x1 &gt;= 160 &amp;&amp; touch_x1 &lt;320 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,160,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xia.bmp&#34;,160,430,plcd); //printf(&#34;next\\n&#34;); if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 3. 随机一张 else if(touch_x1 &gt;= 320 &amp;&amp; touch_x1 &lt;480 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,320,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/sui.bmp&#34;,320,430,plcd); //printf(&#34;suiji\\n&#34;); k = random()%30; sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; } 4. 循环播放 else if(touch_x1 &gt;= 480 &amp;&amp; touch_x1 &lt;640 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480) { Bmp_display(&#34;/mnt/udisk/Logos/bian.bmp&#34;,480,430,plcd); usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/xun.bmp&#34;,480,430,plcd); //printf(&#34;xun\\n&#34;); xunflag=1; while(1) { if(30 == k) { k = 0; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); sleep(1); if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 )break; touch_x1=touch_y1=touch_x2=touch_y2=-1; } } 5. 退出循环播放 else if(touch_x1 &gt;= 640&amp;&amp; touch_x1 &lt;= 800 &amp;&amp; touch_y1 &gt;= 430 &amp;&amp; touch_y1&lt;= 480 ) { usleep(5000); Bmp_display(&#34;/mnt/udisk/Logos/ting2.bmp&#34;,640,430,plcd); printf(&#34;停止循环播放&#34;); touch_x1=touch_y1=touch_x2=touch_y2=-1; //break; } 6. 滑动实现相片的切换 else if(touch_x1 &gt;= 0 &amp;&amp; touch_x1 &lt;= 600 &amp;&amp; touch_y1 &gt;= 200 &amp;&amp; touch_y1&lt;= 430) { //测试滑动\tif(-1 == getInput(touch_fd)) { continue; } int direction; switch (direction = Get_slip_direction()) { case RIGHT: printf(&#34;RIGHT\\n&#34;); if(1 ==k) { k = 30; } sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,--k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; case LEFT: if(31 == k) { k = 0; } printf(&#34;%d\\n&#34;,k); sprintf(arr,&#34;/mnt/udisk/pic/ (%d).bmp&#34;,++k); Bmp_display(arr,0,0,plcd); touch_x1=touch_y1=touch_x2=touch_y2=-1; break; default: touch_x1=touch_y1=touch_x2=touch_y2=-1; break; } } 3. 功能实现以及缺陷 现在已经将基本功能全部做好了，但是我觉得代码还可以进一步优化，但是实习事件已经快结束了，并没有进一步优化代码。单说以下那个触摸就有点不太灵敏，不知道是代码的问题还是板子的问题。\r而且我们做相册时，对图片的处理都是统一为屏幕的大小，然后将其裁剪为同样的大小实现的看上去时“相册”，而且bmp文件也是统一了命名才方便图片路径的使用，这样对于图片的添加是不太友好的。\r对于音乐的添加，在做完音乐播放器以后是很简单的操作，而且事件有限我就没添加了。\r环境检测 1.功能设计 进入初始界面，显示一定信息 打印广告和倒计时，倒计时结束后进入主界面 主界面里面打印光照强度，温湿度，海拔和气压 2.代码实现 1.初始界面 /*打印开始界面*/ void displayStart(int* plcd) { Bmp_display(&#34;/mnt/udisk/Logos/startface.bmp&#34;, 0, 0, plcd); //Lcd_draw_matrx(0,0,800,480,0x71c671,plcd); for(int i=0;i&lt;14;i++) { Draw_word(20+phrase_w*i, 50, phrase_w, phrase_h, 0x000000, phrase[i], plcd); usleep(100000); } for(int i=0;i&lt;6;i++) { Draw_word(20+words_w*i, 100, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } for(int i=6;i&lt;13;i++) { Draw_word(200+words_w*i, 400, words_w, words_h, 0x000000, words[i], plcd); usleep(100000); } sleep(3); } 这部分代码通过计算和循环实现了打印字的自动移动，而不像部分同学的用冗长的重复代码打印，算是自己的一点小创新吧。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-  
-    
-    <meta property="og:title" content="Project_电子相册&amp;音乐播放器&amp;环境检测系统"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://localhost:1313/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-  
-</head>
-
-
-
-<body class='page page-blog-single'>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-        
-        
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
-                <li >
-                    <a href="http://localhost:1313/">首页</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/posts/">博文</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://sport.koobai.com/">骑行</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/apps/">软件</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/movies/">观影</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://qiszy.taobao.com">好物</a>
-                </li>
-            
-        
-    </ul>
-</div>
-  <div id="wrapper" class="wrapper">
-    <div class="header">
 
-<div id="toggle-menu-main-mobile" class="hamburger-trigger">
-  <button class="hamburger">Menu</button>
-</div>
-<div class="new-heard-menu">
-
-
-
-
-<div class="header-menu">
-  <a href="/" >首页</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/posts/" >博文</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://sport.koobai.com/" >骑行</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/apps/" >软件</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/movies/" >观影</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
-</div>
-
-</div>
-  <div class="heard-right"> 
-    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
-    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-    </svg></a>    
-    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
-</div>
-
-</div>
-
-<script src="/js/moment.min.js?v=2.29.4"></script>
-<script src="/js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
 </script>
-     
-<div class="single-nrong">
-<div class="single-zw">
-    <div class="article_details">
-      <div class="article_details_title">Project_电子相册&amp;音乐播放器&amp;环境检测系统</div>
-      
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">MySpace</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://sport.koobai.com/' >
+                
+                
+                
+                <span>骑行</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/apps/' >
+                
+                
+                
+                <span>软件</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/movies/' >
+                
+                
+                
+                <span>观影</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://qiszy.taobao.com' >
+                
+                
+                
+                <span>好物</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/">Project_电子相册&amp;音乐播放器&amp;环境检测系统</a>
+        </h2>
+    
+        
     </div>
-    <div class="content_zhengwen">
-    <div class="content">
-      <p>[toc]</p>
-<h1 id="电子相册">电子相册</h1>
-<h2 id="1-功能设计">1. 功能设计</h2>
-<blockquote>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    20 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[toc]</p>
+<h1 id="电子相册">电子相册
+</h1><h2 id="1-功能设计">1. 功能设计
+</h2><blockquote>
 <ol>
 <li>上一张</li>
 <li>下一张</li>
@@ -159,9 +237,9 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <li>退出循环播放</li>
 <li>滑动实现相片的切换</li>
 </ol></blockquote>
-<h2 id="2代码实现">2.代码实现</h2>
-<h3 id="1-上一张">1. 上一张</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span> <span class="mi">160</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
+<h2 id="2代码实现">2.代码实现
+</h2><h3 id="1-上一张">1. 上一张
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span> <span class="mi">160</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/bian.bmp&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">430</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">usleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
@@ -177,8 +255,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="2-下一张">2. 下一张</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">160</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">320</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="2-下一张">2. 下一张
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">160</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">320</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/bian.bmp&#34;</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">430</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">usleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
@@ -194,8 +272,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="3-随机一张">3. 随机一张</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">320</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">480</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="3-随机一张">3. 随机一张
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">320</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">480</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/bian.bmp&#34;</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">430</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">usleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
@@ -207,8 +285,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="4-循环播放">4. 循环播放</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">480</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">640</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="4-循环播放">4. 循环播放
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">480</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;</span><span class="mi">640</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/bian.bmp&#34;</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mi">430</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">usleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
@@ -232,8 +310,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">				<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">			<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="5-退出循环播放">5. 退出循环播放</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">640</span><span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">800</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span>  <span class="p">)</span>
+</span></span></code></pre></div><h3 id="5-退出循环播放">5. 退出循环播放
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">640</span><span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">800</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">430</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span>  <span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">usleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/ting2.bmp&#34;</span><span class="p">,</span><span class="mi">640</span><span class="p">,</span><span class="mi">430</span><span class="p">,</span><span class="n">plcd</span><span class="p">);</span>
@@ -243,8 +321,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">			<span class="c1">//break;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="6-滑动实现相片的切换">6. 滑动实现相片的切换</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">600</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">200</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">430</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="6-滑动实现相片的切换">6. 滑动实现相片的切换
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">600</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="mi">200</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">430</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="c1">//测试滑动		
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="nf">getInput</span><span class="p">(</span><span class="n">touch_fd</span><span class="p">))</span>
@@ -279,24 +357,24 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">					<span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h2 id="3-功能实现以及缺陷">3. 功能实现以及缺陷</h2>
-<pre><code>现在已经将基本功能全部做好了，但是我觉得代码还可以进一步优化，但是实习事件已经快结束了，并没有进一步优化代码。单说以下那个触摸就有点不太灵敏，不知道是代码的问题还是板子的问题。
+</span></span></code></pre></div><h2 id="3-功能实现以及缺陷">3. 功能实现以及缺陷
+</h2><pre><code>现在已经将基本功能全部做好了，但是我觉得代码还可以进一步优化，但是实习事件已经快结束了，并没有进一步优化代码。单说以下那个触摸就有点不太灵敏，不知道是代码的问题还是板子的问题。
 
 而且我们做相册时，对图片的处理都是统一为屏幕的大小，然后将其裁剪为同样的大小实现的看上去时“相册”，而且bmp文件也是统一了命名才方便图片路径的使用，这样对于图片的添加是不太友好的。
 
 对于音乐的添加，在做完音乐播放器以后是很简单的操作，而且事件有限我就没添加了。
 </code></pre>
-<h1 id="环境检测">环境检测</h1>
-<h2 id="1功能设计">1.功能设计</h2>
-<blockquote>
+<h1 id="环境检测">环境检测
+</h1><h2 id="1功能设计">1.功能设计
+</h2><blockquote>
 <ol>
 <li>进入初始界面，显示一定信息</li>
 <li>打印广告和倒计时，倒计时结束后进入主界面</li>
 <li>主界面里面打印光照强度，温湿度，海拔和气压</li>
 </ol></blockquote>
-<h2 id="2代码实现-1">2.代码实现</h2>
-<h3 id="1初始界面">1.初始界面</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印开始界面*/</span>
+<h2 id="2代码实现-1">2.代码实现
+</h2><h3 id="1初始界面">1.初始界面
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印开始界面*/</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">displayStart</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">plcd</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">Bmp_display</span><span class="p">(</span><span class="s">&#34;/mnt/udisk/Logos/startface.bmp&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">plcd</span><span class="p">);</span>
@@ -319,8 +397,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>这部分代码通过计算和循环实现了打印字的自动移动，而不像部分同学的用冗长的重复代码打印，算是自己的一点小创新吧。</p>
-<h3 id="2-播放广告">2. 播放广告</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印广告视频*/</span>
+<h3 id="2-播放广告">2. 播放广告
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印广告视频*/</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">displayAdvertising</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">plcd</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span> 
 </span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
@@ -340,8 +418,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><pre><code>播放广告的同时，播放音乐，停止的条件是：主界面标志位置1（表示进入主界面），或者广告播放完。本来是打算倒计时5秒后，可以通过触摸退出广告，即进入主界面标志位置1，但是没有做。还有在整合三个部分的代码时，使程序出了点bug，广告页的进度条和倒计时有点小问题，但快要结束了也懒得改了，而且gy39模块也收了，没时间做了。
 </code></pre>
-<h3 id="3主界面">3.主界面</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印主界面*/</span>
+<h3 id="3主界面">3.主界面
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*打印主界面*/</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">displayMainInterface</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">plcd</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
@@ -375,9 +453,9 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 
 还有一个是，我本来是按位刷底色，而且是先刷底色，再打印数值，但是这样会导致一个现象：假如数据本来是9，然后变成了10，再变回9，这时屏幕上会显示90。因为多出来的那个0，并不会被刷掉。解决办法就是：我干脆整体刷，刷一大块区域，这样即使变回了9，后面那个0也会被刷掉。
 </code></pre>
-<h1 id="音乐播放器">音乐播放器</h1>
-<h2 id="1功能设计-1">1.功能设计</h2>
-<blockquote>
+<h1 id="音乐播放器">音乐播放器
+</h1><h2 id="1功能设计-1">1.功能设计
+</h2><blockquote>
 <ol>
 <li>音乐模式</li>
 </ol>
@@ -401,9 +479,9 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 另一个是从底层出发使用madplay库更改命令，但是难度太大了。
 </code></pre>
 <p>第一种方法其实还不错，实现的可能性也很大，不过我没时间去实现我的想法了。</p>
-<h2 id="2代码实现-2">2.代码实现</h2>
-<h3 id="1音乐模式">1.音乐模式</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span><span class="mi">0</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">160</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span><span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
+<h2 id="2代码实现-2">2.代码实现
+</h2><h3 id="1音乐模式">1.音乐模式
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span><span class="mi">0</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">160</span>  <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span><span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="n">Play_State</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -471,8 +549,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="2-上一曲">2. 上一曲</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//上一首按键
+</span></span></code></pre></div><h3 id="2-上一曲">2. 上一曲
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//上一首按键
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">160</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span><span class="o">&lt;=</span> <span class="mi">320</span> <span class="o">&amp;&amp;</span>  <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">system</span><span class="p">(</span><span class="s">&#34;killall -9 madplay&#34;</span><span class="p">);</span>
@@ -517,8 +595,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="3-暂停播放">3. 暂停播放</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//暂停,播放    
+</span></span></code></pre></div><h3 id="3-暂停播放">3. 暂停播放
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//暂停,播放    
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">320</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">480</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="c1">//暂停
@@ -546,8 +624,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">				<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">			<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="4下一曲">4.下一曲</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//下一首按键
+</span></span></code></pre></div><h3 id="4下一曲">4.下一曲
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//下一首按键
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">480</span> <span class="o">&amp;&amp;</span><span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">640</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">system</span><span class="p">(</span><span class="s">&#34;killall -9 madplay&#34;</span><span class="p">);</span>
@@ -587,8 +665,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">			<span class="n">touch_x1</span><span class="o">=</span><span class="n">touch_y1</span><span class="o">=</span><span class="n">touch_x2</span><span class="o">=</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span></code></pre></div><h3 id="5退出">5.退出</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//退出按键
+</span></span></code></pre></div><h3 id="5退出">5.退出
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//退出按键
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">touch_x1</span> <span class="o">&gt;=</span> <span class="mi">640</span> <span class="o">&amp;&amp;</span> <span class="n">touch_x1</span> <span class="o">&lt;=</span> <span class="mi">800</span> <span class="o">&amp;&amp;</span>  <span class="n">touch_y1</span> <span class="o">&gt;=</span> <span class="n">Key_Start_location_y</span> <span class="o">&amp;&amp;</span> <span class="n">touch_y1</span><span class="o">&lt;=</span> <span class="mi">480</span>  <span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">system</span><span class="p">(</span><span class="s">&#34;killall -9 madplay&#34;</span><span class="p">);</span>
@@ -608,9 +686,9 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">  
 </span></span></code></pre></div><pre><code>如果能将那个bug解决，那么这个项目我自认为是完美解决的，至少全部达到了我自己最初的设计。
 </code></pre>
-<h1 id="整合版的全部代码">整合版的全部代码:</h1>
-<h2 id="mainc">main.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+<h1 id="整合版的全部代码">整合版的全部代码:
+</h1><h2 id="mainc">main.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
@@ -1377,8 +1455,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="gy39c">gy39.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&#34;gy39.h&#34;</span><span class="cp">
+</span></span></code></pre></div><h2 id="gy39c">gy39.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&#34;gy39.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">//定义命令 ---&gt;设置模板的工作方式
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">cmd_lux</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mh">0xa5</span><span class="p">,</span><span class="mh">0x81</span><span class="p">,</span><span class="mh">0x26</span><span class="p">};</span><span class="c1">//设置连续光照模式
@@ -1484,8 +1562,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">tty_fd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="gy39h">gy39.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _GY39_H_
+</span></span></code></pre></div><h2 id="gy39h">gy39.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _GY39_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define _GY39_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
@@ -1508,8 +1586,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">GY39</span><span class="p">(</span><span class="kt">int</span> <span class="n">data</span><span class="p">[],</span><span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="lcdc">lcd.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*头文件*/</span>
+</span></span></span></code></pre></div><h2 id="lcdc">lcd.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*头文件*/</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
@@ -1689,8 +1767,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="lcdh">lcd.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef LCD_H
+</span></span></code></pre></div><h2 id="lcdh">lcd.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef LCD_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define LCD_H
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cm">/*函数声明*/</span>
@@ -1701,8 +1779,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Bmp_display</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">bmp_file</span><span class="p">,</span><span class="kt">int</span> <span class="n">x0</span><span class="p">,</span><span class="kt">int</span> <span class="n">y0</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="matrixh">matrix.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _MATRIX_H_
+</span></span></span></code></pre></div><h2 id="matrixh">matrix.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _MATRIX_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define _MATRIX_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cp">#define words_w  40
@@ -2296,8 +2374,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="touchc">touch.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
+</span></span></span></code></pre></div><h2 id="touchc">touch.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">touch_x1</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">touch_y1</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">touch_x2</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">touch_y2</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -2476,8 +2554,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span></span><span class="line"><span class="cl"><span class="cm">        返回值 ：
 </span></span></span><span class="line"><span class="cl"><span class="cm">            无
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
-</span></span></code></pre></div><h2 id="touchh">touch.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef __TOUCH_H__
+</span></span></code></pre></div><h2 id="touchh">touch.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef __TOUCH_H__
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define __TOUCH_H__
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cm">/*头文件*/</span>
@@ -2505,8 +2583,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">printfTouchLocation</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="wordsc">words.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&#34;words.h&#34;</span><span class="cp">
+</span></span></span></code></pre></div><h2 id="wordsc">words.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&#34;words.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cm">/*
 </span></span></span><span class="line"><span class="cl"><span class="cm">    Draw_word:在屏幕的指定的位置显示一个颜色位color的字符
@@ -2538,8 +2616,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">        <span class="c1">//usleep(1);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="wordsh">words.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _WORDS_H_
+</span></span></code></pre></div><h2 id="wordsh">words.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef _WORDS_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define _WORDS_H_
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
@@ -2548,169 +2626,221 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Draw_word</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">h</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">,</span><span class="kt">char</span> <span class="n">s</span><span class="p">[],</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="遗憾和总结">遗憾和总结</h2>
-<pre><code>在这个项目里，还有很多我想实现的功能没有实现，bug也还有，但是时间确实不咋够。不过，在不断优化自己代码的时候，我也明白了一个道理：代码永无止境，不要过度追求完美。感触和想法肯定还有，但是我觉得这是我最大的收获了。
+</span></span></span></code></pre></div><h2 id="遗憾和总结">遗憾和总结
+</h2><pre><code>在这个项目里，还有很多我想实现的功能没有实现，bug也还有，但是时间确实不咋够。不过，在不断优化自己代码的时候，我也明白了一个道理：代码永无止境，不要过度追求完美。感触和想法肯定还有，但是我觉得这是我最大的收获了。
 </code></pre>
 
-    </div>
-    <div class="single-biaoq">
- <div class="page-time">更新于 
-  <script>
-    document.write(formatDate( 1759488826 )); 
-  </script>
- </div>
- <div class="single-tag">
-     
-          
-     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
-          
-          
- </div>
-  </div> 
- </div>
- 
- <div class="archives_nrong" >
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/rgbxieyi/">RGBxieyi</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/rgbxieyi/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/p1425/">P1425</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/p1425/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-</div>
-      
-      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
-      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
-<script src="https://img.koobai.com/Artalk.js"></script>
+</section>
 
 
-<div id="Comments"></div>
-
-<script>
-  Artalk.init({
-    el:        '#Comments',
-    pageKey:   'http:\/\/localhost:1313\/project_%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F\/',
-    pageTitle: 'Project_电子相册\u0026音乐播放器\u0026环境检测系统',
-    server:    'https:\/\/c.koobai.com',
-    site:      'Koobai 空白生活',
+    <footer class="article-footer">
     
-  })
-</script></div> 
-</div>
+    <section class="article-tags">
+        
+            <a href="/tags/default_tag/">Default_tag</a>
+        
+    </section>
 
-<div>
-    <div class="paragraph-dh">
-     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1-功能设计">1. 功能设计</a></li>
-    <li><a href="#2代码实现">2.代码实现</a>
-      <ul>
-        <li><a href="#1-上一张">1. 上一张</a></li>
-        <li><a href="#2-下一张">2. 下一张</a></li>
-        <li><a href="#3-随机一张">3. 随机一张</a></li>
-        <li><a href="#4-循环播放">4. 循环播放</a></li>
-        <li><a href="#5-退出循环播放">5. 退出循环播放</a></li>
-        <li><a href="#6-滑动实现相片的切换">6. 滑动实现相片的切换</a></li>
-      </ul>
-    </li>
-    <li><a href="#3-功能实现以及缺陷">3. 功能实现以及缺陷</a></li>
-  </ul>
 
-  <ul>
-    <li><a href="#1功能设计">1.功能设计</a></li>
-    <li><a href="#2代码实现-1">2.代码实现</a>
-      <ul>
-        <li><a href="#1初始界面">1.初始界面</a></li>
-        <li><a href="#2-播放广告">2. 播放广告</a></li>
-        <li><a href="#3主界面">3.主界面</a></li>
-      </ul>
-    </li>
-  </ul>
+    </footer>
 
-  <ul>
-    <li><a href="#1功能设计-1">1.功能设计</a></li>
-    <li><a href="#2代码实现-2">2.代码实现</a>
-      <ul>
-        <li><a href="#1音乐模式">1.音乐模式</a></li>
-        <li><a href="#2-上一曲">2. 上一曲</a></li>
-        <li><a href="#3-暂停播放">3. 暂停播放</a></li>
-        <li><a href="#4下一曲">4.下一曲</a></li>
-        <li><a href="#5退出">5.退出</a></li>
-      </ul>
-    </li>
-  </ul>
 
-  <ul>
-    <li><a href="#mainc">main.c</a></li>
-    <li><a href="#gy39c">gy39.c</a></li>
-    <li><a href="#gy39h">gy39.h</a></li>
-    <li><a href="#lcdc">lcd.c</a></li>
-    <li><a href="#lcdh">lcd.h</a></li>
-    <li><a href="#matrixh">matrix.h</a></li>
-    <li><a href="#touchc">touch.c</a></li>
-    <li><a href="#touchh">touch.h</a></li>
-    <li><a href="#wordsc">words.c</a></li>
-    <li><a href="#wordsh">words.h</a></li>
-    <li><a href="#遗憾和总结">遗憾和总结</a></li>
-  </ul>
-</nav>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2024年度总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/cpu%E9%99%90%E5%88%B6gpu%E6%80%A7%E8%83%BD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CPU限制GPU性能</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day10_gy39/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day10_GY39</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day11_madplaymakefile/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day11_madplay&amp;makefile</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day12_dirent/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day12_dirent</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
     </div>
-</div>
+</aside>
 
-</div>
-<script src="/js/single.js"></script>    
+     
+    
+        
+    
 
-  </div>
-  <div class="footer-background">
-<div class="footer">
-        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
-        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
-        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
-      </div>
-      <div class="footer-rss">
-      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
-      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
-      </div>
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 MySpace
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
- <script src="/js/view-image.min.js"></script>
-  
-<div class="gotop_hide">
-  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
-</div>
-  
 
-  
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
-  
-  <script type="text/javascript" src="/js/bundle.js"></script>
-  
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.85803ae902a250f7d5dbb4ba3bc919da7eb36f6b0fb381e657be5438a8a0b770.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-  
-   
-</body>
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
 </html>

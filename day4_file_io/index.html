@@ -1,155 +1,233 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="[TOC]\n1.内存映射 通过write去操作屏幕，有明显的缺陷\n屏幕很慢(write的效率不高) 连续调用write还需要配合使用lseek 只是想操作屏幕一小部分，对整个fram buffer赋值 即有人提出fram buffer本身就是一块内存，在C语言中，我们知道一个内存的地址(指针)就可以通过指针来操作这块内存。\n">
+<title>Day4_File_IO</title>
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Day4_File_IO - 空白Koobai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/suju/ios.json">
-  <link rel="icon" href="https://img.koobai.com/koobai.png">
-  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
-  <link rel="canonical" href="http://localhost:1313/day4_file_io/" />
+<link rel='canonical' href='http://localhost:1313/day4_file_io/'>
 
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Day4_File_IO">
+<meta property='og:description' content="[TOC]\n1.内存映射 通过write去操作屏幕，有明显的缺陷\n屏幕很慢(write的效率不高) 连续调用write还需要配合使用lseek 只是想操作屏幕一小部分，对整个fram buffer赋值 即有人提出fram buffer本身就是一块内存，在C语言中，我们知道一个内存的地址(指针)就可以通过指针来操作这块内存。\n">
+<meta property='og:url' content='http://localhost:1313/day4_file_io/'>
+<meta property='og:site_name' content='MySpace'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='default_tag' /><meta property='article:published_time' content='2025-10-03T18:53:46&#43;08:00'/><meta property='article:modified_time' content='2025-10-03T18:53:46&#43;08:00'/>
+<meta name="twitter:title" content="Day4_File_IO">
+<meta name="twitter:description" content="[TOC]\n1.内存映射 通过write去操作屏幕，有明显的缺陷\n屏幕很慢(write的效率不高) 连续调用write还需要配合使用lseek 只是想操作屏幕一小部分，对整个fram buffer赋值 即有人提出fram buffer本身就是一块内存，在C语言中，我们知道一个内存的地址(指针)就可以通过指针来操作这块内存。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-  
-    
-    <meta property="og:title" content="Day4_File_IO"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://localhost:1313/day4_file_io/"/>
-    
-    
-  
-</head>
-
-
-
-<body class='page page-blog-single'>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-        
-        
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
-                <li >
-                    <a href="http://localhost:1313/">首页</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/posts/">博文</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://sport.koobai.com/">骑行</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/apps/">软件</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/movies/">观影</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://qiszy.taobao.com">好物</a>
-                </li>
-            
-        
-    </ul>
-</div>
-  <div id="wrapper" class="wrapper">
-    <div class="header">
 
-<div id="toggle-menu-main-mobile" class="hamburger-trigger">
-  <button class="hamburger">Menu</button>
-</div>
-<div class="new-heard-menu">
-
-
-
-
-<div class="header-menu">
-  <a href="/" >首页</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/posts/" >博文</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://sport.koobai.com/" >骑行</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/apps/" >软件</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/movies/" >观影</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
-</div>
-
-</div>
-  <div class="heard-right"> 
-    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
-    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-    </svg></a>    
-    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
-</div>
-
-</div>
-
-<script src="/js/moment.min.js?v=2.29.4"></script>
-<script src="/js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
 </script>
-     
-<div class="single-nrong">
-<div class="single-zw">
-    <div class="article_details">
-      <div class="article_details_title">Day4_File_IO</div>
-      
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">MySpace</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://sport.koobai.com/' >
+                
+                
+                
+                <span>骑行</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/apps/' >
+                
+                
+                
+                <span>软件</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/movies/' >
+                
+                
+                
+                <span>观影</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://qiszy.taobao.com' >
+                
+                
+                
+                <span>好物</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/day4_file_io/">Day4_File_IO</a>
+        </h2>
+    
+        
     </div>
-    <div class="content_zhengwen">
-    <div class="content">
-      <p>[TOC]</p>
-<h1 id="1内存映射">1.内存映射</h1>
-<p>通过write去操作屏幕，有明显的缺陷</p>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    11 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[TOC]</p>
+<h1 id="1内存映射">1.内存映射
+</h1><p>通过write去操作屏幕，有明显的缺陷</p>
 <ul>
 <li>屏幕很慢(write的效率不高)</li>
 <li>连续调用write还需要配合使用<code>lseek</code></li>
@@ -180,7 +258,16 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">           <span class="o">*</span><span class="p">(</span><span class="n">plcd</span><span class="o">+</span><span class="mi">800</span><span class="o">*</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220519164113344.png" alt="image-20220519164113344" class="img-hide" loading="lazy" decoding="async" /></p>
+</span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220519164113344.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220519164113344"
+	
+	
+></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nl">LINUX操作系统提供了一个API函数</span><span class="p">:</span><span class="n">mmap</span>
 </span></span><span class="line"><span class="cl"><span class="n">memory</span> <span class="n">map</span> <span class="err">内存映射</span>
 </span></span><span class="line"><span class="cl"><span class="n">NAME</span>
@@ -215,25 +302,34 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">             <span class="err">失败：返回</span><span class="n">MAP_FAILED</span> <span class="err">同时</span><span class="n">errno被设置</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">       <span class="kt">int</span> <span class="nf">munmap</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">length</span><span class="p">);</span>
-</span></span></code></pre></div><h1 id="2文件io">2.文件io</h1>
-<blockquote>
+</span></span></code></pre></div><h1 id="2文件io">2.文件io
+</h1><blockquote>
 <p>系统IO:由操作系统提供的，LINUX/UNIX、 WIN &lt;&mdash;- - 标准IO:为了更好的能够方便移植，同一标准。printf scanf&hellip; 它调用的系统IO屏幕</p></blockquote>
-<h2 id="1文件描述符">1.文件描述符</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">file discriptor 唯一性 整数
+<h2 id="1文件描述符">1.文件描述符
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">file discriptor 唯一性 整数
 </span></span><span class="line"><span class="cl">所有已经打开的文件都是通过文件描述符来引用。
 </span></span><span class="line"><span class="cl">文件描述符是在LINUX下面，唯一标识一个已经打开的文
 </span></span><span class="line"><span class="cl">件。后续对这个文件的所有的操作都通过文件描述符。
-</span></span></code></pre></div><h2 id="2文件的操作">2.文件的操作</h2>
-<blockquote>
+</span></span></code></pre></div><h2 id="2文件的操作">2.文件的操作
+</h2><blockquote>
 <p>man:manual 手册</p>
 <p>LINUX会为每个库函数/命令提供一个帮助文档，而 man则是用来查询该帮助文档的。</p>
 <p>man ls 查询ls这条指令的帮助文件(默认是第一页)</p>
 <p>选项-f 帮助文档的目录，因为你要查询的命令可能在 不同的环境下是不同的东西。函数名或者命令。</p>
 <p>man -f ls  f</p>
 <p>man 数字 要查询的东西 ：查看指定的页数</p></blockquote>
-<p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220523154208362.png" alt="image-20220523154208362" class="img-hide" loading="lazy" decoding="async" /></p>
-<h2 id="aopenclose">a.open/close</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
+<p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/image-20220523154208362.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220523154208362"
+	
+	
+></p>
+<h2 id="aopenclose">a.open/close
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
 </span></span><span class="line"><span class="cl">    <span class="n">open</span> <span class="o">-</span> <span class="n">open</span> <span class="n">a</span> <span class="n">file</span>
 </span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;sys/types.h&gt;</span>
@@ -279,8 +375,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
-</span></span></code></pre></div><h3 id="breadwrite">b.read/write</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span></code></pre></div><h3 id="breadwrite">b.read/write
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">NAME</span>
 </span></span><span class="line"><span class="cl">    <span class="n">read</span> <span class="o">-</span> <span class="n">read</span> <span class="n">from</span> <span class="n">a</span> <span class="n">file</span> <span class="n">descriptor</span>
 </span></span><span class="line"><span class="cl"><span class="n">SYNOPSIS</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">#include &lt;unistd.h&gt;</span>
@@ -306,8 +402,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="n">ssize_t</span> <span class="n">size_t</span> <span class="err">???</span>
 </span></span><span class="line"><span class="cl">    <span class="err">使用</span><span class="n">typedef来定义的新类型</span>
 </span></span><span class="line"><span class="cl">    <span class="n">typedef</span> <span class="n">unsigned</span> <span class="ne">int</span> <span class="n">Uint_32</span> <span class="o">//</span><span class="err">定义了一个新类型，名为</span><span class="n">Uint_32</span> <span class="err">实际上就是</span><span class="o">//</span><span class="n">unsigned</span> <span class="ne">int</span>
-</span></span></code></pre></div><h3 id="clseek">c.lseek</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">NAME</span>
+</span></span></code></pre></div><h3 id="clseek">c.lseek
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">NAME</span>
 </span></span><span class="line"><span class="cl">    <span class="n">lseek</span> <span class="o">-</span> <span class="n">reposition</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span> <span class="n">file</span>
 </span></span><span class="line"><span class="cl"><span class="n">offset</span>
 </span></span><span class="line"><span class="cl">    <span class="err">重定位光标</span>
@@ -334,9 +430,9 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="err">重定位光标在文件的开头</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">SEEK_SET</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="err">使用</span><span class="n">lseek求文件的大小</span>
-</span></span></code></pre></div><h1 id="3lcd屏幕">3.LCD屏幕</h1>
-<h2 id="一屏幕属性">一、屏幕属性</h2>
-<blockquote>
+</span></span></code></pre></div><h1 id="3lcd屏幕">3.LCD屏幕
+</h1><h2 id="一屏幕属性">一、屏幕属性
+</h2><blockquote>
 <p>液晶显示屏</p></blockquote>
 <p><strong>分辨率</strong>：有多少行 多少列像素点。
 1080p:1080* 1920
@@ -362,8 +458,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span></code></pre></div><p><strong>透明度：</strong> 一个像素点看起来透明的问题。A（占一个字节 0~255）</p>
 <p>ARGB</p>
 <p>6818开发板屏幕就是ARGB（四个字节）</p>
-<h2 id="二linux帧缓冲">二、LINUX帧缓冲</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">中间层OS的作用:对上层应用层提供操作硬件的接口函数， 屏蔽硬件具体实现细节。让用户不必去关系硬件的实现。 
+<h2 id="二linux帧缓冲">二、LINUX帧缓冲
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">中间层OS的作用:对上层应用层提供操作硬件的接口函数， 屏蔽硬件具体实现细节。让用户不必去关系硬件的实现。 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">在内存中开辟一块缓冲区，用来保存屏幕上每个像素点的 颜色值，然后应用成序直接把要显示的图像的颜色值写入 到内存即可。 
 </span></span><span class="line"><span class="cl">
@@ -375,8 +471,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">LINUX中设计哲学：LINUX一切皆文件。 
 </span></span><span class="line"><span class="cl">屏幕:/dev/fb0 
-</span></span></code></pre></div><h2 id="三练习">三、练习</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*****************************************************************************
+</span></span></code></pre></div><h2 id="三练习">三、练习
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*****************************************************************************
 </span></span></span><span class="line"><span class="cl"><span class="cm">    字符串A123aBCd&amp;$$eNd
 </span></span></span><span class="line"><span class="cl"><span class="cm">    把大写字母-&gt;小写
 </span></span></span><span class="line"><span class="cl"><span class="cm">        小写-&gt;大写
@@ -567,9 +663,18 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/RGB%E9%A2%9C%E8%89%B2%E6%9F%A5%E8%AF%A2%E5%AF%B9%E7%85%A7%E8%A1%A8.png" alt="RGB颜色查询对照表" class="img-hide" loading="lazy" decoding="async" /></p>
-<h1 id="4homework">4.homework</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/********************************************************************
+</span></span></span></code></pre></div><p><img src="https://typora-imag.oss-cn-hangzhou.aliyuncs.com/RGB%E9%A2%9C%E8%89%B2%E6%9F%A5%E8%AF%A2%E5%AF%B9%E7%85%A7%E8%A1%A8.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="RGB颜色查询对照表"
+	
+	
+></p>
+<h1 id="4homework">4.homework
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/********************************************************************
 </span></span></span><span class="line"><span class="cl"><span class="cm">作业
 </span></span></span><span class="line"><span class="cl"><span class="cm">1.在屏幕的x y(矩形的左上角)处显示一个颜色为color
 </span></span></span><span class="line"><span class="cl"><span class="cm">高h宽为w的矩形
@@ -1173,129 +1278,217 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span></span><span class="line"><span class="cl"><span class="cm">428,144
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span></code></pre></div>
-    </div>
-    <div class="single-biaoq">
- <div class="page-time">更新于 
-  <script>
-    document.write(formatDate( 1759488826 )); 
-  </script>
- </div>
- <div class="single-tag">
-     
-          
-     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
-          
-          
- </div>
-  </div> 
- </div>
- 
- <div class="archives_nrong" >
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/day5_bmp/">Day5_BMP</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/day5_bmp/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/day3_6818board/">Day3_6818board</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/day3_6818board/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-</div>
-      
-      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
-      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
-<script src="https://img.koobai.com/Artalk.js"></script>
+</section>
 
 
-<div id="Comments"></div>
-
-<script>
-  Artalk.init({
-    el:        '#Comments',
-    pageKey:   'http:\/\/localhost:1313\/day4_file_io\/',
-    pageTitle: 'Day4_File_IO',
-    server:    'https:\/\/c.koobai.com',
-    site:      'Koobai 空白生活',
+    <footer class="article-footer">
     
-  })
-</script></div> 
-</div>
+    <section class="article-tags">
+        
+            <a href="/tags/default_tag/">Default_tag</a>
+        
+    </section>
 
-<div>
-    <div class="paragraph-dh">
-     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1文件描述符">1.文件描述符</a></li>
-    <li><a href="#2文件的操作">2.文件的操作</a></li>
-    <li><a href="#aopenclose">a.open/close</a>
-      <ul>
-        <li><a href="#breadwrite">b.read/write</a></li>
-        <li><a href="#clseek">c.lseek</a></li>
-      </ul>
-    </li>
-  </ul>
 
-  <ul>
-    <li><a href="#一屏幕属性">一、屏幕属性</a></li>
-    <li><a href="#二linux帧缓冲">二、LINUX帧缓冲</a></li>
-    <li><a href="#三练习">三、练习</a></li>
-  </ul>
-</nav>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2024年度总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/cpu%E9%99%90%E5%88%B6gpu%E6%80%A7%E8%83%BD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CPU限制GPU性能</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day10_gy39/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day10_GY39</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day11_madplaymakefile/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day11_madplay&amp;makefile</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day12_dirent/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day12_dirent</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
     </div>
-</div>
+</aside>
 
-</div>
-<script src="/js/single.js"></script>    
+     
+    
+        
+    
 
-  </div>
-  <div class="footer-background">
-<div class="footer">
-        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
-        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
-        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
-      </div>
-      <div class="footer-rss">
-      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
-      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
-      </div>
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 MySpace
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
- <script src="/js/view-image.min.js"></script>
-  
-<div class="gotop_hide">
-  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
-</div>
-  
 
-  
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
-  
-  <script type="text/javascript" src="/js/bundle.js"></script>
-  
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.85803ae902a250f7d5dbb4ba3bc919da7eb36f6b0fb381e657be5438a8a0b770.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-  
-   
-</body>
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
 </html>

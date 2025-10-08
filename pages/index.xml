@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Pages on 空白Koobai</title>
-    <link>http://localhost:1313/pages/</link>
-    <description>Recent content in Pages on 空白Koobai</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 30 Jan 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/pages/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>观影</title>
-      <link>http://localhost:1313/movies/</link>
-      <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/movies/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>跳转</title>
-      <link>http://localhost:1313/tiaozhuan/</link>
-      <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tiaozhuan/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>博文</title>
-      <link>http://localhost:1313/posts/</link>
-      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>软件</title>
-      <link>http://localhost:1313/apps/</link>
-      <pubDate>Sun, 08 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/apps/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>我</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description></description>
-    </item>
-  </channel>
+    <channel>
+        <title>Pages on MySpace</title>
+        <link>http://localhost:1313/pages/</link>
+        <description>Recent content in Pages on MySpace</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Mon, 30 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/pages/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>观影</title>
+        <link>http://localhost:1313/movies/</link>
+        <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/movies/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>跳转</title>
+        <link>http://localhost:1313/tiaozhuan/</link>
+        <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tiaozhuan/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>博文</title>
+        <link>http://localhost:1313/posts/</link>
+        <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>软件</title>
+        <link>http://localhost:1313/apps/</link>
+        <pubDate>Sun, 08 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/apps/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>我</title>
+        <link>http://localhost:1313/about/</link>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/about/</guid>
+        <description>&lt;img src="https://img.koobai.com/article/writer.jpg" alt="Featured image of post 我" /&gt;</description>
+        </item>
+        
+    </channel>
 </rss>

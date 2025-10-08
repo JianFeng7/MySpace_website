@@ -1,946 +1,366 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。">
+<title>软件</title>
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>软件 - 空白Koobai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/suju/ios.json">
-  <link rel="icon" href="https://img.koobai.com/koobai.png">
-  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
-  <link rel="canonical" href="http://localhost:1313/apps/" />
+<link rel='canonical' href='http://localhost:1313/apps/'>
 
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="软件">
+<meta property='og:description' content="一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。">
+<meta property='og:url' content='http://localhost:1313/apps/'>
+<meta property='og:site_name' content='MySpace'>
+<meta property='og:type' content='article'><meta property='article:section' content='Pages' /><meta property='article:published_time' content='2023-01-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-01-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="软件">
+<meta name="twitter:description" content="一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-  
-    <meta name="description" content="一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。"/>
-    <meta property="og:title" content="软件"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://localhost:1313/apps/"/>
-    
-    <meta property="og:description" content="一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。"/>
-  
-</head>
-
-
-
-<body class='page page-app'>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-        
-        
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
-                <li >
-                    <a href="http://localhost:1313/">首页</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/posts/">博文</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://sport.koobai.com/">骑行</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/apps/">软件</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/movies/">观影</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://qiszy.taobao.com">好物</a>
-                </li>
-            
-        
-    </ul>
-</div>
-  <div id="wrapper" class="wrapper">
-    <div class="header">
 
-<div id="toggle-menu-main-mobile" class="hamburger-trigger">
-  <button class="hamburger">Menu</button>
-</div>
-<div class="new-heard-menu">
-
-
-
-
-<div class="header-menu">
-  <a href="/" >首页</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/posts/" >博文</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://sport.koobai.com/" >骑行</a>
-</div>
-
-
-
-<div class="header-menu menu-current">
-  <a href="/apps/" >软件</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/movies/" >观影</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
-</div>
-
-</div>
-  <div class="heard-right"> 
-    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
-    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-    </svg></a>    
-    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
-</div>
-
-</div>
-
-<script src="/js/moment.min.js?v=2.29.4"></script>
-<script src="/js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
 </script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">MySpace</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://sport.koobai.com/' >
+                
+                
+                
+                <span>骑行</span>
+            </a>
+        </li>
+        
+        
+        <li  class='current' >
+            <a href='/apps/' >
+                
+                
+                
+                <span>软件</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/movies/' >
+                
+                
+                
+                <span>观影</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://qiszy.taobao.com' >
+                
+                
+                
+                <span>好物</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
     
 
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
 
-<div class="pagetitle">一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。以下为日常工作生活中所常用：<br />( 2023-11-12 更新 )</div>
-<div class="appdquanjudiv">
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/jiany.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>自从开始剪视频之后，必备软件，适合我这种小白。喜欢里面各种预制的音乐/热梗/贴纸素材。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank">剪映专业版</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuY2FwY3V0LmNuLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/optimage.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank"></a></div>
-        <div class="appnote"><div>图片压缩软件，支持全格式，每天前 25 张免费。博客大部分图片都经过它的手，推荐。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank">Optimage</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vcHRpbWFnZS5hcHAv" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/upic.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank"></a></div>
-        <div class="appnote"><div>快速上传图片资源到各大存储平台，如腾讯云、又拍云、Github 等等。同类型开源的有 PicGO。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank">uPic</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2dlZTFrL3VQaWM%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/chatgptios.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank"></a></div>
-        <div class="appnote"><div>官方客户端，方便订阅 Plus 会员。历史记录同步 PC 端，整体体验不错。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank">ChatGPT</a></div>
-        <div class="appzhuangtai">
-          <div class="macos"></div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvY2hhdGdwdC9pZDY0NDgzMTEwNjk%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide app-star">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src=""></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank">Home</a></div>
-        <div class="appnote"><div>家庭 App 接入了不少的智能设备，买的是小米系，日常除了使用米家之外，可通过 Home assistant 接入 HomeKit。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank"></a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos">tvOS</div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUFFJUI2JUU1JUJBJUFEL2lkMTExMDE0NTEwMw%3d%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-      <div class="star-img img-hide"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/star_home.webp"></div>
+    <div class="article-details">
     
-    </div>
-  
-    <div class="appquanju img-hide app-star">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank"><img loading="lazy" decoding="async" src=""></a></div>
 
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank">Infuse</a></div>
-        <div class="appnote"><div>如果你有Apple TV，那它就是必备软件。可以让你的视频流以海报的形式展示，并且支持各类格式。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank"></a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos">tvOS</div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9maXJlY29yZS5jb20vaW5mdXNl" target="_blank"><div class="free"></div></a>
-      </div>
-      
-      <div class="star-img img-hide"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/star_Infuse.webp"></div>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/apps/">软件</a>
+        </h2>
     
+        
+        <h3 class="article-subtitle">
+            一款合适的软件，在工作中能成为很好的生产力工具，让工作事半功倍；在生活中能成为很好的消遣工具，让生活充满多姿多彩。
+        </h3>
+        
     </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/chrome.webp"></a></div>
 
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank"></a></div>
-        <div class="appnote"><div>有些站点对 Chrome 的支持更完善，所以现在与 Firefox 交替使用。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank">Google Chrome</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9jaHJvbWUv" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/vscode.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank"></a></div>
-        <div class="appnote"><div>代码编辑软件，只能说牛逼，再也不用切来切去了，只恨相见太晚。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank">Visual Studio Code</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20v" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/keka.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>压缩软件，跟MacZip一样，试用它主要是觉得这图标还蛮有意思的。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank">Keka</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cua2VrYS5pby9lbi8%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/obsidiannew.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>知识管理笔记类软件，插件丰富，配合WebDav各端同步。自己当日常记录、写博客日志使用。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank">Obsidian</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9vYnNpZGlhbi5tZC8%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/sketch.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>2022年做项目才开始学会使用，画稿利器。虽然现在大家都用Figma，但还是得看环境使用，适合自己才是最好的。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank">Sketch</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cuc2tldGNoLmNvbS8%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/ai.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank"></a></div>
-        <div class="appnote"><div>Adobe的矢量软件，平常主要用于素材的修改调整，只会基本的功能。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank">Illustrator 2022</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hZG9iZS5jb20v" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/eagle.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>素材管理软件，支持各类格式。很多年前就已购买，设计师应该人手备一个。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank">Eagle</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9lYWdsZS5jb29sLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/mindnode.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank"></a></div>
-        <div class="appnote"><div>思维导图软件，单纯因为它的颜值才入手的，使用起来也方便简单。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank">Mindnode</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS91cy9hcHAvbWluZG5vZGUtbWluZC1tYXAtb3V0bGluZS9pZDEyMTg3MTgwMjc%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/surge.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>上网必备软件，已使用多年。虽然现在同质化的软件很多，但已使用习惯，主要还支持iCloud同步。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank">Surge</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uc3N1cmdlLmNvbS8%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/bob.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>翻译必备软件，支持各种翻译形式。如果自己申请各大平台翻译密钥，配置好之后，日常翻译非常方便。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank">Bob</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9ib2J0cmFuc2xhdGUuY29tLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/maccy.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank"></a></div>
-        <div class="appnote"><div>剪贴板管理软件，能记录多次的复制内容，方便随时调取使用。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank">Maccy</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9tYWNjeS5hcHAv" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/monitorcontrol.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank"></a></div>
-        <div class="appnote"><div>调整显示器亮度软件，适合外接显示器使用。鼠标在哪个显示屏，调整就是哪个显示屏的亮度。免费开源</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank">MonitorControl</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL01vbml0b3JDb250cm9sL01vbml0b3JDb250cm9s" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide app-star">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src=""></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank">Pixelmator Pro</a></div>
-        <div class="appnote"><div>一直使用Photoshop，在想有没有平替，于是发现了这款轻量级软件，整体操作及快捷键跟ps差不多，还在摸索中～～</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank"></a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cucGl4ZWxtYXRvci5jb20vcHJvLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-      <div class="star-img img-hide"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/star_pixelmator.webp"></div>
     
-    </div>
-  
-    <div class="appquanju img-hide app-star">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src=""></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank">Reeder 5</a></div>
-        <div class="appnote"><div>RSS 阅读器，强悍的交互体验及出色的界面设计，让使用变得优雅且快捷。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank"></a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWVkZXJhcHAuY29tLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-      <div class="star-img img-hide"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/star_reeder.webp"></div>
     
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/hidden.webp"></a></div>
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 08, 2023</time>
+            </div>
+        
 
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>隐藏菜单栏图标软件，菜单栏图标过多的时候，使用它非常不错。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank">Hidden Bar</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2R3YXJ2ZXNmL2hpZGRlbg%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/rectangle.webp"></a></div>
 
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>调整窗口大小软件，用快捷键方式让窗口根据需要分屏。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank">Rectangle</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
 
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9yZWN0YW5nbGVhcHAuY29tLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/bitwarden.webp"></a></div>
+                <time class="article-time--reading">
+                    0 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
 
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank"></a></div>
-        <div class="appnote"><div>密码管理工具，服务器使用Docker版的vaultwarden，数据存储本地，再也不用记该死的密码了。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank">Bitwarden</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos">Web</div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL3ZhdWx0d2FyZGVu" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/appcleaner.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>卸载app工具，使用了多年，能把软件相关文件都能查找出来，比直接删除干净很多。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank">AppCleaner</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9mcmVlbWFjc29mdC5uZXQvYXBwY2xlYW5lci8%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/firefox.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank"></a></div>
-        <div class="appnote"><div>最近用了下 Firefox，发现打开网站速度似乎比 Chrome 快，那就再继续尝试下～～</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank">Firefox</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cubW96aWxsYS5vcmcvemgtQ04vZmlyZWZveC9uZXcv" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/iina.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>视频播放软件，并且支持IPTV播放。免费开源。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank">IINA</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank"><div class="kaiyuan">开源</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9paW5hLmlvLw%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/youtube.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>没什么说的，关注你喜欢的视频频道。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank">Youtube</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos"></div>
-          <div class="macos">tvOS</div>
-          <div class="macos">Web</div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly95b3V0dWJlLmNvbQ%3d%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/netflix.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>流媒体视频软件，缺点就是每个月的订阅费确实蛮贵。独自订阅几个月后，在合租平台租了个合租号。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank">Netflix</a></div>
-        <div class="appzhuangtai">
-          <div class="macos"></div>
-          <div class="macos">iOS</div>
-          <div class="macos">tvOS</div>
-          <div class="macos">Web</div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9uZXRmbGl4LmNvbS8%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/xiaoyuz.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank"></a></div>
-        <div class="appnote"><div>播客应用，其实很少听播客，但在开车的时候，放着声音很不错。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank">小宇宙</a></div>
-        <div class="appzhuangtai">
-          <div class="macos"></div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos">Web</div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly93d3cueGlhb3l1emhvdWZtLmNvbS8%3d" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/tinycal.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank"></a></div>
-        <div class="appnote"><div>一款日历的组件，使用了很多年，主要用来查看农历跟日常的节假日。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank">小历</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUIwJThGJUU1JThFJTg2LSVFNSVCMCU4RiVFOCU4MCU4QyVFNyVCRSU4RSVFNyU5QSU4NCVFNiU5NyVBNSVFNSU4RSU4Ni9pZDEwMzEwODg2MTI%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/telegram.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank"></a></div>
-        <div class="appnote"><div>关注你想关注的，你能想到的资源都有。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank">Telegram</a></div>
-        <div class="appzhuangtai">
-          <div class="macos">macOS</div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank"><div class="shoufei"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly90ZWxlZ3JhbS5vcmcv" target="_blank"><div class="free">免费</div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/tianqi.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank"></a></div>
-        <div class="appnote"><div>一段时间内，特别喜欢收集天气类app，只要看着好看就下载，最终留下了这款，可能因为它数据相对准确。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank">彩云天气 Pro</a></div>
-        <div class="appzhuangtai">
-          <div class="macos"></div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU1JUJEJUE5JUU0JUJBJTkxJUU1JUE0JUE5JUU2JUIwJTk0LSVFNCVCOCVCQSVFNiU4MiVBOCVFOSVBMiU4NCVFNiU4QSVBNSVFNSU4NyVBMCVFNyU4MiVCOSVFNSU4NyVBMCVFNSU4OCU4NiVFNCVCOCU4QiVFOSU5QiVBOC9pZDg0Nzc2NDkxMg%3d%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
-    <div class="appquanju img-hide ">
-      <div class="appimg"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank"><img loading="lazy" decoding="async" src="https://img.koobai.com/app/sms.webp"></a></div>
-
-      <div class="app-title-all">
-        <div class="apptitle2"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank"></a></div>
-        <div class="appnote"><div>过滤垃圾信息必备，iOS相关的过滤真是太垃圾了，羡慕隔壁的Android。</div></div>
-        <div class="apptitle"><a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank">熊猫吃短信</a></div>
-        <div class="appzhuangtai">
-          <div class="macos"></div>
-          <div class="macos">iOS</div>
-          <div class="macos"></div>
-          <div class="macos"></div>
-        </div>
-      </div>
-
-      <div class="appzhuangtai-right">
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank"><div class="kaiyuan"></div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank"><div class="shoufei">付费</div></a>
-        <a href="/tiaozhuan?target=aHR0cHM6Ly9hcHBzLmFwcGxlLmNvbS9jbi9hcHAvJUU3JTg2JThBJUU3JThDJUFCJUU1JTkwJTgzJUU3JTlGJUFEJUU0JUJGJUExLSVFNSU5RSU4MyVFNSU5QyVCRSVFNyU5RiVBRCVFNCVCRiVBMSVFOCVCRiU4NyVFNiVCQiVBNC9pZDEzMTkxOTE4NTI%3d" target="_blank"><div class="free"></div></a>
-      </div>
-      
-    </div>
-  
+    
 </div>
 
-  </div>
-  <div class="footer-background">
-<div class="footer">
-        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
-        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
-        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
-      </div>
-      <div class="footer-rss">
-      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
-      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
-      </div>
+</header>
+
+    <section class="article-content">
+    
+    
+    
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 MySpace
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
- <script src="/js/view-image.min.js"></script>
-  
-<div class="gotop_hide">
-  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
-</div>
-  
 
-  
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
-  
-  <script type="text/javascript" src="/js/bundle.js"></script>
-  
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.85803ae902a250f7d5dbb4ba3bc919da7eb36f6b0fb381e657be5438a8a0b770.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-  
-   
-</body>
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
 </html>

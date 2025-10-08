@@ -1,161 +1,239 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="[TOC]\n实验要求 分别实现5个按钮:上一张下一张,随机播放,循环播放,停止循环播放 在屏幕里选择一块区域显示图片,该区域同时也可以使用滑动. 代码实现 lcd.h #ifndef LCD_H #define LCD_H /*函数声明*/ int *Init_LCD(int *fd); void Uninit_LCD(int fd,int *plcd); void Lcd_draw_point(int x,int y,int color,int *plcd); void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd); int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd); #endif lcd.c /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;sys/mman.h&gt; #include &lt;stdlib.h&gt; /*宏定义*/ #define FILE_PATH &#34;/dev/fb0&#34; /* Init_LCD:初始化显示屏 参数为空 返回值 int* 成功 返回映射区域的首地址 失败 返回NULL */ int *Init_LCD(int *fd) { //1.打开帧缓冲 *fd = open(&#34;/dev/fb0&#34;,O_RDWR); if(-1 == *fd) { perror(&#34;open fail&#34;); return NULL; } //2.映射 int *plcd = mmap(NULL,800*480*4 ,PROT_READ | PROT_WRITE, MAP_SHARED,*fd,0); if(MAP_FAILED == plcd) { perror(&#34;mmap fail&#34;); return NULL; } return plcd; } /* Uninit_LCD:解初始化屏幕 @fd:帧缓冲的文件描述符 @plcd: 返回值:无 */ void Uninit_LCD(int fd,int *plcd) { //1.解映射 munmap(plcd,800*480*4); //2.关闭帧缓冲 close(fd); } void Lcd_draw_point(int x,int y,int color,int *plcd) { if(NULL == plcd) { printf(&#34;error:plcd == NULL\\n&#34;); return ; } if(x&gt;=0&amp;&amp;x&lt;800&amp;&amp;y&gt;=0&amp;&amp;y&lt;480) { *(plcd+800*y+x) = color; } } void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd) { int i,j; if((x+w)&gt;=0||(x+w)&lt;=880||(y+h)&gt;=0||(y+h)&lt;=880) for(j=x;j&lt;x+w;j++) { for(i=y;i&lt;y+h;i++) { Lcd_draw_point(i,j,color,plcd); } } } /* Bmp_display:在屏幕的指定的位置显示bmp图片 @bmp_file：图片的路径名 @x0 y0 图片左上角在屏幕上的坐标 @plcd:帧缓冲映射区域的首地址 返回值： -1 失败 0 成功 */ int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd) { if(plcd == NULL || !(x0&gt;=0&amp;&amp;x0&lt;800&amp;&amp;y0&gt;=0&amp;&amp;y0&lt;480)) { return -1; } //1.打开图片 int fd = open(bmp_file,O_RDONLY); if(-1 == fd) { printf(&#34;%s&#34;,bmp_file); perror(&#34;open fail&#34;); return -1; } //2.判断到底是不是一张bmp图片 char buf[4]={0}; read(fd,buf,2); if(buf[0]!=0x42 || buf[1]!=0x4D) { printf(&#34;NOT BMP\\n&#34;); close(fd); return -1; } //3.解析图片 宽 高 色深 lseek(fd,0x12,SEEK_SET); read(fd,buf,4); int width = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x16,SEEK_SET); read(fd,buf,4); int height = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x1c,SEEK_SET); read(fd,buf,2); short depth = buf[1]&lt;&lt;8 | buf[0]; if(!(depth == 24 || depth == 32)) { printf(&#34;NOT SUPPORT!\\n&#34;); close(fd); return -1; } printf(&#34;%s:%d*%d depth:%d\\n&#34;,bmp_file,width,height,depth); //4.获取像素数组 int line_vaild_bytes=abs(width)*depth/8; int line_bytes;//一行总字节数=有效字节数+赖子数 int laizi = 0; if(line_vaild_bytes%4) { laizi = 4 - line_vaild_bytes%4; } line_bytes = line_vaild_bytes + laizi; int total_bytes = line_bytes*abs(height);//整个像素数组的大小 //从文件中读取像素数组 lseek(fd,54,SEEK_SET); unsigned char piexl[total_bytes]; read(fd,piexl,total_bytes); //5.在屏幕的对应位置显示即可 unsigned char a,r,g,b; int color; int i=0; int x,y; //遍历整个像素数组 for(y=0;y&lt;abs(height);y++) { for(x=0;x&lt;abs(width);x++) { b=piexl[i++]; g=piexl[i++]; r=piexl[i++]; if(depth==32) { a=piexl[i++]; } else { a=0;//不透明 } color=a&lt;&lt;24|r&lt;&lt;16|g&lt;&lt;8|b; Lcd_draw_point(width&gt;0?x+x0:x0+abs(width)-x-1, height&gt;0?y0+abs(height)-y-1:y0+y,color,plcd); } //每一行末尾可能存在赖子 i+=laizi; } close(fd); return 0; } touch.h #ifndef __TOUCH_H__ #define __TOUCH_H__ /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;linux/input.h&gt;//输入子系统 #define UP 1 #define DOWN 2 #define LEFT 3 #define RIGHT 4 #define TOUCH_ERROR -1 /*宏定义*/ #define TOUCH_FILE &#34;/dev/input/event0&#34; //获取坐标 int Init_touch(void); void Uninit_touch(int touch_fd); int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2); int Get_slip_direction(int x1,int y1,int x2 ,int y2); void get_touch(); /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y); /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway(); #endif touch.c #include &#34;touch.h&#34; /* 触摸屏初始化:Init_touch 参数为空 返回值：int touch_fd:触摸屏的文件描述符 */ int Init_touch(void) { //1.打开触摸屏 int touch_fd = open(TOUCH_FILE,O_RDONLY); if(-1 == touch_fd) { perror(&#34;open touch fail&#34;); return -1; } return touch_fd; } /* 关闭触摸屏：Uninit_touch @touch_fd 返回值:void */ void Uninit_touch(int touch_fd) { if(-1 == touch_fd) { return ; } close(touch_fd); } /* get_usr_input_pro:获取用户的对触摸屏的输入 @x1 y1 @x2 y2 @touch_fd 返回值:int -1 失败 0 成功 */ int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2) { if(-1 == touch_fd) { return -1; } struct input_event ev;//保存读取出来的信息 *x1 = *y1 = *x2 =*y2 = -1; while(1) { //1 读取输入事件 int res = read(touch_fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { if(-1 == *x1) { *x1 = ev.value; //只获取一次 *x2 = ev.value; } *x2 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取x轴的坐标 { if(-1 == *y1) { *y1 = ev.value; //只获取一次 *y2 = ev.value; } *y2 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } return 0; } /* 获取滑动的方向:Get_slip_direction @x1 y1 @x2 y2 返回值：int LEFT RIGHT UP DOWN TOUCH_ERROR */ int Get_slip_direction(int x1,int y1,int x2 ,int y2) { if(-1 == x1 || -1 == y1 || -1 == x2 || -1 == y2) { return TOUCH_ERROR; } int direction; //方向 if(abs((y2-y1)/(x2-x1)) &gt;= 1) //上 或者 下 { if(y2 &gt; y1) { return DOWN; } else { return UP; } } else { if(x2 &gt; x1) { return RIGHT; } else { return LEFT; } } } //打印坐标 测试 void get_touch() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { read(fd,&amp;ev,sizeof(ev)); printf(&#34;type =%d,code=%d,value=%d\\n&#34;,ev.type,ev.code,ev.value); int x ,y ; if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X )//触摸屏的x轴 { x = ev.value *(1.0*800/1040); } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y )//触摸屏的y轴 { y = ev.value*(1.0*480/600); } printf(&#34;( %d , %d )\\n&#34;,x,y); if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭 close(fd); } /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y) { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); int flag_x = 0, flag_y = 0; if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员获取坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { *x = ev.value*(1.0*800/1040); flag_x = 1 ; if(flag_y) { break; } } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取y轴的坐标 { *y = ev.value*(1.0*480/600); flag_y = 1 ; if(flag_x) { break; } } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭触摸屏 close(fd); } /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDWR); if(-1 == fd) { perror(&#34;open touch fail&#34;); return -1; } //2.操作 struct input_event ev;//保存读取出来的信息 int x0 = -1 ,y0 = -1 ;//初始坐标,把自身作为判断 int x1 ,y1; while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == REL_X) //获取x轴的坐标 { if(-1 == x0) { x0 = ev.value; //只获取一次 } x1 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == REL_Y) //获取x轴的坐标 { if(-1 == y0) { y0 = ev.value; //只获取一次 } y1 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } printf(&#34;start ( %d , %d ) , leave ( %d , %d )\\n&#34;,x0,y0,x1,y1); int way; //方向 if(abs((y1-y0)/(x1-x0)) &gt;= 1) //上 或者 下 { if(y1 &gt; y0) { printf(&#34;DOWN\\n&#34;); way = DOWN; } else { printf(&#34;UP\\n&#34;); way = UP; } } else { if(x1 &gt; x0) { printf(&#34;RIGHT\\n&#34;); way = RIGHT; } else { printf(&#34;LEFT\\n&#34;); way = LEFT; } } close(fd); return way; } main.c #include &lt;stdio.h&gt; #include &#34;touch.h&#34; #include &#34;lcd.h&#34; int main() { int touch_fd = Init_touch(); int fd=-1; int* plcd = Init_LCD(&amp;fd); //int x,y; // for(y=0;y&gt;=10&amp;&amp;y&lt;420;y++) // { // for(x=0;x&lt;=790&amp;&amp;x&gt;=10;x++) // { // Lcd_draw_point(x,y,0x000000,plcd); // } // } Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); Bmp_display(&#34;./bmp/xiay.bmp&#34;,174,420,plcd); Bmp_display(&#34;./bmp/sui.bmp&#34;,328,420,plcd); Bmp_display(&#34;./bmp/xun.bmp&#34;,482,420,plcd); Bmp_display(&#34;./bmp/ting.bmp&#34;,636,420,plcd); char *file_name[] = {&#34;./bmp/1.bmp&#34;,&#34;./bmp/2.bmp&#34;,&#34;./bmp/3.bmp&#34;,&#34;./bmp/4.bmp&#34;,&#34;./bmp/5.bmp&#34;,&#34;./bmp/6.bmp&#34;,&#34;./bmp/7.bmp&#34;,&#34;./bmp/8.bmp&#34;,&#34;./bmp/9.bmp&#34;,&#34;./bmp/10.bmp&#34;};\t//存放图片地址和名字 int x1=-1,y1=-1,x2=-1,y2=-1; int i=0;//存放图片顺序 int x,y; //存放坐标值 while(1) { get_usr_touch(&amp;x,&amp;y); //显示区域 if(x &gt;= 10 &amp;&amp; x &lt;= 790 &amp;&amp; y &gt;= 10 &amp;&amp; y&lt;= 410) { //测试滑动\tif(-1 == get_usr_input_pro(touch_fd,&amp;x1,&amp;y1,&amp;x2,&amp;y2)) { continue; } int direction; switch (direction = Get_slip_direction(x1,y1,x2,y2)) { case UP: printf(&#34;UP\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd); break; case DOWN: printf(&#34;DOWN\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd); break; case RIGHT: printf(&#34;RIGHT\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd);\tbreak; case LEFT: printf(&#34;LEFT\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd);\tbreak; default: break; } } //上一张 else if(x &gt;= 20 &amp;&amp; x &lt;= 164 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { Bmp_display(&#34;./bmp/shang1.bmp&#34;,20,420,plcd); usleep(500); Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); if(0 == i) { i = 10; } printf(&#34;return\\n&#34;); Bmp_display(file_name[--i],10,10,plcd); } //下一张 else if(x &gt;= 174 &amp;&amp; x &lt;= 318 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { if(9 == i) { i = -1; } printf(&#34;next\\n&#34;); Bmp_display(file_name[++i],10,10,plcd); } //随机播放 else if(x &gt;= 328 &amp;&amp; x &lt;= 472 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { i = random()%10; Bmp_display(file_name[i],10,10,plcd); } //循环播放 else if(x &gt;= 482 &amp;&amp; x &lt;= 626 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { while(1) { if(9 == i) { i = -1; } Bmp_display(file_name[++i],10,10,plcd); sleep(1.5); } } //停止循环播放 else if(x &gt;= 420 &amp;&amp; x &lt;= 636 &amp;&amp; y &gt;= 470&amp;&amp; y&lt;=780 ) { printf(&#34;停止循环播放&#34;); } } Uninit_touch(touch_fd); Uninit_LCD(fd,plcd); return 0; } ">
+<title>Day8_ElectronicAlbum</title>
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Day8_ElectronicAlbum - 空白Koobai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/suju/ios.json">
-  <link rel="icon" href="https://img.koobai.com/koobai.png">
-  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
-  <link rel="canonical" href="http://localhost:1313/day8_electronicalbum/" />
+<link rel='canonical' href='http://localhost:1313/day8_electronicalbum/'>
 
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Day8_ElectronicAlbum">
+<meta property='og:description' content="[TOC]\n实验要求 分别实现5个按钮:上一张下一张,随机播放,循环播放,停止循环播放 在屏幕里选择一块区域显示图片,该区域同时也可以使用滑动. 代码实现 lcd.h #ifndef LCD_H #define LCD_H /*函数声明*/ int *Init_LCD(int *fd); void Uninit_LCD(int fd,int *plcd); void Lcd_draw_point(int x,int y,int color,int *plcd); void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd); int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd); #endif lcd.c /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;sys/mman.h&gt; #include &lt;stdlib.h&gt; /*宏定义*/ #define FILE_PATH &#34;/dev/fb0&#34; /* Init_LCD:初始化显示屏 参数为空 返回值 int* 成功 返回映射区域的首地址 失败 返回NULL */ int *Init_LCD(int *fd) { //1.打开帧缓冲 *fd = open(&#34;/dev/fb0&#34;,O_RDWR); if(-1 == *fd) { perror(&#34;open fail&#34;); return NULL; } //2.映射 int *plcd = mmap(NULL,800*480*4 ,PROT_READ | PROT_WRITE, MAP_SHARED,*fd,0); if(MAP_FAILED == plcd) { perror(&#34;mmap fail&#34;); return NULL; } return plcd; } /* Uninit_LCD:解初始化屏幕 @fd:帧缓冲的文件描述符 @plcd: 返回值:无 */ void Uninit_LCD(int fd,int *plcd) { //1.解映射 munmap(plcd,800*480*4); //2.关闭帧缓冲 close(fd); } void Lcd_draw_point(int x,int y,int color,int *plcd) { if(NULL == plcd) { printf(&#34;error:plcd == NULL\\n&#34;); return ; } if(x&gt;=0&amp;&amp;x&lt;800&amp;&amp;y&gt;=0&amp;&amp;y&lt;480) { *(plcd+800*y+x) = color; } } void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd) { int i,j; if((x+w)&gt;=0||(x+w)&lt;=880||(y+h)&gt;=0||(y+h)&lt;=880) for(j=x;j&lt;x+w;j++) { for(i=y;i&lt;y+h;i++) { Lcd_draw_point(i,j,color,plcd); } } } /* Bmp_display:在屏幕的指定的位置显示bmp图片 @bmp_file：图片的路径名 @x0 y0 图片左上角在屏幕上的坐标 @plcd:帧缓冲映射区域的首地址 返回值： -1 失败 0 成功 */ int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd) { if(plcd == NULL || !(x0&gt;=0&amp;&amp;x0&lt;800&amp;&amp;y0&gt;=0&amp;&amp;y0&lt;480)) { return -1; } //1.打开图片 int fd = open(bmp_file,O_RDONLY); if(-1 == fd) { printf(&#34;%s&#34;,bmp_file); perror(&#34;open fail&#34;); return -1; } //2.判断到底是不是一张bmp图片 char buf[4]={0}; read(fd,buf,2); if(buf[0]!=0x42 || buf[1]!=0x4D) { printf(&#34;NOT BMP\\n&#34;); close(fd); return -1; } //3.解析图片 宽 高 色深 lseek(fd,0x12,SEEK_SET); read(fd,buf,4); int width = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x16,SEEK_SET); read(fd,buf,4); int height = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x1c,SEEK_SET); read(fd,buf,2); short depth = buf[1]&lt;&lt;8 | buf[0]; if(!(depth == 24 || depth == 32)) { printf(&#34;NOT SUPPORT!\\n&#34;); close(fd); return -1; } printf(&#34;%s:%d*%d depth:%d\\n&#34;,bmp_file,width,height,depth); //4.获取像素数组 int line_vaild_bytes=abs(width)*depth/8; int line_bytes;//一行总字节数=有效字节数+赖子数 int laizi = 0; if(line_vaild_bytes%4) { laizi = 4 - line_vaild_bytes%4; } line_bytes = line_vaild_bytes + laizi; int total_bytes = line_bytes*abs(height);//整个像素数组的大小 //从文件中读取像素数组 lseek(fd,54,SEEK_SET); unsigned char piexl[total_bytes]; read(fd,piexl,total_bytes); //5.在屏幕的对应位置显示即可 unsigned char a,r,g,b; int color; int i=0; int x,y; //遍历整个像素数组 for(y=0;y&lt;abs(height);y++) { for(x=0;x&lt;abs(width);x++) { b=piexl[i++]; g=piexl[i++]; r=piexl[i++]; if(depth==32) { a=piexl[i++]; } else { a=0;//不透明 } color=a&lt;&lt;24|r&lt;&lt;16|g&lt;&lt;8|b; Lcd_draw_point(width&gt;0?x+x0:x0+abs(width)-x-1, height&gt;0?y0+abs(height)-y-1:y0+y,color,plcd); } //每一行末尾可能存在赖子 i+=laizi; } close(fd); return 0; } touch.h #ifndef __TOUCH_H__ #define __TOUCH_H__ /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;linux/input.h&gt;//输入子系统 #define UP 1 #define DOWN 2 #define LEFT 3 #define RIGHT 4 #define TOUCH_ERROR -1 /*宏定义*/ #define TOUCH_FILE &#34;/dev/input/event0&#34; //获取坐标 int Init_touch(void); void Uninit_touch(int touch_fd); int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2); int Get_slip_direction(int x1,int y1,int x2 ,int y2); void get_touch(); /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y); /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway(); #endif touch.c #include &#34;touch.h&#34; /* 触摸屏初始化:Init_touch 参数为空 返回值：int touch_fd:触摸屏的文件描述符 */ int Init_touch(void) { //1.打开触摸屏 int touch_fd = open(TOUCH_FILE,O_RDONLY); if(-1 == touch_fd) { perror(&#34;open touch fail&#34;); return -1; } return touch_fd; } /* 关闭触摸屏：Uninit_touch @touch_fd 返回值:void */ void Uninit_touch(int touch_fd) { if(-1 == touch_fd) { return ; } close(touch_fd); } /* get_usr_input_pro:获取用户的对触摸屏的输入 @x1 y1 @x2 y2 @touch_fd 返回值:int -1 失败 0 成功 */ int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2) { if(-1 == touch_fd) { return -1; } struct input_event ev;//保存读取出来的信息 *x1 = *y1 = *x2 =*y2 = -1; while(1) { //1 读取输入事件 int res = read(touch_fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { if(-1 == *x1) { *x1 = ev.value; //只获取一次 *x2 = ev.value; } *x2 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取x轴的坐标 { if(-1 == *y1) { *y1 = ev.value; //只获取一次 *y2 = ev.value; } *y2 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } return 0; } /* 获取滑动的方向:Get_slip_direction @x1 y1 @x2 y2 返回值：int LEFT RIGHT UP DOWN TOUCH_ERROR */ int Get_slip_direction(int x1,int y1,int x2 ,int y2) { if(-1 == x1 || -1 == y1 || -1 == x2 || -1 == y2) { return TOUCH_ERROR; } int direction; //方向 if(abs((y2-y1)/(x2-x1)) &gt;= 1) //上 或者 下 { if(y2 &gt; y1) { return DOWN; } else { return UP; } } else { if(x2 &gt; x1) { return RIGHT; } else { return LEFT; } } } //打印坐标 测试 void get_touch() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { read(fd,&amp;ev,sizeof(ev)); printf(&#34;type =%d,code=%d,value=%d\\n&#34;,ev.type,ev.code,ev.value); int x ,y ; if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X )//触摸屏的x轴 { x = ev.value *(1.0*800/1040); } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y )//触摸屏的y轴 { y = ev.value*(1.0*480/600); } printf(&#34;( %d , %d )\\n&#34;,x,y); if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭 close(fd); } /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y) { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); int flag_x = 0, flag_y = 0; if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员获取坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { *x = ev.value*(1.0*800/1040); flag_x = 1 ; if(flag_y) { break; } } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取y轴的坐标 { *y = ev.value*(1.0*480/600); flag_y = 1 ; if(flag_x) { break; } } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭触摸屏 close(fd); } /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDWR); if(-1 == fd) { perror(&#34;open touch fail&#34;); return -1; } //2.操作 struct input_event ev;//保存读取出来的信息 int x0 = -1 ,y0 = -1 ;//初始坐标,把自身作为判断 int x1 ,y1; while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == REL_X) //获取x轴的坐标 { if(-1 == x0) { x0 = ev.value; //只获取一次 } x1 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == REL_Y) //获取x轴的坐标 { if(-1 == y0) { y0 = ev.value; //只获取一次 } y1 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } printf(&#34;start ( %d , %d ) , leave ( %d , %d )\\n&#34;,x0,y0,x1,y1); int way; //方向 if(abs((y1-y0)/(x1-x0)) &gt;= 1) //上 或者 下 { if(y1 &gt; y0) { printf(&#34;DOWN\\n&#34;); way = DOWN; } else { printf(&#34;UP\\n&#34;); way = UP; } } else { if(x1 &gt; x0) { printf(&#34;RIGHT\\n&#34;); way = RIGHT; } else { printf(&#34;LEFT\\n&#34;); way = LEFT; } } close(fd); return way; } main.c #include &lt;stdio.h&gt; #include &#34;touch.h&#34; #include &#34;lcd.h&#34; int main() { int touch_fd = Init_touch(); int fd=-1; int* plcd = Init_LCD(&amp;fd); //int x,y; // for(y=0;y&gt;=10&amp;&amp;y&lt;420;y++) // { // for(x=0;x&lt;=790&amp;&amp;x&gt;=10;x++) // { // Lcd_draw_point(x,y,0x000000,plcd); // } // } Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); Bmp_display(&#34;./bmp/xiay.bmp&#34;,174,420,plcd); Bmp_display(&#34;./bmp/sui.bmp&#34;,328,420,plcd); Bmp_display(&#34;./bmp/xun.bmp&#34;,482,420,plcd); Bmp_display(&#34;./bmp/ting.bmp&#34;,636,420,plcd); char *file_name[] = {&#34;./bmp/1.bmp&#34;,&#34;./bmp/2.bmp&#34;,&#34;./bmp/3.bmp&#34;,&#34;./bmp/4.bmp&#34;,&#34;./bmp/5.bmp&#34;,&#34;./bmp/6.bmp&#34;,&#34;./bmp/7.bmp&#34;,&#34;./bmp/8.bmp&#34;,&#34;./bmp/9.bmp&#34;,&#34;./bmp/10.bmp&#34;};\t//存放图片地址和名字 int x1=-1,y1=-1,x2=-1,y2=-1; int i=0;//存放图片顺序 int x,y; //存放坐标值 while(1) { get_usr_touch(&amp;x,&amp;y); //显示区域 if(x &gt;= 10 &amp;&amp; x &lt;= 790 &amp;&amp; y &gt;= 10 &amp;&amp; y&lt;= 410) { //测试滑动\tif(-1 == get_usr_input_pro(touch_fd,&amp;x1,&amp;y1,&amp;x2,&amp;y2)) { continue; } int direction; switch (direction = Get_slip_direction(x1,y1,x2,y2)) { case UP: printf(&#34;UP\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd); break; case DOWN: printf(&#34;DOWN\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd); break; case RIGHT: printf(&#34;RIGHT\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd);\tbreak; case LEFT: printf(&#34;LEFT\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd);\tbreak; default: break; } } //上一张 else if(x &gt;= 20 &amp;&amp; x &lt;= 164 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { Bmp_display(&#34;./bmp/shang1.bmp&#34;,20,420,plcd); usleep(500); Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); if(0 == i) { i = 10; } printf(&#34;return\\n&#34;); Bmp_display(file_name[--i],10,10,plcd); } //下一张 else if(x &gt;= 174 &amp;&amp; x &lt;= 318 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { if(9 == i) { i = -1; } printf(&#34;next\\n&#34;); Bmp_display(file_name[++i],10,10,plcd); } //随机播放 else if(x &gt;= 328 &amp;&amp; x &lt;= 472 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { i = random()%10; Bmp_display(file_name[i],10,10,plcd); } //循环播放 else if(x &gt;= 482 &amp;&amp; x &lt;= 626 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { while(1) { if(9 == i) { i = -1; } Bmp_display(file_name[++i],10,10,plcd); sleep(1.5); } } //停止循环播放 else if(x &gt;= 420 &amp;&amp; x &lt;= 636 &amp;&amp; y &gt;= 470&amp;&amp; y&lt;=780 ) { printf(&#34;停止循环播放&#34;); } } Uninit_touch(touch_fd); Uninit_LCD(fd,plcd); return 0; } ">
+<meta property='og:url' content='http://localhost:1313/day8_electronicalbum/'>
+<meta property='og:site_name' content='MySpace'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='default_tag' /><meta property='article:published_time' content='2025-10-03T18:53:46&#43;08:00'/><meta property='article:modified_time' content='2025-10-03T18:53:46&#43;08:00'/>
+<meta name="twitter:title" content="Day8_ElectronicAlbum">
+<meta name="twitter:description" content="[TOC]\n实验要求 分别实现5个按钮:上一张下一张,随机播放,循环播放,停止循环播放 在屏幕里选择一块区域显示图片,该区域同时也可以使用滑动. 代码实现 lcd.h #ifndef LCD_H #define LCD_H /*函数声明*/ int *Init_LCD(int *fd); void Uninit_LCD(int fd,int *plcd); void Lcd_draw_point(int x,int y,int color,int *plcd); void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd); int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd); #endif lcd.c /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;sys/mman.h&gt; #include &lt;stdlib.h&gt; /*宏定义*/ #define FILE_PATH &#34;/dev/fb0&#34; /* Init_LCD:初始化显示屏 参数为空 返回值 int* 成功 返回映射区域的首地址 失败 返回NULL */ int *Init_LCD(int *fd) { //1.打开帧缓冲 *fd = open(&#34;/dev/fb0&#34;,O_RDWR); if(-1 == *fd) { perror(&#34;open fail&#34;); return NULL; } //2.映射 int *plcd = mmap(NULL,800*480*4 ,PROT_READ | PROT_WRITE, MAP_SHARED,*fd,0); if(MAP_FAILED == plcd) { perror(&#34;mmap fail&#34;); return NULL; } return plcd; } /* Uninit_LCD:解初始化屏幕 @fd:帧缓冲的文件描述符 @plcd: 返回值:无 */ void Uninit_LCD(int fd,int *plcd) { //1.解映射 munmap(plcd,800*480*4); //2.关闭帧缓冲 close(fd); } void Lcd_draw_point(int x,int y,int color,int *plcd) { if(NULL == plcd) { printf(&#34;error:plcd == NULL\\n&#34;); return ; } if(x&gt;=0&amp;&amp;x&lt;800&amp;&amp;y&gt;=0&amp;&amp;y&lt;480) { *(plcd+800*y+x) = color; } } void Lcd_draw_matrx(int x,int y,int h,int w,int color,int *plcd) { int i,j; if((x+w)&gt;=0||(x+w)&lt;=880||(y+h)&gt;=0||(y+h)&lt;=880) for(j=x;j&lt;x+w;j++) { for(i=y;i&lt;y+h;i++) { Lcd_draw_point(i,j,color,plcd); } } } /* Bmp_display:在屏幕的指定的位置显示bmp图片 @bmp_file：图片的路径名 @x0 y0 图片左上角在屏幕上的坐标 @plcd:帧缓冲映射区域的首地址 返回值： -1 失败 0 成功 */ int Bmp_display(const char *bmp_file,int x0,int y0,int *plcd) { if(plcd == NULL || !(x0&gt;=0&amp;&amp;x0&lt;800&amp;&amp;y0&gt;=0&amp;&amp;y0&lt;480)) { return -1; } //1.打开图片 int fd = open(bmp_file,O_RDONLY); if(-1 == fd) { printf(&#34;%s&#34;,bmp_file); perror(&#34;open fail&#34;); return -1; } //2.判断到底是不是一张bmp图片 char buf[4]={0}; read(fd,buf,2); if(buf[0]!=0x42 || buf[1]!=0x4D) { printf(&#34;NOT BMP\\n&#34;); close(fd); return -1; } //3.解析图片 宽 高 色深 lseek(fd,0x12,SEEK_SET); read(fd,buf,4); int width = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x16,SEEK_SET); read(fd,buf,4); int height = buf[3]&lt;&lt;24 | buf[2]&lt;&lt;16 | buf[1]&lt;&lt;8 | buf[0]; lseek(fd,0x1c,SEEK_SET); read(fd,buf,2); short depth = buf[1]&lt;&lt;8 | buf[0]; if(!(depth == 24 || depth == 32)) { printf(&#34;NOT SUPPORT!\\n&#34;); close(fd); return -1; } printf(&#34;%s:%d*%d depth:%d\\n&#34;,bmp_file,width,height,depth); //4.获取像素数组 int line_vaild_bytes=abs(width)*depth/8; int line_bytes;//一行总字节数=有效字节数+赖子数 int laizi = 0; if(line_vaild_bytes%4) { laizi = 4 - line_vaild_bytes%4; } line_bytes = line_vaild_bytes + laizi; int total_bytes = line_bytes*abs(height);//整个像素数组的大小 //从文件中读取像素数组 lseek(fd,54,SEEK_SET); unsigned char piexl[total_bytes]; read(fd,piexl,total_bytes); //5.在屏幕的对应位置显示即可 unsigned char a,r,g,b; int color; int i=0; int x,y; //遍历整个像素数组 for(y=0;y&lt;abs(height);y++) { for(x=0;x&lt;abs(width);x++) { b=piexl[i++]; g=piexl[i++]; r=piexl[i++]; if(depth==32) { a=piexl[i++]; } else { a=0;//不透明 } color=a&lt;&lt;24|r&lt;&lt;16|g&lt;&lt;8|b; Lcd_draw_point(width&gt;0?x+x0:x0+abs(width)-x-1, height&gt;0?y0+abs(height)-y-1:y0+y,color,plcd); } //每一行末尾可能存在赖子 i+=laizi; } close(fd); return 0; } touch.h #ifndef __TOUCH_H__ #define __TOUCH_H__ /*头文件*/ #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;fcntl.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;linux/input.h&gt;//输入子系统 #define UP 1 #define DOWN 2 #define LEFT 3 #define RIGHT 4 #define TOUCH_ERROR -1 /*宏定义*/ #define TOUCH_FILE &#34;/dev/input/event0&#34; //获取坐标 int Init_touch(void); void Uninit_touch(int touch_fd); int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2); int Get_slip_direction(int x1,int y1,int x2 ,int y2); void get_touch(); /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y); /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway(); #endif touch.c #include &#34;touch.h&#34; /* 触摸屏初始化:Init_touch 参数为空 返回值：int touch_fd:触摸屏的文件描述符 */ int Init_touch(void) { //1.打开触摸屏 int touch_fd = open(TOUCH_FILE,O_RDONLY); if(-1 == touch_fd) { perror(&#34;open touch fail&#34;); return -1; } return touch_fd; } /* 关闭触摸屏：Uninit_touch @touch_fd 返回值:void */ void Uninit_touch(int touch_fd) { if(-1 == touch_fd) { return ; } close(touch_fd); } /* get_usr_input_pro:获取用户的对触摸屏的输入 @x1 y1 @x2 y2 @touch_fd 返回值:int -1 失败 0 成功 */ int get_usr_input_pro(int touch_fd,int *x1,int *y1,int *x2,int *y2) { if(-1 == touch_fd) { return -1; } struct input_event ev;//保存读取出来的信息 *x1 = *y1 = *x2 =*y2 = -1; while(1) { //1 读取输入事件 int res = read(touch_fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { if(-1 == *x1) { *x1 = ev.value; //只获取一次 *x2 = ev.value; } *x2 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取x轴的坐标 { if(-1 == *y1) { *y1 = ev.value; //只获取一次 *y2 = ev.value; } *y2 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } return 0; } /* 获取滑动的方向:Get_slip_direction @x1 y1 @x2 y2 返回值：int LEFT RIGHT UP DOWN TOUCH_ERROR */ int Get_slip_direction(int x1,int y1,int x2 ,int y2) { if(-1 == x1 || -1 == y1 || -1 == x2 || -1 == y2) { return TOUCH_ERROR; } int direction; //方向 if(abs((y2-y1)/(x2-x1)) &gt;= 1) //上 或者 下 { if(y2 &gt; y1) { return DOWN; } else { return UP; } } else { if(x2 &gt; x1) { return RIGHT; } else { return LEFT; } } } //打印坐标 测试 void get_touch() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { read(fd,&amp;ev,sizeof(ev)); printf(&#34;type =%d,code=%d,value=%d\\n&#34;,ev.type,ev.code,ev.value); int x ,y ; if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X )//触摸屏的x轴 { x = ev.value *(1.0*800/1040); } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y )//触摸屏的y轴 { y = ev.value*(1.0*480/600); } printf(&#34;( %d , %d )\\n&#34;,x,y); if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭 close(fd); } /* get_usr_touch: 获取用户触摸屏输入的坐标值 @x ：保存 x轴的坐标值 @y ：保存 y轴的坐标值 返回值 ： 无 */ void get_usr_touch(int *x,int *y) { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDONLY); if(-1 == fd) { perror(&#34;open touch fail&#34;); return ; } //2.操作 struct input_event ev;//保存读取出来的信息 while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); int flag_x = 0, flag_y = 0; if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员获取坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_X) //获取x轴的坐标 { *x = ev.value*(1.0*800/1040); flag_x = 1 ; if(flag_y) { break; } } if(ev.type == EV_ABS &amp;&amp; ev.code == ABS_Y) //获取y轴的坐标 { *y = ev.value*(1.0*480/600); flag_y = 1 ; if(flag_x) { break; } } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } //3.关闭触摸屏 close(fd); } /* 功能 : 获取方向返回 返回值 : -1 失败 UP 1 DOWN 2 LEFT 3 RIGHT 4 */ int getway() { //1.打开触摸屏 int fd = open(&#34;/dev/input/event0&#34;,O_RDWR); if(-1 == fd) { perror(&#34;open touch fail&#34;); return -1; } //2.操作 struct input_event ev;//保存读取出来的信息 int x0 = -1 ,y0 = -1 ;//初始坐标,把自身作为判断 int x1 ,y1; while(1) { //2.1 读取输入事件 int res = read(fd,&amp;ev,sizeof(ev)); if(res != sizeof(ev)) // 判断结构体数据不符合要求 重新读 { continue;//跳过本次循环,执行下一次循环 } //2.2 通过判断结构体里面的成员坐标值 if(ev.type == EV_ABS &amp;&amp; ev.code == REL_X) //获取x轴的坐标 { if(-1 == x0) { x0 = ev.value; //只获取一次 } x1 = ev.value; } if(ev.type == EV_ABS &amp;&amp; ev.code == REL_Y) //获取x轴的坐标 { if(-1 == y0) { y0 = ev.value; //只获取一次 } y1 = ev.value; } if(ev.type == EV_KEY &amp;&amp; ev.code == BTN_TOUCH &amp;&amp; ev.value == 0 ) //手指松开 { break;//一次获取 } } printf(&#34;start ( %d , %d ) , leave ( %d , %d )\\n&#34;,x0,y0,x1,y1); int way; //方向 if(abs((y1-y0)/(x1-x0)) &gt;= 1) //上 或者 下 { if(y1 &gt; y0) { printf(&#34;DOWN\\n&#34;); way = DOWN; } else { printf(&#34;UP\\n&#34;); way = UP; } } else { if(x1 &gt; x0) { printf(&#34;RIGHT\\n&#34;); way = RIGHT; } else { printf(&#34;LEFT\\n&#34;); way = LEFT; } } close(fd); return way; } main.c #include &lt;stdio.h&gt; #include &#34;touch.h&#34; #include &#34;lcd.h&#34; int main() { int touch_fd = Init_touch(); int fd=-1; int* plcd = Init_LCD(&amp;fd); //int x,y; // for(y=0;y&gt;=10&amp;&amp;y&lt;420;y++) // { // for(x=0;x&lt;=790&amp;&amp;x&gt;=10;x++) // { // Lcd_draw_point(x,y,0x000000,plcd); // } // } Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); Bmp_display(&#34;./bmp/xiay.bmp&#34;,174,420,plcd); Bmp_display(&#34;./bmp/sui.bmp&#34;,328,420,plcd); Bmp_display(&#34;./bmp/xun.bmp&#34;,482,420,plcd); Bmp_display(&#34;./bmp/ting.bmp&#34;,636,420,plcd); char *file_name[] = {&#34;./bmp/1.bmp&#34;,&#34;./bmp/2.bmp&#34;,&#34;./bmp/3.bmp&#34;,&#34;./bmp/4.bmp&#34;,&#34;./bmp/5.bmp&#34;,&#34;./bmp/6.bmp&#34;,&#34;./bmp/7.bmp&#34;,&#34;./bmp/8.bmp&#34;,&#34;./bmp/9.bmp&#34;,&#34;./bmp/10.bmp&#34;};\t//存放图片地址和名字 int x1=-1,y1=-1,x2=-1,y2=-1; int i=0;//存放图片顺序 int x,y; //存放坐标值 while(1) { get_usr_touch(&amp;x,&amp;y); //显示区域 if(x &gt;= 10 &amp;&amp; x &lt;= 790 &amp;&amp; y &gt;= 10 &amp;&amp; y&lt;= 410) { //测试滑动\tif(-1 == get_usr_input_pro(touch_fd,&amp;x1,&amp;y1,&amp;x2,&amp;y2)) { continue; } int direction; switch (direction = Get_slip_direction(x1,y1,x2,y2)) { case UP: printf(&#34;UP\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd); break; case DOWN: printf(&#34;DOWN\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd); break; case RIGHT: printf(&#34;RIGHT\\n&#34;); if(0 == i) { i = 10; } Bmp_display(file_name[--i],10,10,plcd);\tbreak; case LEFT: printf(&#34;LEFT\\n&#34;); if(9 == i) { i = -1; } printf(&#34;%d\\n&#34;,i); Bmp_display(file_name[++i],10,10,plcd);\tbreak; default: break; } } //上一张 else if(x &gt;= 20 &amp;&amp; x &lt;= 164 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { Bmp_display(&#34;./bmp/shang1.bmp&#34;,20,420,plcd); usleep(500); Bmp_display(&#34;./bmp/shang.bmp&#34;,20,420,plcd); if(0 == i) { i = 10; } printf(&#34;return\\n&#34;); Bmp_display(file_name[--i],10,10,plcd); } //下一张 else if(x &gt;= 174 &amp;&amp; x &lt;= 318 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { if(9 == i) { i = -1; } printf(&#34;next\\n&#34;); Bmp_display(file_name[++i],10,10,plcd); } //随机播放 else if(x &gt;= 328 &amp;&amp; x &lt;= 472 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { i = random()%10; Bmp_display(file_name[i],10,10,plcd); } //循环播放 else if(x &gt;= 482 &amp;&amp; x &lt;= 626 &amp;&amp; y &gt;= 420 &amp;&amp; y&lt;= 470) { while(1) { if(9 == i) { i = -1; } Bmp_display(file_name[++i],10,10,plcd); sleep(1.5); } } //停止循环播放 else if(x &gt;= 420 &amp;&amp; x &lt;= 636 &amp;&amp; y &gt;= 470&amp;&amp; y&lt;=780 ) { printf(&#34;停止循环播放&#34;); } } Uninit_touch(touch_fd); Uninit_LCD(fd,plcd); return 0; } ">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-  
-    
-    <meta property="og:title" content="Day8_ElectronicAlbum"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://localhost:1313/day8_electronicalbum/"/>
-    
-    
-  
-</head>
-
-
-
-<body class='page page-blog-single'>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-        
-        
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
-                <li >
-                    <a href="http://localhost:1313/">首页</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/posts/">博文</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://sport.koobai.com/">骑行</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/apps/">软件</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/movies/">观影</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://qiszy.taobao.com">好物</a>
-                </li>
-            
-        
-    </ul>
-</div>
-  <div id="wrapper" class="wrapper">
-    <div class="header">
 
-<div id="toggle-menu-main-mobile" class="hamburger-trigger">
-  <button class="hamburger">Menu</button>
-</div>
-<div class="new-heard-menu">
-
-
-
-
-<div class="header-menu">
-  <a href="/" >首页</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/posts/" >博文</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://sport.koobai.com/" >骑行</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/apps/" >软件</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/movies/" >观影</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
-</div>
-
-</div>
-  <div class="heard-right"> 
-    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
-    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-    </svg></a>    
-    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
-</div>
-
-</div>
-
-<script src="/js/moment.min.js?v=2.29.4"></script>
-<script src="/js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
 </script>
-     
-<div class="single-nrong">
-<div class="single-zw">
-    <div class="article_details">
-      <div class="article_details_title">Day8_ElectronicAlbum</div>
-      
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">MySpace</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://sport.koobai.com/' >
+                
+                
+                
+                <span>骑行</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/apps/' >
+                
+                
+                
+                <span>软件</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/movies/' >
+                
+                
+                
+                <span>观影</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://qiszy.taobao.com' >
+                
+                
+                
+                <span>好物</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/day8_electronicalbum/">Day8_ElectronicAlbum</a>
+        </h2>
+    
+        
     </div>
-    <div class="content_zhengwen">
-    <div class="content">
-      <p>[TOC]</p>
-<h1 id="实验要求">实验要求</h1>
-<ol>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[TOC]</p>
+<h1 id="实验要求">实验要求
+</h1><ol>
 <li>分别实现5个按钮:上一张下一张,随机播放,循环播放,停止循环播放</li>
 <li>在屏幕里选择一块区域显示图片,该区域同时也可以使用滑动.</li>
 </ol>
-<h1 id="代码实现">代码实现</h1>
-<h2 id="lcdh">lcd.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef LCD_H
+<h1 id="代码实现">代码实现
+</h1><h2 id="lcdh">lcd.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef LCD_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define LCD_H
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cm">/*函数声明*/</span>
@@ -166,8 +244,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Bmp_display</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">bmp_file</span><span class="p">,</span><span class="kt">int</span> <span class="n">x0</span><span class="p">,</span><span class="kt">int</span> <span class="n">y0</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">plcd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="lcdc">lcd.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*头文件*/</span>
+</span></span></span></code></pre></div><h2 id="lcdc">lcd.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*头文件*/</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
@@ -347,8 +425,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="touchh">touch.h</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef __TOUCH_H__
+</span></span></code></pre></div><h2 id="touchh">touch.h
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifndef __TOUCH_H__
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define __TOUCH_H__
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl">
@@ -404,8 +482,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></div><h2 id="touchc">touch.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
+</span></span></span></code></pre></div><h2 id="touchc">touch.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="cm">/*
 </span></span></span><span class="line"><span class="cl"><span class="cm">    触摸屏初始化:Init_touch
@@ -745,8 +823,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">way</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="mainc">main.c</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></code></pre></div><h2 id="mainc">main.c
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;touch.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;lcd.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
@@ -879,120 +957,217 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div>
-    </div>
-    <div class="single-biaoq">
- <div class="page-time">更新于 
-  <script>
-    document.write(formatDate( 1759488826 )); 
-  </script>
- </div>
- <div class="single-tag">
-     
-          
-     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
-          
-          
- </div>
-  </div> 
- </div>
- 
- <div class="archives_nrong" >
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/day9_pthread/">Day9_pthread</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/day9_pthread/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/day7_sliptouch/">Day7_SlipTouch</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488826 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/day7_sliptouch/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-</div>
-      
-      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
-      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
-<script src="https://img.koobai.com/Artalk.js"></script>
+</section>
 
 
-<div id="Comments"></div>
-
-<script>
-  Artalk.init({
-    el:        '#Comments',
-    pageKey:   'http:\/\/localhost:1313\/day8_electronicalbum\/',
-    pageTitle: 'Day8_ElectronicAlbum',
-    server:    'https:\/\/c.koobai.com',
-    site:      'Koobai 空白生活',
+    <footer class="article-footer">
     
-  })
-</script></div> 
-</div>
+    <section class="article-tags">
+        
+            <a href="/tags/default_tag/">Default_tag</a>
+        
+    </section>
 
-<div>
-    <div class="paragraph-dh">
-     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#lcdh">lcd.h</a></li>
-    <li><a href="#lcdc">lcd.c</a></li>
-    <li><a href="#touchh">touch.h</a></li>
-    <li><a href="#touchc">touch.c</a></li>
-    <li><a href="#mainc">main.c</a></li>
-  </ul>
-</nav>
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2024年度总结</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/cpu%E9%99%90%E5%88%B6gpu%E6%80%A7%E8%83%BD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CPU限制GPU性能</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day10_gy39/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day10_GY39</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day11_madplaymakefile/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day11_madplay&amp;makefile</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/day12_dirent/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Day12_dirent</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
     </div>
-</div>
+</aside>
 
-</div>
-<script src="/js/single.js"></script>    
+     
+    
+        
+    
 
-  </div>
-  <div class="footer-background">
-<div class="footer">
-        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
-        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
-        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
-      </div>
-      <div class="footer-rss">
-      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
-      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
-      </div>
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 MySpace
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
- <script src="/js/view-image.min.js"></script>
-  
-<div class="gotop_hide">
-  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
-</div>
-  
 
-  
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
-  
-  <script type="text/javascript" src="/js/bundle.js"></script>
-  
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.85803ae902a250f7d5dbb4ba3bc919da7eb36f6b0fb381e657be5438a8a0b770.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-  
-   
-</body>
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
 </html>

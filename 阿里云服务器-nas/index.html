@@ -1,154 +1,232 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="什么是ECS ECS：即Elastic Compute Service\n弹性计算（Elastic Computing）是一种云计算服务模型，它旨在提供灵活、自动且可伸缩的计算资源。\n弹性计算的关键特性包括：\n">
+<title>阿里云服务器&#43;NAS</title>
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>阿里云服务器&#43;NAS - 空白Koobai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/suju/ios.json">
-  <link rel="icon" href="https://img.koobai.com/koobai.png">
-  <link href="/index.xml" title="空白Koobai" type="application/rss+xml">
-  <link rel="canonical" href="http://localhost:1313/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas/" />
+<link rel='canonical' href='http://localhost:1313/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas/'>
 
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="阿里云服务器+NAS">
+<meta property='og:description' content="什么是ECS ECS：即Elastic Compute Service\n弹性计算（Elastic Computing）是一种云计算服务模型，它旨在提供灵活、自动且可伸缩的计算资源。\n弹性计算的关键特性包括：\n">
+<meta property='og:url' content='http://localhost:1313/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas/'>
+<meta property='og:site_name' content='MySpace'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='default_tag' /><meta property='article:published_time' content='2025-10-03T18:53:47&#43;08:00'/><meta property='article:modified_time' content='2025-10-03T18:53:47&#43;08:00'/>
+<meta name="twitter:title" content="阿里云服务器+NAS">
+<meta name="twitter:description" content="什么是ECS ECS：即Elastic Compute Service\n弹性计算（Elastic Computing）是一种云计算服务模型，它旨在提供灵活、自动且可伸缩的计算资源。\n弹性计算的关键特性包括：\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-  
-    
-    <meta property="og:title" content="阿里云服务器&#43;NAS"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://localhost:1313/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas/"/>
-    
-    
-  
-</head>
-
-
-
-<body class='page page-blog-single'>
-  <div id="menu-main-mobile" class="menu-main-mobile">
-    <ul class="menu">
-        
-        
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
-                <li >
-                    <a href="http://localhost:1313/">首页</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/posts/">博文</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://sport.koobai.com/">骑行</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/apps/">软件</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="http://localhost:1313/movies/">观影</a>
-                </li>
-            
-        
-            
-                <li >
-                    <a href="https://qiszy.taobao.com">好物</a>
-                </li>
-            
-        
-    </ul>
-</div>
-  <div id="wrapper" class="wrapper">
-    <div class="header">
 
-<div id="toggle-menu-main-mobile" class="hamburger-trigger">
-  <button class="hamburger">Menu</button>
-</div>
-<div class="new-heard-menu">
-
-
-
-
-<div class="header-menu">
-  <a href="/" >首页</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/posts/" >博文</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://sport.koobai.com/" >骑行</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/apps/" >软件</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="/movies/" >观影</a>
-</div>
-
-
-
-<div class="header-menu">
-  <a href="https://qiszy.taobao.com" target="_blank">好物</a>
-</div>
-
-</div>
-  <div class="heard-right"> 
-    <div class="about-koobai"><a href="/about/"><img src="https://img.koobai.com/koobai.webp" alt="koobai" title="我" data-umami-event="me"></a></div>
-    <a href="https://github.com/koobai/blog" title="Github" target="_blank" class="githuab"><svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" ><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-    </svg></a>    
-    <a href="https://space.bilibili.com/2084095738" target="_blank" title="当UP主的一天"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="zhuzhan-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z"></path></svg></a>
-</div>
-
-</div>
-
-<script src="/js/moment.min.js?v=2.29.4"></script>
-<script src="/js/moment.twitter.min.js"></script>
-<script>
-function formatDate(param) {
-if(typeof param === 'number') {
-     param = new Date(param * 1000).toISOString();
-  }
-return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
-}
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
 </script>
-     
-<div class="single-nrong">
-<div class="single-zw">
-    <div class="article_details">
-      <div class="article_details_title">阿里云服务器&#43;NAS</div>
-      
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">MySpace</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts/' >
+                
+                
+                
+                <span>博文</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://sport.koobai.com/' >
+                
+                
+                
+                <span>骑行</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/apps/' >
+                
+                
+                
+                <span>软件</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/movies/' >
+                
+                
+                
+                <span>观影</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://qiszy.taobao.com' >
+                
+                
+                
+                <span>好物</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas/">阿里云服务器&#43;NAS</a>
+        </h2>
+    
+        
     </div>
-    <div class="content_zhengwen">
-    <div class="content">
-      <h1 id="什么是ecs">什么是ECS</h1>
-<p>ECS：即Elastic Compute Service</p>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    11 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="什么是ecs">什么是ECS
+</h1><p>ECS：即Elastic Compute Service</p>
 <p>弹性计算（Elastic Computing）是一种云计算服务模型，它旨在提供灵活、自动且可伸缩的计算资源。</p>
 <blockquote>
 <p>弹性计算的关键特性包括：</p>
@@ -178,77 +256,35 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <li>操作系统必须为CentOS 7.x。</li>
 <li>实例安全组的入方向规则已放行22、80、443端口。具体操作，</li>
 </ul>
-<h1 id="部署lnmp环境centos-7">部署LNMP环境（CentOS 7）</h1>
-<p>更新时间：2023-10-10 10:24:01</p>
-<p>
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly93d3cuYWxpeXVuLmNvbS9wcm9kdWN0L2Vjcw%3d%3d"
-    
-     target="_blank"
->
-产品详情</a></p>
-<p>
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9ncm91cC9lY3Mv"
-    
-     target="_blank"
->
-相关技术圈</a></p>
-<p>
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vbXlfZmF2b3JpdGVzLmh0bWw%3d"
-    
-     target="_blank"
->
-我的收藏</a></p>
+<h1 id="部署lnmp环境centos-7">部署LNMP环境（CentOS 7）
+</h1><p>更新时间：2023-10-10 10:24:01</p>
+<p><a class="link" href="https://www.aliyun.com/product/ecs"  target="_blank" rel="noopener"
+    >产品详情</a></p>
+<p><a class="link" href="https://developer.aliyun.com/group/ecs/"  target="_blank" rel="noopener"
+    >相关技术圈</a></p>
+<p><a class="link" href="https://help.aliyun.com/my_favorites.html"  target="_blank" rel="noopener"
+    >我的收藏</a></p>
 <p>LNMP是目前主流的网站服务器架构之一，LNMP分别代表Linux、Nginx、MySQL和PHP。本文介绍如何在CentOS 7.x操作系统的ECS实例上搭建LNMP环境。</p>
-<h2 id="背景信息">背景信息</h2>
-<p>本文提供以下两种部署方式，您可以根据需要选择。</p>
+<h2 id="背景信息">背景信息
+</h2><p>本文提供以下两种部署方式，您可以根据需要选择。</p>
 <ul>
-<li>
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyIzc4NjlmNzYwMDR0M3M%3d"
-    
-     target="_blank"
->
-快速部署</a>：基于阿里云资源编排服务ROS（Resource Orchestration Service）实现，可以帮助您快速部署LNMP环境。与手动部署方式相比，快速部署可以自动完成所有资源的创建和配置，实现自动化快速部署。</li>
-<li>
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyIzE0YjhlYjgwMDRzOW0%3d"
-    
-     target="_blank"
->
-手动部署</a>：适用于熟悉Linux操作系统，并且对所安装软件的版本及各软件兼容性有所了解的用户。</li>
+<li><a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#7869f76004t3s"  target="_blank" rel="noopener"
+    >快速部署</a>：基于阿里云资源编排服务ROS（Resource Orchestration Service）实现，可以帮助您快速部署LNMP环境。与手动部署方式相比，快速部署可以自动完成所有资源的创建和配置，实现自动化快速部署。</li>
+<li><a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#14b8eb8004s9m"  target="_blank" rel="noopener"
+    >手动部署</a>：适用于熟悉Linux操作系统，并且对所安装软件的版本及各软件兼容性有所了解的用户。</li>
 </ul>
 <p><strong>说明</strong></p>
-<p>您也可以在
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9tYXJrZXQuYWxpeXVuLmNvbS9zb2Z0d2FyZQ%3d%3d"
-    
-     target="_blank"
->
-云市场</a>购买LNMP镜像直接创建ECS实例，以便快速建站。具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9yZXBsYWNlLXRoZS1taXJyb3ItbG5tcC1kZXBsb3ltZW50LWVudmlyb25tZW50"
-    
-     target="_blank"
->
-更换镜像部署LNMP环境</a>。</p>
+<p>您也可以在<a class="link" href="https://market.aliyun.com/software"  target="_blank" rel="noopener"
+    >云市场</a>购买LNMP镜像直接创建ECS实例，以便快速建站。具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/replace-the-mirror-lnmp-deployment-environment"  target="_blank" rel="noopener"
+    >更换镜像部署LNMP环境</a>。</p>
 <p>本文的示例步骤中，使用的软件版本信息如下所述。当您使用不同软件版本时，需要根据实际情况自行调整命令和参数配置。</p>
 <ul>
 <li>Nginx版本：Nginx 1.20.1</li>
 <li>MySQL版本：MySQL 5.7.42</li>
 <li>PHP版本：PHP 7.0.33</li>
 </ul>
-<h2 id="准备工作">准备工作</h2>
-<p>快速部署时选择已有实例或手动部署LNMP环境时，已有ECS实例必须满足以下条件：</p>
+<h2 id="准备工作">准备工作
+</h2><p>快速部署时选择已有实例或手动部署LNMP环境时，已有ECS实例必须满足以下条件：</p>
 <ul>
 <li>
 <p>实例已分配公网IP地址或绑定弹性公网IP（EIP）。</p>
@@ -257,43 +293,25 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <p>操作系统必须为CentOS 7.x。</p>
 </li>
 <li>
-<p>实例安全组的入方向规则已放行22、80、443端口。具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZXItZ3VpZGUvYWRkLWEtc2VjdXJpdHktZ3JvdXAtcnVsZSNjb25jZXB0LXNtNS0yd3oteGRi"
-    
-     target="_blank"
->
-添加安全组规则</a>。</p>
+<p>实例安全组的入方向规则已放行22、80、443端口。具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/user-guide/add-a-security-group-rule#concept-sm5-2wz-xdb"  target="_blank" rel="noopener"
+    >添加安全组规则</a>。</p>
 <p><strong>重要</strong></p>
 <p>基于服务器数据安全考虑，本文仅说明部署与测试LNMP环境所必需放行的端口，您可以根据实际需求，放行其他应用所需的端口号。例如，远程连接MySQL数据库时，需要放行MySQL默认占用的3306端口。</p>
 </li>
 </ul>
 <p>点我去体验</p>
-<h2 id="操作步骤"><strong>操作步骤</strong></h2>
-<p>快速部署</p>
+<h2 id="操作步骤"><strong>操作步骤</strong>
+</h2><p>快速部署</p>
 <p>手动部署</p>
-<h3 id="步骤一关闭防火墙和selinux"><strong>步骤一：关闭防火墙和SELinux</strong></h3>
-<p><strong>重要</strong></p>
-<p>为避免因使用管理员权限不当造成不可预期的风险，建议您使用普通用户操作。如果普通用户没有sudo权限，具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3NlY3Rpb24tMGhvLW9tZi0wY3Q%3d"
-    
-     target="_blank"
->
-如何为普通用户添加sudo权限</a>。</p>
+<h3 id="步骤一关闭防火墙和selinux"><strong>步骤一：关闭防火墙和SELinux</strong>
+</h3><p><strong>重要</strong></p>
+<p>为避免因使用管理员权限不当造成不可预期的风险，建议您使用普通用户操作。如果普通用户没有sudo权限，具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#section-0ho-omf-0ct"  target="_blank" rel="noopener"
+    >如何为普通用户添加sudo权限</a>。</p>
 <ol>
 <li>
 <p>远程连接需要部署LNMP环境的ECS实例。</p>
-<p>具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZXItZ3VpZGUvY29ubmVjdGlvbi1tZXRob2RzI2NvbmNlcHQtdG1yLXBneC13ZGI%3d"
-    
-     target="_blank"
->
-连接方式概述</a>。</p>
+<p>具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/user-guide/connection-methods#concept-tmr-pgx-wdb"  target="_blank" rel="noopener"
+    >连接方式概述</a>。</p>
 </li>
 <li>
 <p>关闭防火墙。</p>
@@ -301,24 +319,21 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 <li>
 <p>运行以下命令，查看当前防火墙的状态。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl status firewalld
-</span></span></code></pre></div><p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5580348761/p32172.png" alt="查看防火墙状态" class="img-hide" loading="lazy" decoding="async" /></p>
+</span></span></code></pre></div><p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5580348761/p32172.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="查看防火墙状态"
+	
+	
+></p>
 <ul>
-<li>如果防火墙的状态参数是 <code>inactive</code>，则防火墙为关闭状态，请执行步骤
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3N1YnN0ZXAtbXhlLTBtMS1ldW8%3d"
-    
-     target="_blank"
->
-3</a>。</li>
-<li>如果防火墙的状态参数是 <code>active</code>，则防火墙为开启状态，请执行步骤
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3N0ZXAtOXR4LTdjby1uZzQ%3d"
-    
-     target="_blank"
->
-2.b</a>。</li>
+<li>如果防火墙的状态参数是 <code>inactive</code>，则防火墙为关闭状态，请执行步骤<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#substep-mxe-0m1-euo"  target="_blank" rel="noopener"
+    >3</a>。</li>
+<li>如果防火墙的状态参数是 <code>active</code>，则防火墙为开启状态，请执行步骤<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#step-9tx-7co-ng4"  target="_blank" rel="noopener"
+    >2.b</a>。</li>
 </ul>
 </li>
 <li>
@@ -343,14 +358,8 @@ return moment(Date.parse(param)).twitterLong().replace(/\s\d{2}:\d{2}/, '');
 </span></span></code></pre></div></li>
 </ol>
 <p><strong>说明</strong></p>
-<p>如果您想重新开启防火墙，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9maXJld2FsbGQub3JnLw%3d%3d"
-    
-     target="_blank"
->
-firewalld官网信息</a>。</p>
+<p>如果您想重新开启防火墙，请参见<a class="link" href="https://firewalld.org/"  target="_blank" rel="noopener"
+    >firewalld官网信息</a>。</p>
 </li>
 </ul>
 </li>
@@ -363,48 +372,24 @@ firewalld官网信息</a>。</p>
 <p>运行以下命令，查看SELinux的当前状态。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">getenforce
 </span></span></code></pre></div><ul>
-<li>如果SELinux状态参数是 <code>Disabled</code>，则SELinux为关闭状态，请执行
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3NlY3Rpb24tZHJpLWYwci1pdmk%3d"
-    
-     target="_blank"
->
-步骤二：安装Nginx</a>。</li>
-<li>如果SELinux状态参数是 <code>Enforcing</code>，则SELinux为开启状态，请执行步骤
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3N1YnN0ZXAtbXhlLTBtMS1ldW8%3d"
-    
-     target="_blank"
->
-3.b</a>。</li>
+<li>如果SELinux状态参数是 <code>Disabled</code>，则SELinux为关闭状态，请执行<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#section-dri-f0r-ivi"  target="_blank" rel="noopener"
+    >步骤二：安装Nginx</a>。</li>
+<li>如果SELinux状态参数是 <code>Enforcing</code>，则SELinux为开启状态，请执行步骤<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#substep-mxe-0m1-euo"  target="_blank" rel="noopener"
+    >3.b</a>。</li>
 </ul>
 </li>
 <li>
 <p>关闭SELinux。</p>
-<p>SELinux关闭的方式分为临时关闭和永久关闭，请您根据自身业务需求进行选择。具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9lbmFibGUtb3ItZGlzYWJsZS1zZWxpbnV4I3Rhc2stMjM4NTA3NQ%3d%3d"
-    
-     target="_blank"
->
-开启或关闭SELinux</a>。</p>
+<p>SELinux关闭的方式分为临时关闭和永久关闭，请您根据自身业务需求进行选择。具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/enable-or-disable-selinux#task-2385075"  target="_blank" rel="noopener"
+    >开启或关闭SELinux</a>。</p>
 </li>
 </ol>
 </li>
 </ol>
-<h3 id="步骤二安装nginx"><strong>步骤二：安装Nginx</strong></h3>
-<p><strong>说明</strong></p>
-<p>本文只提供一个版本的Nginx作为示例，如果您需要安装其他版本的Nginx，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZS1jYXNlcy9tYW51YWxseS1idWlsZC1hbi1sbm1wLWVudmlyb25tZW50LW9uLWEtY2VudG9zLTctaW5zdGFuY2U%2fc3BtPWEyYzRnLjExMTg2NjIzLjAuaTEyI3NlY3Rpb24tMGhvLW9tZi0wY3Q%3d"
-    
-     target="_blank"
->
-常见问题</a>。</p>
+<h3 id="步骤二安装nginx"><strong>步骤二：安装Nginx</strong>
+</h3><p><strong>说明</strong></p>
+<p>本文只提供一个版本的Nginx作为示例，如果您需要安装其他版本的Nginx，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/use-cases/manually-build-an-lnmp-environment-on-a-centos-7-instance?spm=a2c4g.11186623.0.i12#section-0ho-omf-0ct"  target="_blank" rel="noopener"
+    >常见问题</a>。</p>
 <ol>
 <li>
 <p>运行以下命令，安装Nginx。</p>
@@ -417,9 +402,9 @@ firewalld官网信息</a>。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nginx version: nginx/1.20.1
 </span></span></code></pre></div></li>
 </ol>
-<h3 id="步骤三安装并配置mysql"><strong>步骤三：安装并配置MySQL</strong></h3>
-<h4 id="安装mysql"><strong>安装MySQL</strong></h4>
-<ol>
+<h3 id="步骤三安装并配置mysql"><strong>步骤三：安装并配置MySQL</strong>
+</h3><h4 id="安装mysql"><strong>安装MySQL</strong>
+</h4><ol>
 <li>
 <p>运行以下命令，更新YUM源。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rpm -Uvh  http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
@@ -446,8 +431,8 @@ firewalld官网信息</a>。</p>
 </span></span><span class="line"><span class="cl">sudo systemctl daemon-reload
 </span></span></code></pre></div></li>
 </ol>
-<h4 id="配置mysql"><strong>配置MySQL</strong></h4>
-<ol>
+<h4 id="配置mysql"><strong>配置MySQL</strong>
+</h4><ol>
 <li>
 <p>运行以下命令，查看 <code>/var/log/mysqld.log</code>文件，获取并记录root用户的初始密码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo grep <span class="s1">&#39;temporary password&#39;</span> /var/log/mysqld.log
@@ -518,17 +503,11 @@ firewalld官网信息</a>。</p>
 </ol>
 </li>
 </ol>
-<p>更多信息，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vNS43L2VuL215c3FsLXNlY3VyZS1pbnN0YWxsYXRpb24uaHRtbA%3d%3d"
-    
-     target="_blank"
->
-MySQL文档</a>。</p>
-<h3 id="步骤四安装并配置php"><strong>步骤四：安装并配置PHP</strong></h3>
-<h4 id="安装php"><strong>安装PHP</strong></h4>
-<ol>
+<p>更多信息，请参见<a class="link" href="https://dev.mysql.com/doc/refman/5.7/en/mysql-secure-installation.html"  target="_blank" rel="noopener"
+    >MySQL文档</a>。</p>
+<h3 id="步骤四安装并配置php"><strong>步骤四：安装并配置PHP</strong>
+</h3><h4 id="安装php"><strong>安装PHP</strong>
+</h4><ol>
 <li>
 <p>更新YUM源。</p>
 <ol>
@@ -558,8 +537,8 @@ MySQL文档</a>。</p>
 </span></span><span class="line"><span class="cl">    with Zend OPcache v7.0.33, Copyright <span class="o">(</span>c<span class="o">)</span> 1999-2017, by Zend Technologies            
 </span></span></code></pre></div></li>
 </ol>
-<h4 id="修改nginx配置文件以支持php"><strong>修改Nginx配置文件以支持PHP</strong></h4>
-<ol>
+<h4 id="修改nginx配置文件以支持php"><strong>修改Nginx配置文件以支持PHP</strong>
+</h4><ol>
 <li>
 <p>运行以下命令，备份Nginx配置文件。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
@@ -598,7 +577,16 @@ MySQL文档</a>。</p>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span></code></pre></div></li>
 </ul>
-<p>添加或修改配置信息后，文件内容如下图所示：<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1100356361/p350073.png" alt="nginx配置文件" class="img-hide" loading="lazy" decoding="async" /></p>
+<p>添加或修改配置信息后，文件内容如下图所示：<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1100356361/p350073.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="nginx配置文件"
+	
+	
+></p>
 </li>
 <li>
 <p>按 <code>Esc</code>键，输入 <code>:wq</code>，按 <code>Enter</code>键关闭并保存配置文件。</p>
@@ -614,15 +602,24 @@ MySQL文档</a>。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> nginx
 </span></span></code></pre></div></li>
 </ol>
-<h4 id="配置php"><strong>配置PHP</strong></h4>
-<ol>
+<h4 id="配置php"><strong>配置PHP</strong>
+</h4><ol>
 <li>
 <p>新建并编辑 <code>phpinfo.php</code>文件，用于展示PHP信息。</p>
 <ol>
 <li>
 <p>运行以下命令，新建 <code>phpinfo.php</code>文件。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo vim &lt;网站根目录&gt;/phpinfo.php
-</span></span></code></pre></div><p>*&lt;网站根目录&gt;*是您在 <code>nginx.conf</code>配置文件中 <code>location ~ .php$</code>大括号内，配置的 <code>root</code>参数值，如下图所示。<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2100356361/p350096.png" alt="网站根目录" class="img-hide" loading="lazy" decoding="async" />本文配置的网站根目录为 <code>/usr/share/nginx/html</code>，因此需要运行以下命令新建 <code>phpinfo.php</code>文件：</p>
+</span></span></code></pre></div><p>*&lt;网站根目录&gt;*是您在 <code>nginx.conf</code>配置文件中 <code>location ~ .php$</code>大括号内，配置的 <code>root</code>参数值，如下图所示。<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2100356361/p350096.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="网站根目录"
+	
+	
+>本文配置的网站根目录为 <code>/usr/share/nginx/html</code>，因此需要运行以下命令新建 <code>phpinfo.php</code>文件：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo vim /usr/share/nginx/html/phpinfo.php
 </span></span></code></pre></div></li>
 <li>
@@ -646,47 +643,44 @@ MySQL文档</a>。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> php-fpm
 </span></span></code></pre></div></li>
 </ol>
-<h3 id="步骤五测试访问lnmp配置信息页面"><strong>步骤五：测试访问LNMP配置信息页面</strong></h3>
-<ol>
+<h3 id="步骤五测试访问lnmp配置信息页面"><strong>步骤五：测试访问LNMP配置信息页面</strong>
+</h3><ol>
 <li>
 <p>在本地Windows主机或其他具有公网访问能力的Windows主机中，打开浏览器。</p>
 </li>
 <li>
 <p>在浏览器的地址栏输入 <code>http://&lt;ECS实例公网IP地址&gt;/phpinfo.php</code>进行访问。</p>
 <p>访问结果如下图所示，表示LNMP环境部署成功。</p>
-<p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2100356361/p350106.png" alt="php结果" class="img-hide" loading="lazy" decoding="async" /></p>
+<p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2100356361/p350106.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="php结果"
+	
+	
+></p>
 </li>
 </ol>
-<h2 id="后续步骤">后续步骤</h2>
-<p>测试访问LNMP配置信息页面后，建议您运行以下命令将 <code>phpinfo.php</code>文件删除，消除数据泄露风险。</p>
+<h2 id="后续步骤">后续步骤
+</h2><p>测试访问LNMP配置信息页面后，建议您运行以下命令将 <code>phpinfo.php</code>文件删除，消除数据泄露风险。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rm -rf &lt;网站根目录&gt;/phpinfo.php
 </span></span></code></pre></div><p>其中，*&lt;网站根目录&gt;*需要替换为您在 <code>nginx.conf</code>中配置的网站根目录。</p>
 <p>本文配置的网站根目录为 <code>/usr/share/nginx/html</code>，因此需要运行以下命令：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rm -rf /usr/share/nginx/html/phpinfo.php
-</span></span></code></pre></div><h2 id="常见问题">常见问题</h2>
-<h3 id="问题一如何使用其他版本的nginx服务器">问题一：如何使用其他版本的Nginx服务器？</h3>
-<ol>
+</span></span></code></pre></div><h2 id="常见问题">常见问题
+</h2><h3 id="问题一如何使用其他版本的nginx服务器">问题一：如何使用其他版本的Nginx服务器？
+</h3><ol>
 <li>
-<p>使用浏览器访问
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9uZ2lueC5vcmcvZW4vZG93bmxvYWQuaHRtbA%3d%3d"
-    
-     target="_blank"
->
-Nginx开源社区</a>获取对应的Nginx版本的下载链接。</p>
+<p>使用浏览器访问<a class="link" href="https://nginx.org/en/download.html"  target="_blank" rel="noopener"
+    >Nginx开源社区</a>获取对应的Nginx版本的下载链接。</p>
 <p>请根据您的个人需求，选择对应的Nginx版本。本章节以Nginx 1.8.1为例。</p>
 </li>
 <li>
 <p>远程连接需要部署LNMP环境的ECS实例。</p>
-<p>具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZXItZ3VpZGUvbG9nLW9uLXRvLWFuLWluc3RhbmNlLWJ5LXVzaW5nLXZuYyNjb25jZXB0LXNkay0xangtd2Ri"
-    
-     target="_blank"
->
-使用VNC登录实例</a>。</p>
+<p>具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/user-guide/log-on-to-an-instance-by-using-vnc#concept-sdk-1jx-wdb"  target="_blank" rel="noopener"
+    >使用VNC登录实例</a>。</p>
 </li>
 <li>
 <p>运行以下命令，安装Nginx相关依赖。</p>
@@ -725,21 +719,24 @@ Nginx开源社区</a>获取对应的Nginx版本的下载链接。</p>
 </span></span></code></pre></div></li>
 <li>
 <p>在本地主机中，使用浏览器访问 <code>ECS实例公网IP</code>。</p>
-<p>出现如下图所示的页面，表示Nginx已成功安装并启动。<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7825911161/p228426.png" alt="nginx" class="img-hide" loading="lazy" decoding="async" /></p>
+<p>出现如下图所示的页面，表示Nginx已成功安装并启动。<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7825911161/p228426.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="nginx"
+	
+	
+></p>
 </li>
 </ol>
-<h3 id="问题二如何为普通用户添加sudo权限">问题二：如何为普通用户添加sudo权限？</h3>
-<ol>
+<h3 id="问题二如何为普通用户添加sudo权限">问题二：如何为普通用户添加sudo权限？
+</h3><ol>
 <li>
 <p>使用 <code>root</code>用户远程连接Linux服务器。</p>
-<p>具体操作，请参见
-<a 
-    
-        href="/tiaozhuan?target=aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vemgvZWNzL3VzZXItZ3VpZGUvbG9nLW9uLXRvLWFuLWluc3RhbmNlLWJ5LXVzaW5nLXZuYyNjb25jZXB0LXNkay0xangtd2Ri"
-    
-     target="_blank"
->
-使用VNC登录实例</a>。</p>
+<p>具体操作，请参见<a class="link" href="https://help.aliyun.com/zh/ecs/user-guide/log-on-to-an-instance-by-using-vnc#concept-sdk-1jx-wdb"  target="_blank" rel="noopener"
+    >使用VNC登录实例</a>。</p>
 </li>
 <li>
 <p>运行以下命令，新建一个普通用户 <code>test</code>并设置密码。</p>
@@ -755,7 +752,16 @@ Nginx开源社区</a>获取对应的Nginx版本的下载链接。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vim /etc/sudoers
 </span></span></code></pre></div><p>按i键进入编辑模式并添加以下配置：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">test</span> <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span>  NOPASSWD: ALL
-</span></span></code></pre></div><p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3968248761/p578461.png" alt="sada45" class="img-hide" loading="lazy" decoding="async" />输入:wq，保存并退出文件。</p>
+</span></span></code></pre></div><p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3968248761/p578461.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="sada45"
+	
+	
+>输入:wq，保存并退出文件。</p>
 </li>
 <li>
 <p>运行以下命令，切换到 <code>test</code>用户。</p>
@@ -765,152 +771,257 @@ Nginx开源社区</a>获取对应的Nginx版本的下载链接。</p>
 <p>运行以下命令，测试 <code>sudo</code>权限。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo cat /etc/redhat-release
 </span></span></code></pre></div><p>如果回显信息类似如下所示，表示 <code>sudo</code>权限已经添加成</p>
-<p><img src="assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703654419823.png" alt="1703654419823" class="img-hide" loading="lazy" decoding="async" /></p>
-<p><img src="assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703655470426.png" alt="1703655470426" class="img-hide" loading="lazy" decoding="async" /></p>
+<p><img src="/assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703654419823.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1703654419823"
+	
+	
+></p>
+<p><img src="/assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703655470426.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1703655470426"
+	
+	
+></p>
 <p>域名解析</p>
 <p>UPDATE wp_options SET option_value = &lsquo;http://实例公网IP&rsquo; WHERE option_name = &lsquo;home&rsquo; OR option_name = &lsquo;siteurl&rsquo;;</p>
 <p>功。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>test@iZbp1dqulfhozse3jbp**** ~<span class="o">]</span>$ sudo cat /etc/redhat-release
 </span></span><span class="line"><span class="cl">CentOS Linux release 7.9.2009 <span class="o">(</span>Core<span class="o">)</span>
-</span></span></code></pre></div><p>使用瀏覽器前往http://[<strong>WordPress</strong> 網域名稱]/wp-admin (例： 
-<a 
-    
-        href="/tiaozhuan?target=aHR0cDovL2Nvb2xleGFtcGxlLmNvbS93cC1hZG1pbg%3d%3d"
-    
-     target="_blank"
->
-http://coolexample.com/wp-admin</a> )。 輸入您的使用者名稱或email 地址及密碼，然後點選「 <strong>登入</strong> 」</p>
+</span></span></code></pre></div><p>使用瀏覽器前往http://[<strong>WordPress</strong> 網域名稱]/wp-admin (例： <a class="link" href="http://coolexample.com/wp-admin"  target="_blank" rel="noopener"
+    >http://coolexample.com/wp-admin</a> )。 輸入您的使用者名稱或email 地址及密碼，然後點選「 <strong>登入</strong> 」</p>
 </li>
 </ol>
-<p><img src="assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703662582927.png" alt="1703662582927" class="img-hide" loading="lazy" decoding="async" /></p>
+<p><img src="/assets/%e9%98%bf%e9%87%8c%e4%ba%91%e6%9c%8d%e5%8a%a1%e5%99%a8&#43;NAS/1703662582927.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1703662582927"
+	
+	
+></p>
 
-    </div>
-    <div class="single-biaoq">
- <div class="page-time">更新于 
-  <script>
-    document.write(formatDate( 1759488827 )); 
-  </script>
- </div>
- <div class="single-tag">
-     
-          
-     <div class="single-tag-c">#<a href="/tags/default_tag/">Default_tag</a></div>
-          
-          
- </div>
-  </div> 
- </div>
- 
- <div class="archives_nrong" >
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/%E9%BE%99%E5%9C%BA%E6%82%9F%E9%81%93/">龙场悟道</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488827 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/%E9%BE%99%E5%9C%BA%E6%82%9F%E9%81%93/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-  
-    <div class="archives_one">
-      <div>
-        <div class="archive-title"><a href="/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6-%E9%98%85%E8%AF%BB%E6%B3%A8%E8%A7%A3/">量子力学-阅读注解</a></div>
-        <div class="archive-time">
-          <script>
-            document.write(formatDate( 1759488827 )); 
-          </script>
-        </div>
-        </div>
-        <div class="archive-img">
-        <a href="/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6-%E9%98%85%E8%AF%BB%E6%B3%A8%E8%A7%A3/"><img loading="lazy" decoding="async" src="/" /></a>          
-        </div>
-    </div>
-  
-</div>
-      
-      <div id="MoreComments" onclick="loadComments()">评论一下 ...</div>
-      <div class="article-comments" id="articlecomments" style="display: none;"><link href="https://img.koobai.com/Artalk.css" rel="stylesheet">
-<script src="https://img.koobai.com/Artalk.js"></script>
+</section>
 
 
-<div id="Comments"></div>
-
-<script>
-  Artalk.init({
-    el:        '#Comments',
-    pageKey:   'http:\/\/localhost:1313\/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-nas\/',
-    pageTitle: '阿里云服务器\u002bNAS',
-    server:    'https:\/\/c.koobai.com',
-    site:      'Koobai 空白生活',
+    <footer class="article-footer">
     
-  })
-</script></div> 
-</div>
+    <section class="article-tags">
+        
+            <a href="/tags/default_tag/">Default_tag</a>
+        
+    </section>
 
-<div>
-    <div class="paragraph-dh">
-     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#背景信息">背景信息</a></li>
-    <li><a href="#准备工作">准备工作</a></li>
-    <li><a href="#操作步骤"><strong>操作步骤</strong></a>
-      <ul>
-        <li><a href="#步骤一关闭防火墙和selinux"><strong>步骤一：关闭防火墙和SELinux</strong></a></li>
-        <li><a href="#步骤二安装nginx"><strong>步骤二：安装Nginx</strong></a></li>
-        <li><a href="#步骤三安装并配置mysql"><strong>步骤三：安装并配置MySQL</strong></a></li>
-        <li><a href="#步骤四安装并配置php"><strong>步骤四：安装并配置PHP</strong></a></li>
-        <li><a href="#步骤五测试访问lnmp配置信息页面"><strong>步骤五：测试访问LNMP配置信息页面</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#后续步骤">后续步骤</a></li>
-    <li><a href="#常见问题">常见问题</a>
-      <ul>
-        <li><a href="#问题一如何使用其他版本的nginx服务器">问题一：如何使用其他版本的Nginx服务器？</a></li>
-        <li><a href="#问题二如何为普通用户添加sudo权限">问题二：如何为普通用户添加sudo权限？</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/untitled/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Untitled</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/%E4%BA%BA%E7%94%9F%E7%9A%84%E6%99%BA%E6%85%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">人生的智慧</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/%E4%BA%BA%E7%94%9F%E8%A7%84%E5%88%92/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">人生规划</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/%E5%85%B3%E4%BA%8E%E6%96%87%E5%8C%96%E5%B7%A5%E4%BD%9C%E7%A4%BE%E4%BC%9A%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E6%80%9D%E8%80%83/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">关于文化、工作、社会的相关性思考</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/%E5%8D%81%E8%83%9C%E5%8D%81%E8%B4%A5%E8%AE%BA%E5%8A%A0%E7%8F%AD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">十胜十败论加班</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
     </div>
-</div>
+</aside>
 
-</div>
-<script src="/js/single.js"></script>    
+     
+    
+        
+    
 
-  </div>
-  <div class="footer-background">
-<div class="footer">
-        <div class="footer-info">&copy; 2025 <a href="/">空白Koobai</a>. 
-        由 <a href="https://gohugo.io/" target="_blank"> Hugo </a> 提供强力驱动,<span class="youpaiyun"><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">又拍云</a>提供存储/加速</span>. 
-        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备16011784号-1</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011302000343">浙公网安备 33011302000343 号</a>
-      </div>
-      <div class="footer-rss">
-      <a href="https://memos.koobai.com/u/1/rss.xml" target="_blank">唠叨 RSS</a> / 
-      <a href="https://koobai.com/index.xml" target="_blank">博文 RSS</a>
-      </div>
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 MySpace
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
- <script src="/js/view-image.min.js"></script>
-  
-<div class="gotop_hide">
-  <div class="gotop" onclick="smoothScrollTop()" id="gotop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="m1875 1037l-787-787v1798H960V250l-787 787l-90-90L1024 6l941 941z"/></svg></div>
-</div>
-  
 
-  
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
-  
-  <script type="text/javascript" src="/js/bundle.js"></script>
-  
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.85803ae902a250f7d5dbb4ba3bc919da7eb36f6b0fb381e657be5438a8a0b770.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-  
-   
-</body>
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
 </html>
